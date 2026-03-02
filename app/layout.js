@@ -77,11 +77,10 @@ export const metadata = {
   },
   icons: {
     icon: [
-      { url: "/logo.png" },
+      { url: "/logo.png", sizes: "any", type: "image/png" },
     ],
-    apple: [{ url: "/logo.png", sizes: "180x180", type: "image/png" }],
+    apple: { url: "/logo.png", sizes: "180x180" },
   },
-  manifest: "/site.webmanifest",
   openGraph: {
     title: "BWorth - Sustainable Fashion Ecosystem",
     description: "The leading technology partner for circular luxury and sustainable fashion innovation.",
@@ -134,6 +133,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        {/* Favicon */}
+        <link rel="icon" type="image/png" href="/logo.png" />
+        <link rel="apple-touch-icon" href="/logo.png" />
+        
         {/* JSON-LD Structured Data */}
         <script
           type="application/ld+json"
