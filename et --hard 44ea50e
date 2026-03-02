@@ -1,0 +1,25 @@
+[33m35aa1fb[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{0}: commit: feat: Refactor metadata to separate layout components for About, B2B, Brands, Our Mission, and Our Vision pages
+[33ma6dc637[m HEAD@{1}: commit: feat: Move contact page metadata to a separate layout component
+[33m44ea50e[m HEAD@{2}: commit: feat: Enhance SEO with metadata, sitemap, and robots.txt implementation
+[33mefe7d91[m HEAD@{3}: commit: feat: Implement contact form with email notifications using Nodemailer
+[33mcc3003d[m HEAD@{4}: Branch: renamed refs/heads/main to refs/heads/main
+[33mcc3003d[m HEAD@{6}: commit: feat: Update footer link hover color based on theme
+[33m1094893[m HEAD@{7}: commit: feat: Add an animated loading screen component using Framer Motion.
+[33me58c1fa[m HEAD@{8}: commit: feat: Add a responsive Navbar component with theme and language switching capabilities.
+[33m345d3ab[m HEAD@{9}: commit: feat: introduce main application landing page with interactive sections, GSAP animations, and dynamic theming.
+[33me2eed4b[m HEAD@{10}: commit: feat: Implement core website structure, navigation, footer, and initial content pages with i18n support and media assets.
+[33m5765d91[m HEAD@{11}: commit: feat: Initialize core website structure with essential components and pages including Hero, Navbar, Footer, and various content pages.
+[33mf1da773[m HEAD@{12}: commit: feat: Add initial website pages including About Us, Our Mission, Our Vision, and Home, along with Hero and ScrollBanner components and translation utilities.
+[33m4369d60[m HEAD@{13}: commit: feat: add core website pages and reusable UI components including Navbar, Footer, and a Contact Us form.
+[33mb72b9bb[m HEAD@{14}: commit: feat: Add Hero component, AppDownloadSection component, and a new API route for app statistics.
+[33mfe0e093[m HEAD@{15}: commit: feat: implement initial website pages and shared components for a new site structure.
+[33md6d01bf[m HEAD@{16}: commit: feat: Add new pages, global styling, and core layout/navigation components.
+[33m0967b53[m HEAD@{17}: commit: feat: implement initial website structure with core pages, navigation, and reusable components.feat: implement initial website structure with core pages, navigation, and reusable components.
+[33m45de65a[m HEAD@{18}: commit: feat: Implement initial website pages and components for homepage, brands, our vision, hero, and app download.
+[33me7d1f5a[m HEAD@{19}: commit: feat: Add initial Hero component and core pages for contact, vision, and brands.
+[33m645316f[m HEAD@{20}: commit: feat: Implement initial website structure including core pages, layout, and UI components.
+[33m7f2b892[m HEAD@{21}: commit: feat: Implement initial landing page with Hero, ScrollBanner, and AppDownloadSection components, including GSAP animations and translation utilities.
+[33m352e000[m HEAD@{22}: commit: feat: Add foundational website structure including core pages, components, and theme/language context.
+[33mfe44afc[m HEAD@{23}: commit: feat: Add About Us page, core UI components (Navbar, Footer, AppDownloadSection), and a new logo.
+[33mf6e0da1[m HEAD@{24}: Branch: renamed refs/heads/master to refs/heads/main
+[33mf6e0da1[m HEAD@{26}: commit (initial): Initial commit

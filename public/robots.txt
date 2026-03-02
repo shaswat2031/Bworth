@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /*.json$
+Disallow: /admin
+Disallow: /_next/
+
+# Slow down aggressive crawlers
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+# Fast crawlers OK
+User-agent: Googlebot
+
+# Sitemap location
+Sitemap: https://www.bworth.co.in/sitemap.xml

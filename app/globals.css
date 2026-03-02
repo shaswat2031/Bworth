@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-primary: #14A3C7;
+    --text-primary: #FFFFFF;
+    --border-primary: rgba(255, 255, 255, 0.1);
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --menu-bg: #14A3C7;
+  }
+
+  body.theme-white {
+    --bg-primary: #F8FAFC;
+    --text-primary: #020610;
+    --border-primary: rgba(0, 0, 0, 0.1);
+    --glass-bg: rgba(0, 0, 0, 0.03);
+    --menu-bg: #FFFFFF;
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    /* Deeper, richer black-navy */
+    color: var(--text-primary);
+    /* Crisp off-white */
+    @apply antialiased overflow-x-hidden transition-colors duration-300;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply tracking-tighter font-serif;
+  }
+
+  body.lang-hi {
+    letter-spacing: 0.05em;
+    /* Increased spacing for Hindi readability */
+    word-spacing: 0.05em;
+  }
+}
+
+@layer utilities {
+  .font-serif {
+    font-family: var(--font-playfair), serif;
+  }
+
+  .font-sans {
+    font-family: var(--font-poppins), sans-serif;
+  }
+
+  .outline-text {
+    -webkit-text-stroke: 1px currentColor;
+    color: transparent;
+  }
+
+  .vertical-text {
+    writing-mode: vertical-rl;
+  }
+
+  .glass {
+    @apply backdrop-blur-2xl border transition-colors duration-300;
+    background-color: var(--glass-bg);
+    border-color: var(--border-primary);
+  }
+
+  .glass-dark {
+    @apply bg-black/20 backdrop-blur-2xl border border-white/5;
+  }
+
+  /* Subtler Neutral Glow */
+  .soft-glow {
+    box-shadow: 0 0 50px -12px rgba(255, 255, 255, 0.05);
+  }
+}
