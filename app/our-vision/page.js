@@ -8,7 +8,7 @@ import { useLanguage } from "../context/LanguageContext";
 import { useTheme } from "../context/ThemeContext";
 import { translations } from "../utils/translations";
 
-export default function OurVision() {export default function OurVision() {
+export default function OurVision() {
   const { language } = useLanguage();
   const { theme } = useTheme();
   const t = translations[language];

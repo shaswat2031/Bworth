@@ -8,7 +8,7 @@ import { useLanguage } from "../context/LanguageContext";
 import { useTheme } from "../context/ThemeContext";
 import { translations } from "../utils/translations";
 
-export default function Brands() {export default function Brands() {
+export default function Brands() {
   const { language } = useLanguage();
   const { theme } = useTheme();
   const t = translations[language];
