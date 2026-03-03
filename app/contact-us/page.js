@@ -225,7 +225,6 @@ export default function ContactUs() {
                       type="email"
                       placeholder={t.contact_page.ph_email}
                       autoComplete="email"
-                      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                       title="Please enter a valid email address."
                       className={`w-full border-b p-4 focus:border-[#14A3C7] outline-none transition-colors font-bold ${theme === "white"
                         ? "bg-black/5 border-black/10 placeholder:text-black/50 text-black"
