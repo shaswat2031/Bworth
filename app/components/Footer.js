@@ -151,7 +151,7 @@ export default function Footer() {
               }`}
           >
             <Link
-              href="/privacy-policy"
+              href="/privacypolicy"
               className="hover:text-[#14A3C7] transition-colors"
             >
               {t.footer.policy}

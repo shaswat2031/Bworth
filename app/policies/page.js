@@ -17,7 +17,7 @@ export default function Policies() {
       icon: <ShieldCheck size={24} />,
       title: t.policies_page.privacy_policy,
       desc: t.policies_page.privacy_desc,
-      href: "/privacy-policy"
+      href: "/privacypolicy"
     },
     {
       icon: <RefreshCw size={24} />,
