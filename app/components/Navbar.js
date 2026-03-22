@@ -4,18 +4,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Globe, ArrowRight, Sun, Moon } from "lucide-react";
-import { useLanguage } from "../context/LanguageContext";
+import { Menu, X, ArrowRight, Sun, Moon } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
-import { translations } from "../utils/translations";
+import { translations as t } from "../utils/translations";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const { language, toggleLanguage } = useLanguage();
   const { theme, toggleTheme } = useTheme();
-  const t = translations[language];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,12 +24,10 @@ export default function Navbar() {
 
   const navLinks = [
     { name: t.navbar.home, href: "/" },
-    { name: t.navbar.about, href: "/about-us" },
-    { name: t.navbar.mission, href: "/our-mission" },
-    { name: t.navbar.vision, href: "/our-vision" },
     { name: t.navbar.brands, href: "/brands" },
     { name: t.navbar.b2b, href: "/b2b" },
-    { name: t.navbar.contact, href: "/contact-us" },
+    { name: t.navbar.mission, href: "/our-mission" },
+    { name: t.navbar.vision, href: "/our-vision" },
   ];
 
   const menuVariants = {
@@ -51,7 +46,6 @@ export default function Navbar() {
       transition: {
         duration: 0.6,
         ease: [0.22, 1, 0.36, 1],
-        when: "beforeChildren",
         staggerChildren: 0.1,
       },
     },
@@ -65,10 +59,10 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-[80] transition-all duration-300 px-4 md:px-12 py-4 md:py-6 ${scrolled
+        className={`fixed top-0 left-0 right-0 z-[80] transition-all duration-500 px-6 md:px-12 py-4 md:py-6 ${scrolled
           ? theme === "white"
-            ? "bg-white/90 backdrop-blur-md border-b border-black/[0.05]"
-            : "bg-[#14A3C7]/90 backdrop-blur-md border-b border-white/[0.05]"
+            ? "bg-white/80 backdrop-blur-xl border-b border-black/[0.05] shadow-sm py-3 md:py-4"
+            : "bg-[#14A3C7]/80 backdrop-blur-xl border-b border-white/[0.1] shadow-lg py-3 md:py-4"
           : "bg-transparent"
           }`}
       >
@@ -80,24 +74,52 @@ export default function Navbar() {
               width={0}
               height={0}
               sizes="100vw"
-              className={`h-8 md:h-10 w-auto object-contain transition-all ${theme === "white" ? "" : "brightness-0 invert"
+              className={`h-8 md:h-12 w-auto object-contain transition-all duration-500 group-hover:scale-105 ${theme === "white" ? "" : "brightness-0 invert"
                 }`}
             />
           </Link>
 
-          <div className="flex items-center gap-4 md:gap-10 shrink-0">
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center gap-8">
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className={`text-xs font-black uppercase tracking-[0.2em] transition-all hover:scale-105 relative py-2 group ${isActive
+                    ? theme === "white" ? "text-[#14A3C7]" : "text-black"
+                    : theme === "white" ? "text-black/60 hover:text-black" : "text-white/80 hover:text-white"
+                    }`}
+                >
+                  {link.name}
+                  <span className={`absolute bottom-0 left-0 h-[2px] bg-current transition-all duration-300 ${isActive ? "w-full" : "w-0 group-hover:w-full"}`}></span>
+                </Link>
+              );
+            })}
+          </div>
+
+          <div className="flex items-center gap-4 shrink-0">
+            {/* Theme Toggle - Desktop */}
+            <button
+                onClick={() => toggleTheme(theme === "blue" ? "white" : "blue")}
+                className={`hidden lg:flex p-2.5 rounded-full transition-all hover:scale-110 active:scale-95 ${
+                    theme === "white" ? "bg-black/5 text-black hover:bg-black/10" : "bg-white/10 text-white hover:bg-white/20"
+                }`}
+            >
+                {theme === "blue" ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+
+            {/* Hamburger Button - Mobile & Tablet */}
             <button
               onClick={() => setIsOpen(true)}
-              className={`flex items-center gap-2 md:gap-3 px-4 md:px-5 py-2 md:py-2.5 rounded-full hover:bg-[#14A3C7] hover:text-white transition-all active:scale-95 group shadow-xl ${theme === "white"
+              className={`lg:hidden flex items-center gap-2 px-4 py-2 rounded-full transition-all active:scale-95 group shadow-xl ${theme === "white"
                 ? "bg-black text-white shadow-black/5"
                 : "bg-white text-black shadow-white/5"
                 }`}
             >
-              <span className="text-sm font-bold tracking-wider">
-                {t.navbar.menu}
-              </span>
               <Menu
-                size={18}
+                size={20}
                 className="group-hover:rotate-90 transition-transform"
               />
             </button>
@@ -123,7 +145,7 @@ export default function Navbar() {
                 }`}
             >
               <div>
-                <Link href="/" className="block">
+                <Link href="/" className="block" onClick={() => setIsOpen(false)}>
                   <Image
                     src="/logo.png"
                     alt="Bworth Logo"
@@ -142,22 +164,7 @@ export default function Navbar() {
                 </p>
               </div>
 
-              <div className="space-y-6">
-                <div
-                  onClick={toggleLanguage}
-                  className={`flex items-center gap-3 transition-colors cursor-pointer group ${theme === "white"
-                    ? "text-black/40 hover:text-[#14A3C7]"
-                    : "text-white hover:text-[#14A3C7]"
-                    }`}
-                >
-                  <Globe size={18} />
-                  <span className="text-xs font-bold uppercase tracking-widest">
-                    {language === "en"
-                      ? "ENGLISH / हिन्दी"
-                      : "हिन्दी / ENGLISH"}
-                  </span>
-                </div>
-
+              <div className="space-y-6 mt-12 pb-12">
                 <div
                   onClick={() =>
                     toggleTheme(theme === "blue" ? "white" : "blue")
@@ -174,7 +181,7 @@ export default function Navbar() {
                 </div>
 
                 <div
-                  className={`text-[10px] uppercase tracking-[0.2em] font-bold text-black`}
+                  className={`text-[10px] uppercase tracking-[0.2em] font-bold ${theme === "white" ? "text-black/30" : "text-white/30"}`}
                 >
                   © {new Date().getFullYear()} BEWORTH TECHNOLOGIES
                 </div>
@@ -184,7 +191,7 @@ export default function Navbar() {
             {/* Right side navigation */}
             <div className="flex-1 flex flex-col h-full overflow-y-auto">
               <div
-                className={`sticky top-0 z-10 flex justify-between items-center md:justify-end p-6 md:p-8 backdrop-blur-sm ${theme === "white" ? "bg-white/80" : "bg-[#14A3C7]/80"
+                className={`sticky top-0 z-10 flex justify-between items-center p-6 md:p-8 backdrop-blur-sm ${theme === "white" ? "bg-white/80" : "bg-[#14A3C7]/80"
                   }`}
               >
                 <div className="md:hidden">
@@ -199,17 +206,9 @@ export default function Navbar() {
                   />
                 </div>
 
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4 ml-auto">
                   {/* Mobile Toggles */}
-                  <div className="flex md:hidden items-center gap-4 mr-2">
-                    <button
-                      onClick={toggleLanguage}
-                      className={
-                        theme === "white" ? "text-black/60" : "text-white/60"
-                      }
-                    >
-                      <Globe size={20} />
-                    </button>
+                  <div className="md:hidden pr-4">
                     <button
                       onClick={() =>
                         toggleTheme(theme === "blue" ? "white" : "blue")
@@ -224,7 +223,7 @@ export default function Navbar() {
 
                   <button
                     onClick={() => setIsOpen(false)}
-                    className={`flex items-center gap-2 px-4 py-2 transition-all border rounded-full group ${theme === "white"
+                    className={`flex items-center gap-2 px-5 py-2.5 transition-all border rounded-full group ${theme === "white"
                       ? "hover:bg-black hover:text-white border-black/10 bg-black/5"
                       : "hover:bg-white hover:text-black border-white/10 bg-white/5"
                       }`}
@@ -296,7 +295,7 @@ export default function Navbar() {
             </div>
           </motion.div>
         )}
-      </AnimatePresence >
+      </AnimatePresence>
     </>
   );
 }

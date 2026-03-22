@@ -5,18 +5,15 @@ import { useGSAP } from "@gsap/react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowDownRight } from "lucide-react";
-import { useLanguage } from "../context/LanguageContext";
 import { useTheme } from "../context/ThemeContext";
-import { translations } from "../utils/translations";
+import { translations as t } from "../utils/translations";
 
 import GsapTextReveal from "./GsapTextReveal";
 
 gsap.registerPlugin(useGSAP);
 
 export default function Hero() {
-    const { language } = useLanguage();
     const { theme } = useTheme();
-    const t = translations[language];
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
     const containerRef = useRef(null);
 
@@ -50,7 +47,7 @@ export default function Hero() {
     }, { scope: containerRef });
 
     return (
-        <section ref={containerRef} className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 pb-12 pt-24 lg:pt-0 overflow-hidden">
+        <section ref={containerRef} className="relative min-h-[80vh] flex flex-col justify-center px-6 md:px-12 pb-12 pt-24 lg:pt-12 overflow-hidden">
             {/* Interactive Mouse Glow */}
             <div
                 className="pointer-events-none fixed inset-0 z-10 opacity-30 transition-opacity duration-300 pointer-events-none"
@@ -82,8 +79,8 @@ export default function Hero() {
                         </div>
 
                         <div
-                            className={`text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-black uppercase tracking-tighter ${theme === "white" ? "text-black" : "text-white"
-                                } ${language === "hi" ? "leading-tight" : "leading-[0.85]"}`}
+                            className={`text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-black uppercase tracking-tighter leading-[0.85] ${theme === "white" ? "text-black" : "text-white"
+                                }`}
                         >
                             <GsapTextReveal
                                 text={t.hero_component.creating}
@@ -114,7 +111,7 @@ export default function Hero() {
                         >
                             <div className="aspect-[3/4] relative overflow-hidden">
                                 <Image
-                                    src="/hero.png"
+                                    src="/hero_new.png"
                                     alt="Hero Image"
                                     fill
                                     className="object-cover w-full h-full transition-transform duration-1000 group-hover:scale-110"
@@ -158,15 +155,6 @@ export default function Hero() {
                                         size={18}
                                         className="group-hover:rotate-45 transition-transform"
                                     />
-                                </Link>
-                                <Link
-                                    href="#how-it-works"
-                                    className={`px-8 py-5 rounded-full font-bold border transition-colors text-sm ${theme === "white"
-                                        ? "border-black/10 text-black hover:bg-black/5"
-                                        : "border-white/10 text-white hover:bg-white/5"
-                                        }`}
-                                >
-                                    {t.hero_component.how_it_works}
                                 </Link>
                             </div>
                         </div>

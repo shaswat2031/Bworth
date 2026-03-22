@@ -4,14 +4,12 @@ import Link from "next/link";
 import { ArrowLeft, ShipWheel } from "lucide-react";
 import ProfileCard from "../components/ProfileCard";
 import Footer from "../components/Footer";
-import { useLanguage } from "../context/LanguageContext";
+import ContactSection from "../components/ContactSection";
 import { useTheme } from "../context/ThemeContext";
-import { translations } from "../utils/translations";
+import { translations as t } from "../utils/translations";
 
 export default function AboutUs() {
-  const { language } = useLanguage();
   const { theme } = useTheme();
-  const t = translations[language];
 
   return (
     <main
@@ -42,7 +40,7 @@ export default function AboutUs() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className={`text-4xl sm:text-6xl md:text-8xl lg:text-[10rem] font-serif font-black uppercase tracking-tighter mb-8 md:mb-12 ${language === "hi" ? "leading-tight" : "leading-[0.85]"}`}>
+            <h1 className={`text-4xl sm:text-6xl md:text-8xl lg:text-[10rem] font-serif font-black uppercase tracking-tighter mb-8 md:mb-12 leading-[0.85]`}>
               {t.hero.mission_title_our} <br />{" "}
               <span className={theme === "white" ? "text-[#14A3C7]" : "text-black"}>
                 {t.about_page.genesis}
@@ -154,27 +152,28 @@ export default function AboutUs() {
             transition={{ duration: 0.8 }}
           >
             <span className="text-xs font-bold tracking-[0.3em] text-black uppercase">
-              Leadership
+              {t.about_page.leadership}
             </span>
             <h2
               className={`text-3xl sm:text-4xl md:text-6xl font-serif font-black uppercase tracking-tighter leading-none ${theme === "white" ? "text-black" : "text-white"
                 }`}
             >
-              Visionary <br />{" "}
+              {t.about_page.visionary} <br />{" "}
               <span className={`italic ${theme === "white" ? "text-[#14A3C7]" : "text-black"}`}>
-                Leadership.
+                {t.about_page.leader_title}
               </span>
             </h2>
             <p
               className={`text-lg md:text-xl leading-relaxed ${theme === "white" ? "text-black font-bold" : "text-white font-normal"
                 }`}
             >
-              With 18 years of deep expertise in building businesses, Dheeraj Anand leads BWorth with a strategic vision to redefine sustainability in fashion. His leadership combines improved business acumen with a passion for environmental impact.
+              {t.about_page.leader_desc}
             </p>
           </motion.div>
         </div>
       </section>
 
+      <ContactSection />
       <Footer />
 
       <style jsx>{`

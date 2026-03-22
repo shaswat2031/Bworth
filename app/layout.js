@@ -1,8 +1,6 @@
 import { Poppins, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
-import CustomCursor from "./components/CustomCursor";
-import { LanguageProvider } from "./context/LanguageContext";
 import { ThemeProvider } from "./context/ThemeContext";
 import Loading from "./loading";
 
@@ -150,17 +148,14 @@ export default function RootLayout({ children }) {
         <link rel="canonical" href={baseUrl} />
       </head>
       <body
-        className={`${poppins.variable} ${playfair.variable} antialiased font-sans cursor-none`}
+        className={`${poppins.variable} ${playfair.variable} antialiased font-sans`}
         suppressHydrationWarning
       >
-        <LanguageProvider>
           <ThemeProvider>
             <Loading />
-            <CustomCursor />
             <Navbar />
             {children}
           </ThemeProvider>
-        </LanguageProvider>
       </body>
     </html>
   );

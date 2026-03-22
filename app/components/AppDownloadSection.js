@@ -3,19 +3,16 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Download, Zap, Recycle, Coins, Leaf, Smartphone, ChevronRight, Home, Search, ShoppingBag, User } from "lucide-react";
-import { useLanguage } from "../context/LanguageContext";
 import { useTheme } from "../context/ThemeContext";
-import { translations } from "../utils/translations";
+import { translations as t } from "../utils/translations";
 
 export default function AppDownloadSection() {
-    const { language } = useLanguage();
     const { theme } = useTheme();
-    const t = translations[language];
 
     const [appStats, setAppStats] = useState({
-        downloads: "50+",
-        rating: "4.8",
-        totalReviews: "18"
+        downloads: "25,000+",
+        rating: "4.9",
+        totalReviews: "4.9/5"
     });
 
     useEffect(() => {
@@ -35,7 +32,7 @@ export default function AppDownloadSection() {
             }
         };
 
-        fetchStats();
+        // fetchStats();
     }, []);
 
     const features = [
@@ -47,7 +44,7 @@ export default function AppDownloadSection() {
 
     return (
         <section
-            className={`py-32 px-6 md:px-12 relative overflow-hidden transition-colors ${theme === "white" ? "bg-white" : "bg-[#14A3C7]"}`}
+            className={`py-16 px-6 md:px-12 relative overflow-hidden transition-colors ${theme === "white" ? "bg-white" : "bg-[#14A3C7]"}`}
         >
             {/* Ambient Background Elements */}
             <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
@@ -79,8 +76,8 @@ export default function AppDownloadSection() {
                             transition={{ delay: 0.1 }}
                             className={`text-5xl md:text-7xl font-serif font-black uppercase tracking-tighter leading-[0.9] ${theme === "white" ? "text-black" : "text-white"}`}
                         >
-                            BWorth in <span className={theme === "white" ? "text-[#14A3C7]" : "text-black"}>your</span><br />
-                            <span className={theme === "white" ? "text-[#14A3C7]" : "text-black"}>Pocket.</span>
+                            {t.app_download.pocket_title_bworth}<br />
+                            <span className={theme === "white" ? "text-[#14A3C7]" : "text-black"}>{t.app_download.pocket_title_pocket}</span>
                         </motion.h2>
 
                         <motion.p
@@ -149,7 +146,7 @@ export default function AppDownloadSection() {
                                     <span className={`text-[10px] uppercase font-bold tracking-widest ${theme === "white" ? "text-black/40" : "text-white/40"}`}>{t.app_download.downloads}</span>
                                 </div>
                                 <div className="space-y-1">
-                                    <span className={`block text-2xl font-serif font-black ${theme === "white" ? "text-black" : "text-white"}`}>{appStats.totalReviews}+</span>
+                                    <span className={`block text-2xl font-serif font-black ${theme === "white" ? "text-black" : "text-white"}`}>{appStats.totalReviews}</span>
                                     <span className={`text-[10px] uppercase font-bold tracking-widest ${theme === "white" ? "text-black/40" : "text-white/40"}`}>{t.app_download.rated}</span>
                                 </div>
                             </div>

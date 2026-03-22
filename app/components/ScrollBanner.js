@@ -3,21 +3,18 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
-import { useLanguage } from "../context/LanguageContext";
 import { useTheme } from "../context/ThemeContext";
-import { translations } from "../utils/translations";
+import { translations as t } from "../utils/translations";
 
 gsap.registerPlugin(useGSAP);
 
 export default function ScrollBanner() {
-  const { language } = useLanguage();
   const { theme } = useTheme();
-  const t = translations[language];
   const containerRef = useRef(null);
   const text = t.scroll_banner.text;
 
   // Create enough items to fill widely and loop seamlessly
-  const items = Array(12).fill(text);
+  const items = Array(3).fill(text);
 
   useGSAP(
     () => {
@@ -44,7 +41,7 @@ export default function ScrollBanner() {
         <div className="marquee-content flex whitespace-nowrap will-change-transform py-2">
           {[...items, ...items].map((item, index) => (
             <div key={index} className="flex items-center shrink-0">
-              <span className={`text-3xl md:text-6xl font-serif font-black tracking-tighter mx-4 md:mx-12 ${language === 'hi' ? 'leading-[1.4] py-2' : ''}`}>
+              <span className="text-3xl md:text-6xl font-serif font-black tracking-tighter mx-4 md:mx-12">
                 {item}
               </span>
               <div className="w-4 h-4 md:w-6 md:h-6 bg-[#14A3C7] rotate-45 mx-4 shadow-[0_0_15px_rgba(20,163,199,0.5)]"></div>

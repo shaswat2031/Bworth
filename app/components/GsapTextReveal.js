@@ -45,10 +45,11 @@ export default function GsapTextReveal({
     return (
         <Tag ref={containerRef} className={`${className}`}>
             {text.split(" ").map((word, i) => (
-                <span key={i} className="inline-block mr-[0.25em]">
+                <span key={i} className="inline-block mr-[0.35em] whitespace-nowrap">
                     <span className="word inline-block will-change-transform">
                         {word}
                     </span>
+                    {" "}
                 </span>
             ))}
         </Tag>

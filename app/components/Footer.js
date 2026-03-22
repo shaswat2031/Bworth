@@ -2,14 +2,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight, Instagram, Facebook, Linkedin, Youtube } from "lucide-react";
-import { useLanguage } from "../context/LanguageContext";
 import { useTheme } from "../context/ThemeContext";
-import { translations } from "../utils/translations";
+import { translations as t } from "../utils/translations";
 
 export default function Footer() {
-  const { language } = useLanguage();
   const { theme } = useTheme();
-  const t = translations[language];
   const currentYear = new Date().getFullYear();
 
   const footerLinks = [
@@ -24,32 +21,28 @@ export default function Footer() {
 
   return (
     <footer
-      className={`pt-24 pb-12 px-6 md:px-12 border-t transition-colors ${theme === "white"
-        ? "bg-[#F8FAFC] text-black border-black/10"
-        : "bg-[#14A3C7] text-white border-white/5"
+      className={`py-16 px-6 md:px-12 border-t transition-colors ${theme === "white"
+        ? "bg-[#F8FAFC] text-black border-black/5"
+        : "bg-[#0A192F] text-white border-white/5"
         }`}
     >
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-24">
-          <div className="lg:col-span-5">
-            <Link href="/" className="block mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+          {/* Brand Column */}
+          <div className="space-y-6">
+            <Link href="/" className="inline-block">
               <Image
                 src="/logo.png"
                 alt="Bworth Logo"
-                width={0}
-                height={0}
-                sizes="100vw"
-                className={`h-10 w-auto object-contain transition-all ${theme === "white" ? "" : "invert hue-rotate-180"
-                  }`}
+                width={140}
+                height={40}
+                className={`h-8 w-auto object-contain transition-all ${theme === "white" ? "" : "invert"}`}
               />
             </Link>
-            <p
-              className={`text-xl font-bold leading-relaxed mb-10 max-w-sm ${theme === "white" ? "text-black" : "text-white"
-                }`}
-            >
+            <p className={`text-sm leading-relaxed max-w-[240px] ${theme === "white" ? "text-black/60" : "text-white/60"}`}>
               {t.footer.desc}
             </p>
-            <div className="flex gap-4">
+            <div className="flex gap-3">
               {[
                 { Icon: Instagram, href: "https://www.instagram.com/bworth.fashion" },
                 { Icon: Facebook, href: "https://www.facebook.com/people/BWorth/61565081468088/" },
@@ -61,104 +54,82 @@ export default function Footer() {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`w-12 h-12 flex items-center justify-center border rounded-full hover:bg-[#14A3C7] hover:text-white transition-all cursor-pointer ${theme === "white"
-                    ? "bg-black/5 border-black/10"
-                    : "bg-white/5 border-white/10"
+                  className={`w-9 h-9 flex items-center justify-center rounded-lg border transition-all ${theme === "white"
+                      ? "bg-black/5 border-black/10 hover:bg-black hover:text-white"
+                      : "bg-white/5 border-white/10 hover:bg-[#14A3C7] hover:border-[#14A3C7]"
                     }`}
                 >
-                  <Icon size={20} />
+                  <Icon size={16} />
                 </Link>
               ))}
             </div>
           </div>
 
-          <div className="lg:col-span-3">
-            <h4
-              className={`text-xs font-bold uppercase tracking-[0.3em] mb-8 ${theme === "white" ? "text-black" : "text-white"
-                }`}
-            >
+          {/* Navigation Column */}
+          <div>
+            <h4 className={`text-[10px] font-black uppercase tracking-[0.3em] mb-6 ${theme === "white" ? "text-black/40" : "text-white/40"}`}>
               {t.footer.navigation}
             </h4>
-            <ul className="space-y-4">
+            <ul className="grid grid-cols-2 gap-x-4 gap-y-3">
               {footerLinks.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className={`text-lg font-serif font-bold uppercase group flex items-center gap-2 transition-colors ${
-                      theme === "white" ? "hover:text-[#14A3C7]" : "hover:text-black"
-                    }`}
+                    className={`text-sm font-medium transition-colors ${theme === "white" ? "hover:text-[#14A3C7]" : "hover:text-[#14A3C7]"
+                      }`}
                   >
                     {link.name}
-                    <ArrowUpRight
-                      size={16}
-                      className="opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all font-sans"
-                    />
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="lg:col-span-4 flex flex-col justify-between">
+          {/* Contact Column */}
+          <div>
+            <h4 className={`text-[10px] font-black uppercase tracking-[0.3em] mb-6 ${theme === "white" ? "text-black/40" : "text-white/40"}`}>
+              {t.footer.contact_details}
+            </h4>
             <div className="space-y-4">
-              <h4
-                className={`text-xs font-bold uppercase tracking-[0.3em] mb-6 ${theme === "white" ? "text-black" : "text-white"
-                  }`}
-              >
-                {t.footer.contact_details}
-              </h4>
-              <div className="space-y-2">
-                <p
-                  className={`text-2xl font-serif font-bold ${theme === "white" ? "text-black" : "text-white"
-                    }`}
-                >
-                  +91 8826668050
-                </p>
-                <p className={`text-lg font-normal underline decoration-white/30 underline-offset-8 ${theme === "white" ? "text-[#14A3C7] decoration-[#14A3C7]/30" : "text-white"}`}>
-                  info@bworth.co.in
-                </p>
+              <div>
+                <p className="text-sm font-bold opacity-40 mb-1 uppercase tracking-tighter text-[10px]">{t.footer.contact_details}</p>
+                <p className="text-base font-serif font-black">+91 8826668050</p>
+              </div>
+              <div>
+                <p className="text-sm font-bold opacity-40 mb-1 uppercase tracking-tighter text-[10px]">Email</p>
+                <p className="text-sm font-medium truncate">info@bworth.co.in</p>
               </div>
             </div>
+          </div>
 
-            <div className="mt-12 lg:mt-0">
-              <h4
-                className={`text-xs font-bold uppercase tracking-[0.3em] mb-4 ${theme === "white" ? "text-black" : "text-white"
-                  }`}
-              >
-                {t.footer.location}
-              </h4>
-              <p
-                className={`text-sm font-bold tracking-widest uppercase ${theme === "white" ? "text-black" : "text-white"
-                  }`}
-              >
-                {t.footer.address}
-              </p>
-            </div>
+          {/* Location Column */}
+          <div>
+            <h4 className={`text-[10px] font-black uppercase tracking-[0.3em] mb-6 ${theme === "white" ? "text-black/40" : "text-white/40"}`}>
+              {t.footer.location}
+            </h4>
+            <p className="text-sm leading-relaxed max-w-[200px]">
+              {t.footer.address}
+            </p>
           </div>
         </div>
 
-        <div
-          className={`flex flex-col md:flex-row justify-between items-center py-12 border-t gap-6 md:gap-8 ${theme === "white" ? "border-black/5" : "border-white/5"
-            }`}
-        >
-          <p
-            className={`text-[10px] font-bold tracking-[0.5em] uppercase text-black text-center md:text-left`}
-          >
-            © {currentYear} BEWORTH TECHNOLOGIES
+        <div className={`pt-10 border-t flex flex-col md:flex-row justify-between items-center gap-6 ${theme === "white" ? "border-black/5" : "border-white/5"}`}>
+          <p className={`text-[10px] font-black tracking-[0.3em] uppercase ${theme === "white" ? "text-black/40" : "text-white/40"}`}>
+            © {t.footer.rights}
           </p>
           <div
             className={`flex flex-wrap justify-center gap-6 md:gap-8 text-[10px] font-bold tracking-[0.5em] uppercase ${theme === "white" ? "text-black" : "text-white"
               }`}
           >
             <Link
-              href="/privacypolicy"
-              className="hover:text-[#14A3C7] transition-colors"
+              href="/privacy-policy"
+              className={`transition-colors ${theme === "white" ? "hover:text-[#14A3C7]" : "hover:text-white"}`}
             >
               {t.footer.policy}
             </Link>
             <Link
               href="/terms-of-use"
-              className="hover:text-[#14A3C7] transition-colors"
+              className={`transition-colors ${theme === "white" ? "hover:text-[#14A3C7]" : "hover:text-white"}`}
             >
               {t.footer.terms}
             </Link>

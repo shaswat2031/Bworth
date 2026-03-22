@@ -33,12 +33,6 @@
   h6 {
     @apply tracking-tighter font-serif;
   }
-
-  body.lang-hi {
-    letter-spacing: 0.05em;
-    /* Increased spacing for Hindi readability */
-    word-spacing: 0.05em;
-  }
 }
 
 @layer utilities {

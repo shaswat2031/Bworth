@@ -3,14 +3,11 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowLeft, ShieldCheck } from "lucide-react";
 import Footer from "../components/Footer";
-import { useLanguage } from "../context/LanguageContext";
 import { useTheme } from "../context/ThemeContext";
-import { translations } from "../utils/translations";
+import { translations as t } from "../utils/translations";
 
 export default function PrivacyPolicy() {
-    const { language } = useLanguage();
     const { theme } = useTheme();
-    const t = translations[language];
 
     return (
         <main

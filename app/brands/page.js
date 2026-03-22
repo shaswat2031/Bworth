@@ -4,14 +4,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, Flag, MapPin, Award } from "lucide-react";
 import Footer from "../components/Footer";
-import { useLanguage } from "../context/LanguageContext";
+import ContactSection from "../components/ContactSection";
 import { useTheme } from "../context/ThemeContext";
-import { translations } from "../utils/translations";
+import { translations as t } from "../utils/translations";
 
 export default function Brands() {
-  const { language } = useLanguage();
   const { theme } = useTheme();
-  const t = translations[language];
 
   return (
     <main
@@ -214,6 +212,7 @@ export default function Brands() {
         </div>
       </section>
 
+      <ContactSection />
       <Footer />
     </main>
   );

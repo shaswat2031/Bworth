@@ -4,14 +4,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, Building2, School, Globe, Users } from "lucide-react";
 import Footer from "../components/Footer";
-import { useLanguage } from "../context/LanguageContext";
+import ContactSection from "../components/ContactSection";
 import { useTheme } from "../context/ThemeContext";
-import { translations } from "../utils/translations";
+import { translations as t } from "../utils/translations";
 
 export default function B2BEngagement() {
-    const { language } = useLanguage();
     const { theme } = useTheme();
-    const t = translations[language];
 
     const offerings = [
         {
@@ -48,7 +46,7 @@ export default function B2BEngagement() {
                 <div className="max-w-7xl mx-auto">
                     <Link href="/" className="inline-flex items-center gap-2 font-bold tracking-widest text-xs uppercase mb-12 group">
                         <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-                        {language === 'en' ? "Back to Home" : "होम पर वापस जाएं"}
+                        {t.common.back_home}
                     </Link>
 
                     <motion.div
@@ -56,7 +54,7 @@ export default function B2BEngagement() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
                     >
-                        <h1 className={`text-4xl sm:text-6xl md:text-8xl lg:text-[10rem] font-serif font-black uppercase tracking-tighter mb-8 md:mb-12 ${language === "hi" ? "leading-tight" : "leading-[0.85]"}`}>
+                        <h1 className={`text-4xl sm:text-6xl md:text-8xl lg:text-[10rem] font-serif font-black uppercase tracking-tighter mb-8 md:mb-12 leading-[0.85]`}>
                             {t.b2b_page.title_b2b} <br />
                             <span className={theme === "white" ? "text-[#14A3C7]" : "text-black"}>{t.b2b_page.title_engagement}</span>
                         </h1>
@@ -152,6 +150,7 @@ export default function B2BEngagement() {
                 </div>
             </section>
 
+            <ContactSection />
             <Footer />
         </main>
     );

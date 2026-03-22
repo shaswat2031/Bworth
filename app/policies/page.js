@@ -1,16 +1,13 @@
 "use client";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowLeft, ShieldCheck, FileText, Lock, RefreshCw } from "lucide-react";
+import { ArrowLeft, ShieldCheck, FileText, Lock, RefreshCw, RotateCcw } from "lucide-react";
 import Footer from "../components/Footer";
-import { useLanguage } from "../context/LanguageContext";
 import { useTheme } from "../context/ThemeContext";
-import { translations } from "../utils/translations";
+import { translations as t } from "../utils/translations";
 
 export default function Policies() {
-  const { language } = useLanguage();
   const { theme } = useTheme();
-  const t = translations[language];
 
   const policyCategories = [
     {
@@ -30,6 +27,12 @@ export default function Policies() {
       title: t.policies_page.user_agreement,
       desc: t.policies_page.user_desc,
       href: "/terms-of-use"
+    },
+    {
+      icon: <RotateCcw size={24} />,
+      title: t.policies_page.returns,
+      desc: t.policies_page.returns_desc,
+      href: "/returns-exchange-refunds-policy"
     },
     {
       icon: <FileText size={24} />,

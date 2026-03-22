@@ -1,133 +1,164 @@
 "use client";
 import { motion } from "framer-motion";
-import { Recycle, Zap, ShieldCheck, TrendingUp, Heart, Users, Cloud, Building2 } from "lucide-react";
-import { useLanguage } from "../context/LanguageContext";
+import { UploadCloud, Coins, ShoppingBag } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
-import { translations } from "../utils/translations";
+import { translations as t } from "../utils/translations";
 
 export default function FeatureSection() {
-    const { language } = useLanguage();
     const { theme } = useTheme();
-    const t = translations[language];
 
     const features = [
         {
-            icon: <TrendingUp size={32} />,
-            title: t.features.marketplace_title,
-            desc: t.features.marketplace_desc
-        },
-        {
-            icon: <Recycle size={32} />,
+            icon: <UploadCloud size={40} strokeWidth={1.5} />,
             title: t.features.buyback_title,
-            desc: t.features.buyback_desc
+            desc: t.features.buyback_desc,
+            accent: "#14A3C7"
         },
         {
-            icon: <ShieldCheck size={32} />,
+            icon: <Coins size={40} strokeWidth={1.5} />,
             title: t.features.events_title,
-            desc: t.features.events_desc
+            desc: t.features.events_desc,
+            accent: "#FBBF24" // Golden for coins
         },
         {
-            icon: <Heart size={32} />,
-            title: t.features.social_cause_title,
-            desc: t.features.social_cause_desc
-        },
-        {
-            icon: <Users size={32} />,
-            title: t.features.referral_title,
-            desc: t.features.referral_desc
-        },
-        {
-            icon: <Cloud size={32} />,
-            title: t.features.carbon_credits_title,
-            desc: t.features.carbon_credits_desc
+            icon: <ShoppingBag size={40} strokeWidth={1.5} />,
+            title: t.features.marketplace_title,
+            desc: t.features.marketplace_desc,
+            accent: "#10B981" // Green for sustainability/recycling
         }
     ];
 
     return (
         <section
-            className={`py-24 px-6 md:px-12 backdrop-blur-sm border-y transition-colors ${theme === "white"
-                ? "bg-black/[0.02] border-black/[0.05]"
-                : "bg-white/[0.01] border-white/[0.05]"
+            className={`py-24 px-6 md:px-12 relative overflow-hidden transition-colors duration-700 ${theme === "white"
+                ? "bg-[#F8FAFC]"
+                : "bg-black"
                 }`}
         >
-            <div className="max-w-7xl mx-auto">
-                <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-20">
-                    <div className="max-w-2xl">
-                        <span
-                            className={`text-sm font-bold tracking-widest block mb-4 uppercase ${theme === "white"
-                                ? "text-black/40"
-                                : "text-white/60"
+            {/* Ambient Background Glows */}
+            <div className={`absolute top-0 left-1/4 w-96 h-96 blur-[120px] rounded-full opacity-20 pointer-events-none ${theme === "white" ? "bg-[#14A3C7]" : "bg-[#14A3C7]/40"}`}></div>
+            <div className={`absolute bottom-0 right-1/4 w-96 h-96 blur-[120px] rounded-full opacity-10 pointer-events-none ${theme === "white" ? "bg-blue-200" : "bg-blue-900/40"}`}></div>
+
+            <div className="max-w-7xl mx-auto relative z-10">
+                <div className="flex flex-col md:flex-row justify-between items-end gap-12 mb-20">
+                    <div className="max-w-3xl">
+                        <motion.div
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6 }}
+                            className="flex items-center gap-3 mb-6"
+                        >
+                            <span className={`w-8 h-[1px] ${theme === "white" ? "bg-[#14A3C7]" : "bg-white/40"}`}></span>
+                            <span
+                                className={`text-sm font-black tracking-[0.4em] uppercase ${theme === "white"
+                                    ? "text-[#14A3C7]"
+                                    : "text-white/60"
+                                    }`}
+                            >
+                                {t.features.tech_fashion}
+                            </span>
+                        </motion.div>
+                        <motion.h2
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, delay: 0.1 }}
+                            className={`text-4xl sm:text-6xl md:text-8xl font-serif font-black uppercase tracking-tighter leading-[0.9] ${theme === "white" ? "text-black" : "text-white"
                                 }`}
                         >
-                            {t.features.tech_fashion}
-                        </span>
-                        <h2
-                            className={`text-2xl sm:text-4xl md:text-7xl font-serif font-black uppercase tracking-tighter leading-none ${theme === "white" ? "text-black" : "text-white"
-                                }`}
-                        >
-                            {language === 'en' ? (
-                                <>
-                                    The infrastructure <span className={theme === "white" ? "text-[#14A3C7]" : "text-black"}>for circularity.</span>
-                                </>
-                            ) : t.features.infrastructure}
-                        </h2>
+                            {t.features.infrastructure.split(' ').map((word, i) => (
+                                <span key={i} className={i % 2 !== 0 && theme === "white" ? "text-[#14A3C7] italic block sm:inline" : "block sm:inline mr-4"}>
+                                    {word}{" "}
+                                </span>
+                            ))}
+                        </motion.h2>
                     </div>
-                    <p
-                        className={`font-medium max-w-sm leading-relaxed ${theme === "white" ? "text-black/50" : "text-white/60"
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                        className={`text-xl md:text-2xl font-light max-w-sm leading-relaxed ${theme === "white" ? "text-black/60" : "text-white/50"
                             }`}
                     >
                         {t.features.desc}
-                    </p>
+                    </motion.p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-0">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-10">
                     {features.map((f, i) => (
                         <motion.div
                             key={i}
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 50 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: i * 0.1 }}
-                            whileHover={{ y: -5 }}
-                            className={`p-10 border transition-all duration-500 group ${theme === "white"
-                                ? "border-black/[0.05] hover:bg-black/[0.05]"
-                                : "border-white/[0.05] hover:bg-white"
-                                } ${i === 0
-                                    ? "md:rounded-l-3xl"
-                                    : i === features.length - 1
-                                        ? "md:rounded-r-3xl"
-                                        : ""
+                            transition={{ duration: 0.7, delay: i * 0.2 }}
+                            whileHover={{ y: -12 }}
+                            className={`group relative p-10 lg:p-14 rounded-[3.5rem] border transition-all duration-500 overflow-hidden ${theme === "white"
+                                ? "bg-white border-black/[0.05] hover:border-[#14A3C7]/30 hover:shadow-[0_20px_50px_rgba(20,163,199,0.12)]"
+                                : "bg-white/5 border-white/[0.05] hover:bg-white/10 hover:border-white/20"
                                 }`}
                         >
-                            <motion.div
-                                className={`mb-8 p-3 w-fit rounded-lg transition-all ${theme === "white"
-                                    ? "bg-black/[0.05] text-black group-hover:bg-black group-hover:text-white"
-                                    : "bg-white/[0.05] text-white group-hover:bg-white group-hover:text-black"
-                                    }`}
-                                whileHover={{ scale: 1.1, rotate: 5 }}
-                            >
-                                {f.icon}
-                            </motion.div>
-                            <h3
-                                className={`text-2xl font-serif font-bold uppercase mb-4 transition-colors ${theme === "white"
-                                    ? "text-[#14A3C7] group-hover:text-blue-500"
-                                    : "text-white group-hover:text-black"
-                                    }`}
-                            >
-                                {f.title}
-                            </h3>
-                            <p
-                                className={`text-sm font-medium leading-relaxed transition-colors ${theme === "white"
-                                    ? "text-black/50 group-hover:text-black/70"
-                                    : "text-white/60 group-hover:text-black"
-                                    }`}
-                            >
-                                {f.desc}
-                            </p>
+                            {/* Large Step Background Number */}
+                            <div className={`absolute -top-10 -right-10 text-[12rem] font-serif font-black leading-none opacity-[0.03] transition-all duration-700 group-hover:scale-110 group-hover:opacity-[0.08] ${theme === "white" ? "text-black" : "text-white"}`}>
+                                0{i + 1}
+                            </div>
+
+                            <div className="relative z-10">
+                                <motion.div
+                                    className={`mb-12 p-5 w-fit rounded-3xl transition-all duration-500 ${theme === "white"
+                                        ? "bg-[#F8FAFC] text-black shadow-inner group-hover:bg-[#14A3C7] group-hover:text-white"
+                                        : "bg-white/5 text-white group-hover:bg-white group-hover:text-black"
+                                        }`}
+                                    whileHover={{ scale: 1.1, rotate: [-5, 5, 0] }}
+                                >
+                                    {f.icon}
+                                </motion.div>
+
+                                <div className={`text-[10px] font-black uppercase tracking-[0.4em] mb-6 inline-flex items-center gap-2 ${theme === "white" ? "text-[#14A3C7]" : "text-white/40"}`}>
+                                    <span className={`w-4 h-[2px] rounded-full ${theme === "white" ? "bg-[#14A3C7]" : "bg-white/40"}`}></span>
+                                    Step 0{i + 1}
+                                </div>
+
+                                <h3
+                                    className={`text-3xl md:text-4xl font-serif font-black uppercase mb-6 leading-tight transition-colors ${theme === "white"
+                                        ? "text-black group-hover:text-[#14A3C7]"
+                                        : "text-white"
+                                        }`}
+                                >
+                                    {f.title}
+                                </h3>
+
+                                <p
+                                    className={`text-lg font-medium leading-relaxed mb-8 transition-colors ${theme === "white"
+                                        ? "text-black/50"
+                                        : "text-white/60"
+                                        }`}
+                                >
+                                    {f.desc}
+                                </p>
+
+
+                            </div>
+
+                            {/* Corner Accent Decor */}
+                            <div 
+                                className="absolute bottom-0 right-0 w-32 h-32 opacity-0 group-hover:opacity-10 transition-opacity duration-700"
+                                style={{
+                                    background: `radial-gradient(circle at bottom right, ${f.accent}, transparent 70%)`
+                                }}
+                            ></div>
                         </motion.div>
                     ))}
                 </div>
             </div>
+
+            <style jsx>{`
+                .feature-card:hover {
+                    box-shadow: 0 40px 80px -20px rgba(0,0,0,0.1);
+                }
+            `}</style>
         </section>
     );
 }
