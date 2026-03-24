@@ -47,7 +47,7 @@ export const translations = {
         pain_1: "Clothes you don’t wear",
         pain_2: "Low resale value",
         pain_3: "No easy way to recycle",
-        desc: "Join 5,000+ users who are turning their clutter into value while saving the planet."
+        desc: "Join 500+ users who are turning their clutter into value while saving the planet."
     },
     scroll_banner: {
         text: "SUSTAINABLE FUTURE • EARN REWARDS • RECYCLE FASHION • JOIN THE MOVEMENT"
