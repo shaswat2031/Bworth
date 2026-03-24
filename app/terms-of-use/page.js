@@ -1,7 +1,6 @@
 "use client";
-import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowLeft, FileText, CheckCircle2, Shield, User, Scale, AlertTriangle, Eye, HelpCircle } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Shield, User, Scale, AlertTriangle, Eye, HelpCircle } from "lucide-react";
 import Footer from "../components/Footer";
 import { useTheme } from "../context/ThemeContext";
 import { translations as t } from "../utils/translations";
@@ -9,21 +8,6 @@ import { translations as t } from "../utils/translations";
 export default function TermsOfUse() {
     const { theme } = useTheme();
     const content = t.terms_page;
-
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.1
-            }
-        }
-    };
-
-    const itemVariants = {
-        hidden: { opacity: 0, y: 30 },
-        visible: { opacity: 1, y: 0 }
-    };
 
     return (
         <main className={`min-h-screen transition-colors duration-500 ${theme === "white" ? "bg-[#F8FAFC] text-black" : "bg-[#0A192F] text-white"}`}>
@@ -42,30 +26,20 @@ export default function TermsOfUse() {
                         {t.common.back_home}
                     </Link>
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 50 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, ease: "circOut" }}
-                    >
+                    <div>
                         <h1 className="text-5xl md:text-8xl lg:text-[7rem] font-serif font-black uppercase tracking-tighter leading-[0.85] mb-8">
                             {content.title} <br />
                             <span className="italic">{content.subtitle}</span>
                         </h1>
-                    </motion.div>
+                    </div>
                 </div>
             </section>
 
-            {/* Content Sections */}
+            {/* Content Sections - 100% Static */}
             <section className="pb-16 px-6 md:px-12">
-                <motion.div 
-                    className="max-w-5xl mx-auto space-y-12"
-                    variants={containerVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.1 }}
-                >
+                <div className="max-w-5xl mx-auto space-y-12">
                     {/* Acceptance Section */}
-                    <motion.div variants={itemVariants} className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
                         <div className="lg:col-span-4">
                             <div className="sticky top-40 flex items-center gap-4 lg:flex-col lg:items-start">
                                 <div className="w-12 h-12 rounded-xl bg-[#14A3C7]/10 flex items-center justify-center text-[#14A3C7]">
@@ -81,10 +55,10 @@ export default function TermsOfUse() {
                                 {content.accept_desc}
                             </div>
                         </div>
-                    </motion.div>
+                    </div>
 
                     {/* Use of Site */}
-                    <motion.div variants={itemVariants} className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
                         <div className="lg:col-span-4">
                             <div className="sticky top-40 flex items-center gap-4 lg:flex-col lg:items-start">
                                 <div className="w-12 h-12 rounded-xl bg-[#14A3C7]/10 flex items-center justify-center text-[#14A3C7]">
@@ -100,10 +74,10 @@ export default function TermsOfUse() {
                                 {content.use_desc}
                             </div>
                         </div>
-                    </motion.div>
+                    </div>
 
                     {/* User Account */}
-                    <motion.div variants={itemVariants} className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
                         <div className="lg:col-span-4">
                             <div className="sticky top-40 flex items-center gap-4 lg:flex-col lg:items-start">
                                 <div className="w-12 h-12 rounded-xl bg-[#14A3C7]/10 flex items-center justify-center text-[#14A3C7]">
@@ -119,10 +93,10 @@ export default function TermsOfUse() {
                                 {content.user_desc}
                             </div>
                         </div>
-                    </motion.div>
+                    </div>
 
                     {/* Intellectual Property */}
-                    <motion.div variants={itemVariants} className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
                         <div className="lg:col-span-4">
                             <div className="sticky top-40 flex items-center gap-4 lg:flex-col lg:items-start">
                                 <div className="w-12 h-12 rounded-xl bg-[#14A3C7]/10 flex items-center justify-center text-[#14A3C7]">
@@ -138,10 +112,10 @@ export default function TermsOfUse() {
                                 {content.ip_desc}
                             </div>
                         </div>
-                    </motion.div>
+                    </div>
 
                     {/* Limitation of Liability */}
-                    <motion.div variants={itemVariants} className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
                         <div className="lg:col-span-4">
                             <div className="sticky top-40 flex items-center gap-4 lg:flex-col lg:items-start">
                                 <div className="w-12 h-12 rounded-xl bg-[#14A3C7]/10 flex items-center justify-center text-[#14A3C7]">
@@ -157,10 +131,10 @@ export default function TermsOfUse() {
                                 {content.limit_desc}
                             </div>
                         </div>
-                    </motion.div>
+                    </div>
 
                     {/* Changes to Terms */}
-                    <motion.div variants={itemVariants} className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
                         <div className="lg:col-span-4">
                             <div className="sticky top-40 flex items-center gap-4 lg:flex-col lg:items-start">
                                 <div className="w-12 h-12 rounded-xl bg-[#14A3C7]/10 flex items-center justify-center text-[#14A3C7]">
@@ -176,10 +150,10 @@ export default function TermsOfUse() {
                                 {content.change_desc}
                             </div>
                         </div>
-                    </motion.div>
+                    </div>
 
                     {/* Footer Info */}
-                    <motion.div variants={itemVariants} className="pt-12 border-t border-current/10">
+                    <div className="pt-12 border-t border-current/10">
                         <div className={`p-12 md:p-16 rounded-[4rem] border flex flex-col md:flex-row items-center justify-between gap-12 ${theme === "white" ? "bg-white border-black/5" : "bg-white/5 border-white/10"}`}>
                             <div className="space-y-4 text-center md:text-left">
                                 <p className="text-[10px] font-black uppercase tracking-[0.4em] opacity-40">Documentation Info</p>
@@ -195,8 +169,8 @@ export default function TermsOfUse() {
                                 </div>
                             </div>
                         </div>
-                    </motion.div>
-                </motion.div>
+                    </div>
+                </div>
             </section>
 
             <Footer />

@@ -55,8 +55,8 @@ export default function Policies() {
           </Link>
 
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-6xl md:text-8xl lg:text-[7rem] font-serif font-black uppercase tracking-tighter leading-[0.85] mb-12">

@@ -1,7 +1,6 @@
 "use client";
-import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowLeft, ShieldCheck, Eye, Lock, Database, Phone, MessageSquare, Terminal, RefreshCw, HelpCircle } from "lucide-react";
+import { ArrowLeft, ShieldCheck, Eye, Lock, Database, Phone, MessageSquare, Terminal, HelpCircle } from "lucide-react";
 import Footer from "../components/Footer";
 import { useTheme } from "../context/ThemeContext";
 import { translations as t } from "../utils/translations";
@@ -9,21 +8,6 @@ import { translations as t } from "../utils/translations";
 export default function PrivacyPolicy() {
     const { theme } = useTheme();
     const content = t.privacy_page;
-
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.1
-            }
-        }
-    };
-
-    const itemVariants = {
-        hidden: { opacity: 0, scale: 0.95 },
-        visible: { opacity: 1, scale: 1 }
-    };
 
     return (
         <main className={`min-h-screen transition-colors duration-500 ${theme === "white" ? "bg-[#F8FAFC] text-black" : "bg-[#0A192F] text-white"}`}>
@@ -42,30 +26,20 @@ export default function PrivacyPolicy() {
                         {t.common.back_home}
                     </Link>
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 50 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, ease: "circOut" }}
-                    >
+                    <div>
                         <h1 className="text-5xl md:text-8xl lg:text-[7rem] font-serif font-black uppercase tracking-tighter leading-[0.85] mb-8">
                             {content.title} <br />
                             <span className="italic">{content.subtitle}</span>
                         </h1>
-                    </motion.div>
+                    </div>
                 </div>
             </section>
 
-            {/* Content Sections */}
+            {/* Content Sections - 100% Static */}
             <section className="pb-24 px-6 md:px-12">
-                <motion.div 
-                    className="max-w-5xl mx-auto space-y-16"
-                    variants={containerVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.1 }}
-                >
+                <div className="max-w-5xl mx-auto space-y-16">
                     {/* Introduction */}
-                    <motion.div variants={itemVariants} className="space-y-8">
+                    <div className="space-y-8">
                         <div className="flex items-center gap-4">
                             <div className="w-10 h-10 rounded-full bg-[#14A3C7]/10 flex items-center justify-center text-[#14A3C7]">
                                 <ShieldCheck size={20} />
@@ -75,10 +49,10 @@ export default function PrivacyPolicy() {
                         <div className={`p-10 rounded-[3rem] border text-lg font-light leading-relaxed opacity-80 ${theme === "white" ? "bg-white border-black/5" : "bg-white/5 border-white/5"}`}>
                             {content.intro_desc}
                         </div>
-                    </motion.div>
+                    </div>
 
                     {/* Information We Collect */}
-                    <motion.div variants={itemVariants} className="space-y-12">
+                    <div className="space-y-12">
                         <div className="flex items-center gap-4">
                             <div className="w-10 h-10 rounded-full bg-[#14A3C7]/10 flex items-center justify-center text-[#14A3C7]">
                                 <Database size={20} />
@@ -101,10 +75,10 @@ export default function PrivacyPolicy() {
                                 </div>
                             ))}
                         </div>
-                    </motion.div>
+                    </div>
 
                     {/* How We Use Your Data */}
-                    <motion.div variants={itemVariants} className="space-y-12">
+                    <div className="space-y-12">
                         <div className="flex items-center gap-4">
                             <div className="w-10 h-10 rounded-full bg-[#14A3C7]/10 flex items-center justify-center text-[#14A3C7]">
                                 <Eye size={20} />
@@ -122,10 +96,10 @@ export default function PrivacyPolicy() {
                                 ))}
                             </div>
                         </div>
-                    </motion.div>
+                    </div>
 
                     {/* Data Security */}
-                    <motion.div variants={itemVariants} className="space-y-8">
+                    <div className="space-y-8">
                         <div className="flex items-center gap-4">
                             <div className="w-10 h-10 rounded-full bg-[#14A3C7]/10 flex items-center justify-center text-[#14A3C7]">
                                 <Lock size={20} />
@@ -135,10 +109,10 @@ export default function PrivacyPolicy() {
                         <div className={`p-10 md:p-12 rounded-[3.5rem] border italic text-xl font-light leading-relaxed ${theme === "white" ? "bg-green-50/50 border-green-100 text-green-800" : "bg-green-900/10 border-green-500/20 text-green-400"}`}>
                             {content.security_desc}
                         </div>
-                    </motion.div>
+                    </div>
 
                     {/* Contact Us */}
-                    <motion.div variants={itemVariants} className="space-y-12 pt-16 border-t border-current/10">
+                    <div className="space-y-12 pt-16 border-t border-current/10">
                         <div className="flex items-center gap-4">
                             <div className="w-10 h-10 rounded-full bg-[#14A3C7]/10 flex items-center justify-center text-[#14A3C7]">
                                 <Phone size={20} />
@@ -160,10 +134,10 @@ export default function PrivacyPolicy() {
                                 </div>
                             </div>
                         </div>
-                    </motion.div>
+                    </div>
 
                     {/* Footer Info */}
-                    <motion.div variants={itemVariants} className="pt-24 border-t border-current/10">
+                    <div className="pt-24 border-t border-current/10">
                         <div className={`p-12 md:p-16 rounded-[4rem] border flex flex-col md:flex-row items-center justify-between gap-12 ${theme === "white" ? "bg-white border-black/5" : "bg-white/5 border-white/10"}`}>
                             <div className="space-y-4 text-center md:text-left">
                                 <p className="text-[10px] font-black uppercase tracking-[0.4em] opacity-40">Policy Update</p>
@@ -179,8 +153,8 @@ export default function PrivacyPolicy() {
                                 </div>
                             </div>
                         </div>
-                    </motion.div>
-                </motion.div>
+                    </div>
+                </div>
             </section>
 
             <Footer />
