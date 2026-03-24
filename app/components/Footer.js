@@ -177,6 +177,12 @@ export default function Footer() {
             >
               {t.footer.terms}
             </Link>
+            <Link
+              href="/returns-exchange-refunds-policy"
+              className={`transition-colors ${theme === "white" ? "hover:text-[#14A3C7]" : "hover:text-white"}`}
+            >
+              {t.footer.returns}
+            </Link>
           </div>
         </div>
       </div>

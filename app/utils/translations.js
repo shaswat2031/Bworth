@@ -336,10 +336,12 @@ export const translations = {
         cost_title: "Cost of Return",
         cost_desc_1: "If you have opted for an all return option and are eligible to return the product as per applicable policies, you may return the product free of cost no matter what the reason.",
         cost_desc_2: "If you have opted for the Wrong/Defect return option and are eligible to return the product as per applicable policies, you may return the product free of cost if fault with the product lies with the supplier. The following are the faults that lie with the supplier:",
-        faults_title: "Return Reason Category | Actual Return Reason",
-        fault_1: "Wrong Product: Wrong Size Delivered, Same product in different colour, Completely different product from the product shown",
-        fault_2: "Defective Product: Product is dirty or with stains, Product is broken, Product is torn",
-        fault_3: "Received incomplete product: Part of the product is missing, Less quantity than ordered",
+        cost_table_header: ["Return Reason Category", "Actual Return Reason"],
+        cost_table_body: [
+            { category: "Wrong Product", reasons: ["Wrong Size Delivered", "Same product in different colour", "Completely different product from the product shown"] },
+            { category: "Defective Product", reasons: ["Product is dirty or with stains", "Product is broken", "Product is torn"] },
+            { category: "Received incomplete product", reasons: ["Part of the product is missing", "Less quantity than ordered"] }
+        ],
         verify_title: "The following aspects in relation to the product will need be verified before arranging return free of cost:",
         verify_points: [
             "whether the quality of the product returned is merchantable; and",
@@ -428,3 +430,4 @@ export const translations = {
         contact_query: "For any further queries regarding return, exchange or refund, please reach out to customer support at info@bworth.co.in."
     }
 };
+

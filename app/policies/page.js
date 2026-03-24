@@ -14,7 +14,7 @@ export default function Policies() {
       icon: <ShieldCheck size={24} />,
       title: t.policies_page.privacy_policy,
       desc: t.policies_page.privacy_desc,
-      href: "/privacypolicy"
+      href: "/privacy-policy"
     },
     {
       icon: <RefreshCw size={24} />,
@@ -47,7 +47,7 @@ export default function Policies() {
       className={`min-h-screen transition-colors ${theme === "white" ? "bg-[#F8FAFC] text-black" : "bg-[#14A3C7] text-white"
         }`}
     >
-      <section className="relative pt-40 pb-24 px-6 md:px-12">
+      <section className="relative pt-24 pb-12 px-6 md:px-12">
         <div className="max-w-7xl mx-auto">
           <Link href="/" className="inline-flex items-center gap-2 font-bold tracking-widest text-xs uppercase mb-12 group">
             <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
@@ -59,15 +59,15 @@ export default function Policies() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-6xl md:text-8xl lg:text-[10rem] font-serif font-black uppercase tracking-tighter leading-[0.85] mb-12">
-              {t.hero.mission_title_our} <br /> <span className="text-blue-500 italic">{t.policies_page.title}</span>
+            <h1 className="text-6xl md:text-8xl lg:text-[7rem] font-serif font-black uppercase tracking-tighter leading-[0.85] mb-12">
+              {t.hero.mission_title_our} <br /> <span className="text-[#14A3C7] italic">{t.policies_page.title}</span>
             </h1>
           </motion.div>
         </div>
       </section>
 
       <section
-        className={`py-24 px-6 md:px-12 border-t transition-colors ${theme === "white"
+        className={`py-12 px-6 md:px-12 border-t transition-colors ${theme === "white"
           ? "border-black/5 bg-black/[0.01]"
           : "border-white/5 bg-white/[0.01]"
           }`}
@@ -103,7 +103,7 @@ export default function Policies() {
             ))}
           </div>
 
-          <div className="mt-32 max-w-4xl mx-auto space-y-24">
+          <div className="mt-16 max-w-4xl mx-auto space-y-12">
             <div className="space-y-8">
               <h2 className="text-3xl md:text-5xl font-serif font-bold uppercase tracking-tighter">
                 {t.policies_page.transparency}
