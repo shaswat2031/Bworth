@@ -2,6 +2,15 @@
 
 @layer base {
   :root {
+    --bg-primary: #F8FAFC;
+    --text-primary: #020610;
+    --border-primary: rgba(0, 0, 0, 0.1);
+    --glass-bg: rgba(0, 0, 0, 0.03);
+    --menu-bg: #FFFFFF;
+  }
+
+  /* Theme: Blue */
+  .theme-blue {
     --bg-primary: #14A3C7;
     --text-primary: #FFFFFF;
     --border-primary: rgba(255, 255, 255, 0.1);
@@ -9,7 +18,7 @@
     --menu-bg: #14A3C7;
   }
 
-  body.theme-white {
+  .theme-white {
     --bg-primary: #F8FAFC;
     --text-primary: #020610;
     --border-primary: rgba(0, 0, 0, 0.1);

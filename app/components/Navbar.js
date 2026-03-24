@@ -104,6 +104,7 @@ export default function Navbar() {
                 className={`hidden lg:flex p-2.5 rounded-full transition-all hover:scale-110 active:scale-95 ${
                     theme === "white" ? "bg-black/5 text-black hover:bg-black/10" : "bg-white/10 text-white hover:bg-white/20"
                 }`}
+                title={theme === "blue" ? "Switch to Light Mode" : "Switch to Dark Mode"}
             >
                 {theme === "blue" ? <Sun size={18} /> : <Moon size={18} />}
             </button>
@@ -174,7 +175,7 @@ export default function Navbar() {
                 >
                   {theme === "blue" ? <Sun size={18} /> : <Moon size={18} />}
                   <span className="text-xs font-bold uppercase tracking-widest">
-                    {theme === "blue" ? "Light Mode" : "Dark Mode"}
+                    {theme === "blue" ? "Dark Mode" : "Light Mode"}
                   </span>
                 </div>
 

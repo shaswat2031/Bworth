@@ -129,12 +129,28 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         {/* Favicon */}
         <link rel="icon" type="image/png" href="/logo.png" />
         <link rel="apple-touch-icon" href="/logo.png" />
         
+        {/* Theme Initialization Script to prevent flash */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  const savedTheme = localStorage.getItem('appTheme');
+                  const theme = savedTheme || 'white';
+                  document.documentElement.classList.remove('theme-blue', 'theme-white');
+                  document.documentElement.classList.add('theme-' + theme);
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+
         {/* JSON-LD Structured Data */}
         <script
           type="application/ld+json"
