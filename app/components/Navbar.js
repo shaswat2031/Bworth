@@ -26,8 +26,6 @@ export default function Navbar() {
     { name: t.navbar.home, href: "/" },
     { name: t.navbar.brands, href: "/brands" },
     { name: t.navbar.b2b, href: "/b2b" },
-    { name: t.navbar.mission, href: "/our-mission" },
-    { name: t.navbar.vision, href: "/our-vision" },
   ];
 
   const menuVariants = {

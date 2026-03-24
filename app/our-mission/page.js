@@ -94,7 +94,7 @@ export default function OurMission() {
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1 }}
-            className={`relative w-full aspect-[21/9] rounded-[4rem] overflow-hidden border shadow-2xl mb-24 group ${theme === "white" ? "border-black/5" : "border-white/5"}`}
+            className={`relative w-full aspect-video md:min-h-[650px] rounded-[3rem] md:rounded-[4rem] overflow-hidden border shadow-2xl mb-24 group ${theme === "white" ? "border-black/5" : "border-white/5"}`}
           >
             <video
               ref={videoRef}
