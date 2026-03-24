@@ -47,7 +47,7 @@ export default function Hero() {
     }, { scope: containerRef });
 
     return (
-        <section ref={containerRef} className="relative min-h-[80vh] flex flex-col justify-center px-6 md:px-12 pb-12 pt-24 lg:pt-12 overflow-hidden">
+        <section ref={containerRef} className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 pb-24 pt-32 lg:pt-36 overflow-x-hidden">
             {/* Interactive Mouse Glow */}
             <div
                 className="pointer-events-none fixed inset-0 z-10 opacity-30 transition-opacity duration-300 pointer-events-none"
