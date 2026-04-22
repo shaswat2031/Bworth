@@ -51,35 +51,24 @@ export default function Brands() {
             target="_blank"
             rel="noopener noreferrer"
             style={{ y }}
-            className={`absolute right-4 md:right-12 xl:right-0 top-[20%] md:top-1/2 w-32 h-32 md:w-44 md:h-44 rounded-full hidden sm:flex items-center justify-center group cursor-pointer z-10 ${
+            className={`absolute right-4 md:right-12 xl:-right-4 top-[15%] md:top-[30%] hidden sm:flex items-center p-2 pr-8 gap-5 rounded-full shadow-[0_20px_40px_-15px_rgba(0,0,0,0.15)] transition-all duration-500 hover:shadow-[0_30px_50px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 group z-20 border ${
               theme === "white" 
-                ? "text-black hover:text-[#14A3C7]" 
-                : "text-white hover:text-blue-400"
+                ? "bg-white/80 backdrop-blur-xl text-black border-black/5 hover:bg-white" 
+                : "bg-black/50 backdrop-blur-xl text-white border-white/10 hover:bg-black/70"
             }`}
           >
-            <motion.div 
-              animate={{ rotate: 360 }} 
-              transition={{ repeat: Infinity, duration: 12, ease: "linear" }}
-              className="absolute inset-0 w-full h-full origin-center"
-            >
-              <svg viewBox="0 0 100 100" className="w-full h-full overflow-visible">
-                <path
-                  id="circlePath"
-                  d="M 50, 50 m -36, 0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0"
-                  fill="transparent"
-                />
-                <text className="text-[10px] font-bold uppercase tracking-[0.22em]" fill="currentColor">
-                  <textPath href="#circlePath" startOffset="0%">
-                    BECOME A BRAND • BECOME A BRAND • 
-                  </textPath>
-                </text>
-              </svg>
-            </motion.div>
-            
-            <div className={`relative z-10 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center shadow-xl transition-all duration-500 group-hover:scale-110 ${
+            <div className={`w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center transition-colors duration-500 ${
               theme === "white" ? "bg-black text-white group-hover:bg-[#14A3C7]" : "bg-[#14A3C7] text-white group-hover:bg-blue-400"
             }`}>
-              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+              <ArrowRight size={20} className="group-hover:translate-x-1.5 transition-transform duration-300" />
+            </div>
+            <div className="flex flex-col items-start py-2">
+              <span className={`text-[9px] font-bold uppercase tracking-[0.3em] mb-1.5 ${theme === "white" ? "text-black/50" : "text-white/60"}`}>
+                Partnership
+              </span>
+              <span className="font-serif font-bold uppercase tracking-wider text-base md:text-lg leading-none">
+                Become a Brand
+              </span>
             </div>
           </motion.a>
         </div>
