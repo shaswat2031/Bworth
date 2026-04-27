@@ -20,7 +20,7 @@ export const translations = {
         mission_heading: "Creating Sustainable Fashion.",
         mission_desc: "Our mission is to revolutionize the fashion industry through a unique buyback program that allows consumers to return their clothes after a period of use.",
         items_recycled: "10,000+ Items Recycled",
-        brand_partners: "5,000+ Users Joined",
+        brand_partners: "500+ Users Joined",
         mission_footer_desc: "We strive to integrate sustainability into the fabric of fashion, preserving the planet's beauty for future generations. By extending every item's lifecycle, we're building a world where fashion never ends.",
         read_story: "READ OUR FULL STORY",
         win_win_title_global: "A Global",
