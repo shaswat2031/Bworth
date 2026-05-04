@@ -22,7 +22,7 @@ export default function ScrollBanner() {
 
       gsap.to(".marquee-content", {
         x: -totalWidth,
-        duration: 100,
+        duration: 8,
         ease: "none",
         repeat: -1,
       });

@@ -1,0 +1,154 @@
+.container {
+  padding: 4rem 2rem;
+  max-width: 1400px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.card {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1.2fr;
+  gap: 3rem;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 24px;
+  padding: 2.5rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+}
+
+.leftSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  object-fit: contain;
+  max-width: 100%;
+  height: auto;
+  max-height: 200px;
+}
+
+.collabText {
+  font-family: var(--font-poppins), sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  line-height: 1.4;
+  letter-spacing: 1px;
+}
+
+.collabText span {
+  font-size: 0.8rem;
+  font-weight: 300;
+}
+
+.infoItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-poppins), sans-serif;
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
+.promoText {
+  font-family: var(--font-poppins), sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.middleSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.title {
+  font-family: var(--font-playfair), serif;
+  font-size: 2.8rem;
+  font-weight: 900;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.description {
+  font-family: var(--font-poppins), sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.commitmentText {
+  font-family: var(--font-poppins), sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  font-weight: 500;
+}
+
+.rightSection {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  background-color: #f0f0f0;
+  cursor: pointer; /* Suggests it's clickable */
+}
+
+.imageWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.carouselImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 15px;
+}
+
+.carouselImageContain {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 15px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .card {
+    grid-template-columns: 1fr 1.5fr;
+    grid-template-rows: auto auto;
+    gap: 2.5rem;
+  }
+  .rightSection {
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .title {
+    font-size: 2.2rem;
+  }
+}
+/* End of BrandSteps styles */
