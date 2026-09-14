@@ -69,10 +69,7 @@ export default function OurMission() {
       {/* Hero Section */}
       <section className="relative pt-40 pb-12 px-6 md:px-12">
         <div className="max-w-7xl mx-auto">
-          <Link href="/" className="inline-flex items-center gap-2 font-black tracking-[0.4em] text-[10px] uppercase mb-12 group transition-colors">
-            <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-            {t.common.back_home}
-          </Link>
+
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-20">
             <div className="lg:col-span-12">

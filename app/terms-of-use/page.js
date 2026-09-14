@@ -1,179 +1,141 @@
 "use client";
+import React from "react";
 import Link from "next/link";
-import { ArrowLeft, CheckCircle2, Shield, User, Scale, AlertTriangle, Eye, HelpCircle } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowLeft, CheckCircle2, Shield, User, Scale, AlertTriangle, Eye, HelpCircle, FileText } from "lucide-react";
 import Footer from "../components/Footer";
 import { useTheme } from "../context/ThemeContext";
 import { translations as t } from "../utils/translations";
 
 export default function TermsOfUse() {
-    const { theme } = useTheme();
-    const content = t.terms_page;
+  const { theme } = useTheme();
+  const content = t.terms_page;
+  const isWhite = theme === "white";
 
-    return (
-        <main className={`min-h-screen transition-colors duration-500 ${theme === "white" ? "bg-[#F8FAFC] text-black" : "bg-[#0A192F] text-white"}`}>
-            {/* Hero Section */}
-            <section className="relative pt-24 pb-12 px-6 md:px-12 overflow-hidden">
-                <div className="absolute top-0 right-0 w-1/2 h-full opacity-20 pointer-events-none">
-                    <div className="absolute top-1/4 right-0 w-96 h-96 bg-[#14A3C7] rounded-full blur-[120px]" />
+  const termsSections = [
+    { title: content.accept_title, desc: content.accept_desc, icon: CheckCircle2 },
+    { title: content.use_title, desc: content.use_desc, icon: Eye },
+    { title: content.user_title, desc: content.user_desc, icon: User },
+    { title: content.ip_title, desc: content.ip_desc, icon: Shield },
+    { title: content.limit_title, desc: content.limit_desc, icon: Scale },
+    { title: content.change_title, desc: content.change_desc, icon: AlertTriangle, highlight: true },
+  ];
+
+  return (
+    <main className={`min-h-screen transition-colors duration-500 ${
+      isWhite ? "bg-slate-50 text-slate-900" : "bg-[#061217] text-white"
+    }`}>
+      {/* Hero Section */}
+      <section className="relative pt-32 pb-16 px-6 md:px-12 overflow-hidden">
+        {/* Background Ambient Glow */}
+        <div className="absolute top-1/4 right-1/2 translate-x-1/2 w-full max-w-5xl h-96 bg-[#14A3C7]/10 blur-[130px] rounded-full pointer-events-none" />
+
+        <div className="max-w-5xl mx-auto relative z-10">
+
+
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="space-y-4"
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#14A3C7]/15 border border-[#14A3C7]/30 text-[#14A3C7]">
+              <FileText size={16} />
+              <span className="text-xs font-black uppercase tracking-widest">LEGAL TERMS</span>
+            </div>
+
+            <h1 className={`text-4xl sm:text-6xl lg:text-7xl font-serif font-black uppercase tracking-tight leading-[1.05] ${
+              isWhite ? "text-slate-900" : "text-white"
+            }`}>
+              {content.title} <br />
+              <span className="text-[#14A3C7] italic">{content.subtitle}</span>
+            </h1>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Content Sections */}
+      <section className="pb-24 px-6 md:px-12">
+        <div className="max-w-5xl mx-auto space-y-10">
+          {termsSections.map((section, idx) => {
+            const IconComp = section.icon;
+            return (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.05 }}
+                className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start"
+              >
+                <div className="lg:col-span-4 flex items-center gap-3 lg:pt-4">
+                  <div className="w-11 h-11 rounded-xl bg-[#14A3C7]/15 text-[#14A3C7] flex items-center justify-center shrink-0">
+                    <IconComp size={22} />
+                  </div>
+                  <h2 className={`text-xl sm:text-2xl font-serif font-black uppercase tracking-wider ${
+                    isWhite ? "text-slate-900" : "text-white"
+                  }`}>
+                    {section.title}
+                  </h2>
                 </div>
-                
-                <div className="max-w-5xl mx-auto relative z-10">
-                    <Link
-                        href="/"
-                        className="inline-flex items-center gap-2 font-bold tracking-widest text-[10px] uppercase mb-16 px-4 py-2 rounded-full border border-current opacity-60 hover:opacity-100 transition-all group"
-                    >
-                        <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
-                        {t.common.back_home}
-                    </Link>
 
-                    <div>
-                        <h1 className="text-5xl md:text-8xl lg:text-[7rem] font-serif font-black uppercase tracking-tighter leading-[0.85] mb-8">
-                            {content.title} <br />
-                            <span className="italic">{content.subtitle}</span>
-                        </h1>
-                    </div>
+                <div className="lg:col-span-8">
+                  <div className={`p-8 sm:p-10 rounded-3xl border shadow-lg backdrop-blur-xl text-base sm:text-lg font-normal leading-relaxed ${
+                    section.highlight
+                      ? isWhite
+                        ? "bg-amber-50 border-amber-200 text-amber-950"
+                        : "bg-amber-950/20 border-amber-500/30 text-amber-200"
+                      : isWhite
+                      ? "bg-white border-slate-200 text-slate-700 shadow-slate-200/50"
+                      : "bg-[#081822] border-white/15 text-slate-200 shadow-black/80"
+                  }`}>
+                    {section.desc}
+                  </div>
                 </div>
-            </section>
+              </motion.div>
+            );
+          })}
 
-            {/* Content Sections - 100% Static */}
-            <section className="pb-16 px-6 md:px-12">
-                <div className="max-w-5xl mx-auto space-y-12">
-                    {/* Acceptance Section */}
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-                        <div className="lg:col-span-4">
-                            <div className="sticky top-40 flex items-center gap-4 lg:flex-col lg:items-start">
-                                <div className="w-12 h-12 rounded-xl bg-[#14A3C7]/10 flex items-center justify-center text-[#14A3C7]">
-                                    <CheckCircle2 size={24} />
-                                </div>
-                                <h2 className="text-2xl font-serif font-black uppercase tracking-tight leading-none">
-                                    {content.accept_title}
-                                </h2>
-                            </div>
-                        </div>
-                        <div className="lg:col-span-8">
-                            <div className={`p-8 md:p-12 rounded-[2.5rem] border text-lg font-light leading-relaxed opacity-80 ${theme === "white" ? "bg-white border-black/5 shadow-xl shadow-black/[0.01]" : "bg-white/5 border-white/5"}`}>
-                                {content.accept_desc}
-                            </div>
-                        </div>
-                    </div>
+          {/* Footer Card Info */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="pt-12 border-t border-slate-300 dark:border-white/10"
+          >
+            <div className={`p-8 sm:p-10 rounded-3xl border flex flex-col sm:flex-row items-center justify-between gap-6 shadow-lg ${
+              isWhite
+                ? "bg-white border-slate-200 text-slate-900 shadow-slate-200/50"
+                : "bg-[#081822] border-white/15 text-white shadow-black/80"
+            }`}>
+              <div className="space-y-1 text-center sm:text-left">
+                <p className={`text-xs font-black uppercase tracking-widest ${
+                  isWhite ? "text-slate-500" : "text-slate-400"
+                }`}>
+                  Documentation Info
+                </p>
+                <p className="text-xl font-serif font-bold text-[#14A3C7]">{content.last_updated}</p>
+              </div>
 
-                    {/* Use of Site */}
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-                        <div className="lg:col-span-4">
-                            <div className="sticky top-40 flex items-center gap-4 lg:flex-col lg:items-start">
-                                <div className="w-12 h-12 rounded-xl bg-[#14A3C7]/10 flex items-center justify-center text-[#14A3C7]">
-                                    <Eye size={24} />
-                                </div>
-                                <h2 className="text-2xl font-serif font-black uppercase tracking-tight leading-none">
-                                    {content.use_title}
-                                </h2>
-                            </div>
-                        </div>
-                        <div className="lg:col-span-8">
-                            <div className={`p-8 md:p-12 rounded-[2.5rem] border text-lg font-light leading-relaxed opacity-80 ${theme === "white" ? "bg-white border-black/5 shadow-xl shadow-black/[0.01]" : "bg-white/5 border-white/5"}`}>
-                                {content.use_desc}
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* User Account */}
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-                        <div className="lg:col-span-4">
-                            <div className="sticky top-40 flex items-center gap-4 lg:flex-col lg:items-start">
-                                <div className="w-12 h-12 rounded-xl bg-[#14A3C7]/10 flex items-center justify-center text-[#14A3C7]">
-                                    <User size={24} />
-                                </div>
-                                <h2 className="text-2xl font-serif font-black uppercase tracking-tight leading-none">
-                                    {content.user_title}
-                                </h2>
-                            </div>
-                        </div>
-                        <div className="lg:col-span-8">
-                            <div className={`p-8 md:p-12 rounded-[2.5rem] border text-lg font-light leading-relaxed opacity-80 ${theme === "white" ? "bg-white border-black/5 shadow-xl shadow-black/[0.01]" : "bg-white/5 border-white/5"}`}>
-                                {content.user_desc}
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Intellectual Property */}
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-                        <div className="lg:col-span-4">
-                            <div className="sticky top-40 flex items-center gap-4 lg:flex-col lg:items-start">
-                                <div className="w-12 h-12 rounded-xl bg-[#14A3C7]/10 flex items-center justify-center text-[#14A3C7]">
-                                    <Shield size={24} />
-                                </div>
-                                <h2 className="text-2xl font-serif font-black uppercase tracking-tight leading-none">
-                                    {content.ip_title}
-                                </h2>
-                            </div>
-                        </div>
-                        <div className="lg:col-span-8">
-                            <div className={`p-8 md:p-12 rounded-[2.5rem] border text-lg font-light leading-relaxed opacity-80 ${theme === "white" ? "bg-white border-black/5 shadow-xl shadow-black/[0.01]" : "bg-white/5 border-white/5"}`}>
-                                {content.ip_desc}
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Limitation of Liability */}
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-                        <div className="lg:col-span-4">
-                            <div className="sticky top-40 flex items-center gap-4 lg:flex-col lg:items-start">
-                                <div className="w-12 h-12 rounded-xl bg-[#14A3C7]/10 flex items-center justify-center text-[#14A3C7]">
-                                    <Scale size={24} />
-                                </div>
-                                <h2 className="text-2xl font-serif font-black uppercase tracking-tight leading-none">
-                                    {content.limit_title}
-                                </h2>
-                            </div>
-                        </div>
-                        <div className="lg:col-span-8">
-                            <div className={`p-8 md:p-12 rounded-[2.5rem] border text-lg font-light leading-relaxed opacity-80 ${theme === "white" ? "bg-white border-black/5 shadow-xl shadow-black/[0.01]" : "bg-white/5 border-white/5"}`}>
-                                {content.limit_desc}
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Changes to Terms */}
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-                        <div className="lg:col-span-4">
-                            <div className="sticky top-40 flex items-center gap-4 lg:flex-col lg:items-start">
-                                <div className="w-12 h-12 rounded-xl bg-[#14A3C7]/10 flex items-center justify-center text-[#14A3C7]">
-                                    <AlertTriangle size={24} />
-                                </div>
-                                <h2 className="text-2xl font-serif font-black uppercase tracking-tight leading-none">
-                                    {content.change_title}
-                                </h2>
-                            </div>
-                        </div>
-                        <div className="lg:col-span-8">
-                            <div className={`p-8 md:p-12 rounded-[2.5rem] border text-lg font-light leading-relaxed opacity-80 ${theme === "white" ? "bg-blue-50/50 border-blue-100 italic" : "bg-blue-900/10 border-blue-500/20 italic"}`}>
-                                {content.change_desc}
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Footer Info */}
-                    <div className="pt-12 border-t border-current/10">
-                        <div className={`p-12 md:p-16 rounded-[4rem] border flex flex-col md:flex-row items-center justify-between gap-12 ${theme === "white" ? "bg-white border-black/5" : "bg-white/5 border-white/10"}`}>
-                            <div className="space-y-4 text-center md:text-left">
-                                <p className="text-[10px] font-black uppercase tracking-[0.4em] opacity-40">Documentation Info</p>
-                                <p className="text-xl font-serif italic text-[#14A3C7]">{content.last_updated}</p>
-                            </div>
-                            <div className="flex items-center gap-4">
-                                <div className="p-4 rounded-full bg-[#14A3C7]/10 text-[#14A3C7]">
-                                    <HelpCircle size={32} />
-                                </div>
-                                <div className="space-y-1">
-                                    <p className="font-bold opacity-80">Need clarification?</p>
-                                    <p className="text-sm opacity-50 italic">Reach out to our legal team.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-2xl bg-[#14A3C7]/15 text-[#14A3C7] flex items-center justify-center shrink-0">
+                  <HelpCircle size={26} />
                 </div>
-            </section>
+                <div>
+                  <p className="font-bold text-sm">Need clarification?</p>
+                  <p className={`text-xs ${isWhite ? "text-slate-500" : "text-slate-400"}`}>
+                    Reach out to our legal team.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
 
-            <Footer />
-        </main>
-    );
+        </div>
+      </section>
+
+      <Footer />
+    </main>
+  );
 }

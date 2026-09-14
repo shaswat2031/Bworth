@@ -46,11 +46,15 @@
 
 @layer utilities {
   .font-serif {
-    font-family: var(--font-playfair), serif;
+    font-family: var(--font-outfit), var(--font-poppins), sans-serif;
   }
 
   .font-sans {
     font-family: var(--font-poppins), sans-serif;
+  }
+
+  .font-display {
+    font-family: var(--font-outfit), sans-serif;
   }
 
   .outline-text {

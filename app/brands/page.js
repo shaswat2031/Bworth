@@ -1,7 +1,8 @@
 "use client";
-import { motion, useScroll, useTransform } from "framer-motion";
+import React from "react";
+import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, Sparkles, Handshake } from "lucide-react";
 import Footer from "../components/Footer";
 import ContactSection from "../components/ContactSection";
 import { useTheme } from "../context/ThemeContext";
@@ -12,104 +13,102 @@ import BrandOfferingsSection from "../components/BrandOfferingsSection";
 
 export default function Brands() {
   const { theme } = useTheme();
-  const { scrollY } = useScroll();
-  const rotate = useTransform(scrollY, [0, 1000], [0, 200]);
-  const y = useTransform(scrollY, [0, 1000], [0, 150]);
+  const isWhite = theme === "white";
 
   return (
-    <main
-      className={`min-h-screen transition-colors ${theme === "white" ? "bg-[#F8FAFC] text-black" : "bg-[#14A3C7] text-white"
-        }`}
-    >
-      {/* Header */}
-      <section
-        className={`relative pt-32 pb-12 px-6 md:px-12 transition-colors ${theme === "white" ? "bg-black/5" : "bg-white/5"
-          }`}
-      >
-        <div className="max-w-7xl mx-auto relative">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 font-bold tracking-widest text-xs uppercase mb-6 group"
-          >
-            <ArrowLeft
-              size={16}
-              className="group-hover:-translate-x-1 transition-transform"
-            />
-            {t.common.back_home}
-          </Link>
+    <main className={`min-h-screen transition-colors duration-500 ${
+      isWhite ? "bg-slate-50 text-slate-900" : "bg-[#061217] text-white"
+    }`}>
+      {/* Header / Hero */}
+      <section className="relative pt-32 pb-16 px-6 md:px-12 overflow-hidden">
+        {/* Background Ambient Glow */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-full max-w-6xl h-96 bg-[#14A3C7]/15 blur-[140px] rounded-full pointer-events-none" />
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-[10rem] font-serif font-black uppercase tracking-tighter leading-[0.85] mb-4 md:mb-6">
-              {t.brands_page.title_brand} <br /> <span className={theme === "white" ? "text-[#14A3C7]" : "text-black"}>{t.brands_page.title_partners}</span>
-            </h1>
-          </motion.div>
+        <div className="max-w-7xl mx-auto relative z-10 space-y-6">
 
-          <motion.a
-            href="https://brand.bworth.co.in/onBoarding"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ y }}
-            className={`absolute right-4 md:right-12 xl:-right-4 top-[15%] md:top-[30%] hidden sm:flex items-center p-2 pr-8 gap-5 rounded-full shadow-[0_20px_40px_-15px_rgba(0,0,0,0.15)] transition-all duration-500 hover:shadow-[0_30px_50px_-15px_rgba(0,0,0,0.25)] hover:-translate-y-1 group z-20 border ${
-              theme === "white" 
-                ? "bg-white/80 backdrop-blur-xl text-black border-black/5 hover:bg-white" 
-                : "bg-black/50 backdrop-blur-xl text-white border-white/10 hover:bg-black/70"
-            }`}
-          >
-            <div className={`w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center transition-colors duration-500 ${
-              theme === "white" ? "bg-black text-white group-hover:bg-[#14A3C7]" : "bg-[#14A3C7] text-white group-hover:bg-blue-400"
-            }`}>
-              <ArrowRight size={20} className="group-hover:translate-x-1.5 transition-transform duration-300" />
-            </div>
-            <div className="flex flex-col items-start py-2">
-              <span className={`text-[9px] font-bold uppercase tracking-[0.3em] mb-1.5 ${theme === "white" ? "text-black/50" : "text-white/60"}`}>
-                Partnership
-              </span>
-              <span className="font-serif font-bold uppercase tracking-wider text-base md:text-lg leading-none">
-                Become a Brand
-              </span>
-            </div>
-          </motion.a>
+
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="space-y-4"
+            >
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#14A3C7]/15 border border-[#14A3C7]/30 text-[#14A3C7]">
+                <Handshake size={16} />
+                <span className="text-xs font-black uppercase tracking-widest">BRAND PARTNERSHIPS</span>
+              </div>
+
+              <h1 className={`text-4xl sm:text-6xl lg:text-7xl font-serif font-black uppercase tracking-tight leading-[1.05] ${
+                isWhite ? "text-slate-900" : "text-white"
+              }`}>
+                {t.brands_page.title_brand} <br />
+                <span className="text-[#14A3C7] italic">{t.brands_page.title_partners}</span>
+              </h1>
+            </motion.div>
+
+            {/* Become a Brand CTA Button */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <a
+                href="https://brand.bworth.co.in/onBoarding"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`inline-flex items-center gap-4 p-3 pr-8 rounded-full border shadow-xl transition-all duration-300 hover:scale-105 group ${
+                  isWhite
+                    ? "bg-white border-slate-300 text-slate-900 hover:border-[#14A3C7]"
+                    : "bg-[#081822] border-white/20 text-white hover:border-[#14A3C7]"
+                }`}
+              >
+                <div className="w-12 h-12 rounded-full bg-[#14A3C7] text-white flex items-center justify-center shadow-md group-hover:bg-[#0d84a3] transition-colors">
+                  <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                </div>
+                <div className="space-y-0.5">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-[#14A3C7] block">
+                    PARTNERSHIP
+                  </span>
+                  <span className="font-serif font-black uppercase tracking-wider text-base">
+                    Become a Brand
+                  </span>
+                </div>
+              </a>
+            </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Meet Our Partners Section */}
-      <section
-        className={`relative py-4 md:py-6 transition-colors ${
-          theme === "white" ? "bg-white" : "bg-[#14A3C7]"
-        }`}
-      >
-        <div className="container mx-auto px-4">
-          <motion.div 
-            className="text-center max-w-3xl mx-auto mb-4"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            <h2 className={`text-5xl md:text-7xl font-serif font-black uppercase tracking-tighter mb-4 ${theme === "white" ? "text-[#14A3C7]" : "text-black"}`}>
+      <section className={`py-12 relative overflow-hidden ${
+        isWhite ? "bg-slate-50" : "bg-[#061217]"
+      }`}>
+        <div className="max-w-7xl mx-auto px-6 mb-8">
+          <div className="text-center space-y-3">
+            <h2 className={`text-3xl sm:text-5xl font-serif font-black uppercase tracking-tight ${
+              isWhite ? "text-slate-900" : "text-white"
+            }`}>
               Meet Our Partners
             </h2>
-            <div className={`w-20 h-0.5 mx-auto ${theme === "white" ? "bg-[#14A3C7]" : "bg-black"}`}></div>
-          </motion.div>
+            <div className="w-20 h-1 bg-[#14A3C7] mx-auto rounded-full" />
+          </div>
         </div>
+
         <BrandCarousel />
       </section>
 
       {/* Brands Coming Soon Section */}
-      <section
-        className={`relative py-0 transition-colors ${
-          theme === "white" ? "bg-[#f8fafc]" : "bg-[#0B7FA6]"
-        }`}
-      >
+      <section className={`py-8 relative overflow-hidden ${
+        isWhite ? "bg-slate-100" : "bg-[#081720]"
+      }`}>
         <BrandComingSoon />
       </section>
 
+      {/* Brand Offerings Section */}
       <BrandOfferingsSection />
 
+      {/* Contact Section */}
       <ContactSection />
       <Footer />
     </main>

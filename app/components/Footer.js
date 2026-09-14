@@ -17,11 +17,13 @@ export default function Footer() {
 
   const footerLinks = [
     { name: t.footer.home, href: '/' },
+    { name: "B2C (Consumer)", href: '/b2c' },
+    { name: t.footer.b2b, href: '/b2b' },
     { name: t.footer.about, href: '/about-us' },
     { name: t.footer.mission, href: '/our-mission' },
     { name: t.footer.vision, href: '/our-vision' },
+    { name: "Carbon Calculator", href: '/carbon-calculator' },
     { name: t.footer.brands, href: '/brands' },
-    { name: t.footer.b2b, href: '/b2b' },
     { name: t.footer.contact, href: '/contact-us' },
   ];
 

@@ -75,15 +75,7 @@ export default function ContactUs() {
       <div className="relative z-10">
         <section className="pt-32 pb-16 md:pt-40 md:pb-24 px-6 md:px-12">
           <div className="max-w-7xl mx-auto">
-            <Link
-              href="/"
-              className={`inline-flex items-center gap-2 font-black tracking-[0.4em] text-[10px] uppercase mb-12 group transition-colors ${
-                theme === 'white' ? 'text-black' : 'text-white'
-              }`}
-            >
-              <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-              {t.common.back_home}
-            </Link>
+
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
               {/* Left Column: Info & Messaging */}
@@ -154,78 +146,93 @@ export default function ContactUs() {
                 >
                   <div className="relative z-10">
                     <h2 className="text-3xl font-serif font-black uppercase tracking-tighter mb-10">
-                      Let's Start a <span className="text-[#14A3C7]">Conversation</span>
+                      Let&apos;s Start a <span className="text-[#14A3C7]">Conversation</span>
                     </h2>
                     
-                    <form className="space-y-8" onSubmit={handleSubmit}>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <form className="space-y-6" onSubmit={handleSubmit}>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
-                          <label className={`text-[10px] font-black uppercase tracking-widest ml-1 ${theme === 'white' ? 'text-black/40' : 'text-white/40'}`}>
+                          <label className={`text-xs font-black uppercase tracking-wider ${theme === 'white' ? 'text-slate-800' : 'text-slate-200'}`}>
                             {t.contact_page.your_name}
                           </label>
                           <input
                             name="name"
-                            placeholder="NAME"
+                            placeholder="Enter your name"
                             required
-                            className={`w-full bg-transparent border-b-2 p-4 focus:border-[#14A3C7] outline-none transition-all font-serif font-black text-xl placeholder:text-black/20 ${theme === 'white' ? 'border-black/10' : 'border-white/10 placeholder:text-white/20'}`}
+                            className={`w-full p-4 rounded-2xl border-2 font-medium text-base outline-none transition-all ${
+                              theme === 'white'
+                                ? 'bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 focus:border-[#14A3C7] focus:ring-4 focus:ring-[#14A3C7]/15'
+                                : 'bg-[#0b1d26] border-slate-700 text-white placeholder:text-slate-400 focus:border-[#14A3C7] focus:ring-4 focus:ring-[#14A3C7]/20'
+                            }`}
                           />
                         </div>
                         <div className="space-y-2">
-                          <label className={`text-[10px] font-black uppercase tracking-widest ml-1 ${theme === 'white' ? 'text-black/40' : 'text-white/40'}`}>
+                          <label className={`text-xs font-black uppercase tracking-wider ${theme === 'white' ? 'text-slate-800' : 'text-slate-200'}`}>
                             {t.contact_page.your_email}
                           </label>
                           <input
                             type="email"
                             name="email"
-                            placeholder="EMAIL"
+                            placeholder="name@example.com"
                             required
-                            className={`w-full bg-transparent border-b-2 p-4 focus:border-[#14A3C7] outline-none transition-all font-serif font-black text-xl placeholder:text-black/20 ${theme === 'white' ? 'border-black/10' : 'border-white/10 placeholder:text-white/20'}`}
+                            className={`w-full p-4 rounded-2xl border-2 font-medium text-base outline-none transition-all ${
+                              theme === 'white'
+                                ? 'bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 focus:border-[#14A3C7] focus:ring-4 focus:ring-[#14A3C7]/15'
+                                : 'bg-[#0b1d26] border-slate-700 text-white placeholder:text-slate-400 focus:border-[#14A3C7] focus:ring-4 focus:ring-[#14A3C7]/20'
+                            }`}
                           />
                         </div>
                       </div>
 
                       <div className="space-y-2">
-                        <label className={`text-[10px] font-black uppercase tracking-widest ml-1 ${theme === 'white' ? 'text-black/40' : 'text-white/40'}`}>
+                        <label className={`text-xs font-black uppercase tracking-wider ${theme === 'white' ? 'text-slate-800' : 'text-slate-200'}`}>
                           {t.contact_page.mobile}
                         </label>
                         <input
                           type="tel"
                           name="phone"
-                          placeholder="+91"
+                          placeholder="+91 98765 43210"
                           required
-                          className={`w-full bg-transparent border-b-2 p-4 focus:border-[#14A3C7] outline-none transition-all font-serif font-black text-xl placeholder:text-black/20 ${theme === 'white' ? 'border-black/10' : 'border-white/10 placeholder:text-white/20'}`}
+                          className={`w-full p-4 rounded-2xl border-2 font-medium text-base outline-none transition-all ${
+                            theme === 'white'
+                              ? 'bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 focus:border-[#14A3C7] focus:ring-4 focus:ring-[#14A3C7]/15'
+                              : 'bg-[#0b1d26] border-slate-700 text-white placeholder:text-slate-400 focus:border-[#14A3C7] focus:ring-4 focus:ring-[#14A3C7]/20'
+                          }`}
                         />
                       </div>
 
                       <div className="space-y-2">
-                        <label className={`text-[10px] font-black uppercase tracking-widest ml-1 ${theme === 'white' ? 'text-black/40' : 'text-white/40'}`}>
+                        <label className={`text-xs font-black uppercase tracking-wider ${theme === 'white' ? 'text-slate-800' : 'text-slate-200'}`}>
                           {t.contact_page.comments}
                         </label>
                         <textarea
                           name="comments"
                           rows="4"
-                          placeholder="HOW CAN WE HELP?"
+                          placeholder="How can we help you..."
                           required
-                          className={`w-full bg-transparent border-b-2 p-4 focus:border-[#14A3C7] outline-none transition-all font-serif font-black text-xl resize-none placeholder:text-black/20 ${theme === 'white' ? 'border-black/10' : 'border-white/10 placeholder:text-white/20'}`}
+                          className={`w-full p-4 rounded-2xl border-2 font-medium text-base outline-none transition-all resize-none ${
+                            theme === 'white'
+                              ? 'bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 focus:border-[#14A3C7] focus:ring-4 focus:ring-[#14A3C7]/15'
+                              : 'bg-[#0b1d26] border-slate-700 text-white placeholder:text-slate-400 focus:border-[#14A3C7] focus:ring-4 focus:ring-[#14A3C7]/20'
+                          }`}
                         />
                       </div>
 
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className={`w-full py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-xs transition-all flex items-center justify-center gap-4 relative overflow-hidden group ${
-                          theme === 'white' 
-                            ? 'bg-black text-white hover:bg-[#14A3C7]' 
-                            : 'bg-[#14A3C7] text-white hover:bg-white hover:text-black'
-                        }`}
+                        className="w-full py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-xs transition-all shadow-xl bg-[#14A3C7] text-white hover:bg-[#0c7f9c] active:scale-[0.99] flex items-center justify-center gap-3 group"
                       >
                         <span className="relative z-10">{isSubmitting ? 'Sending...' : t.contact_page.send}</span>
                         <Send size={16} className="relative z-10 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                       </button>
 
                       {submitStatus.message && (
-                        <p className={`text-sm font-black uppercase py-4 text-center ${submitStatus.type === 'success' ? 'text-green-500' : 'text-red-500'}`}>
-                          {submitStatus.message}
+                        <p className={`text-xs font-bold uppercase py-2 text-center ${
+                          submitStatus.type === 'success'
+                            ? (theme === 'white' ? 'text-emerald-700' : 'text-emerald-300')
+                            : (theme === 'white' ? 'text-rose-700' : 'text-rose-300')
+                        }`}>                          {submitStatus.message}
                         </p>
                       )}
                     </form>

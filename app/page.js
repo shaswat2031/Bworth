@@ -123,11 +123,11 @@ export default function Home() {
         className={`py-16 px-6 md:px-12 transition-colors relative overflow-hidden ${theme === "white" ? "bg-white" : "bg-[#14A3C7]"}`}
       >
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center mb-12">
-            <h2 className={`problem-title text-4xl md:text-7xl font-serif font-black uppercase tracking-tighter mb-6 ${theme === "white" ? "text-black" : "text-white"}`}>
+          <div className="text-center mb-12 space-y-3">
+            <h2 className={`problem-title text-3xl md:text-5xl font-sans font-extrabold uppercase tracking-tight ${theme === "white" ? "text-black" : "text-white"}`}>
               {t.problem_section.title}
             </h2>
-            <p className={`problem-subtitle text-2xl md:text-3xl font-serif italic ${theme === "white" ? "text-[#14A3C7]" : "text-black"}`}>
+            <p className={`problem-subtitle text-xl md:text-2xl font-sans font-semibold italic ${theme === "white" ? "text-[#14A3C7]" : "text-black"}`}>
               {t.problem_section.subtitle}
             </p>
           </div>
@@ -167,8 +167,8 @@ export default function Home() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                 </div>
 
-                <div className="p-10">
-                    <p className={`text-2xl md:text-3xl font-serif font-black leading-tight ${theme === "white" ? "text-black" : "text-white"}`}>
+                <div className="p-8">
+                    <p className={`text-xl md:text-2xl font-sans font-bold leading-tight ${theme === "white" ? "text-black" : "text-white"}`}>
                         {entry.text}
                     </p>
                 </div>
@@ -176,8 +176,8 @@ export default function Home() {
             ))}
           </motion.div>
 
-          <div className="text-center mt-20 relative z-20">
-            <p className={`problem-footer text-lg md:text-xl font-medium max-w-2xl mx-auto leading-relaxed ${theme === "white" ? "text-black/60" : "text-white/80"}`}>
+          <div className="text-center mt-16 relative z-20">
+            <p className={`problem-footer text-base md:text-lg font-medium max-w-2xl mx-auto leading-relaxed ${theme === "white" ? "text-black/60" : "text-white/80"}`}>
               {t.problem_section?.desc}
             </p>
             <div className={`problem-line w-24 h-[1px] mx-auto mt-8 ${theme === "white" ? "bg-black/10" : "bg-white/10"}`}></div>
@@ -192,22 +192,22 @@ export default function Home() {
       {/* Mid-page CTA - Get Coins */}
       <section className={`py-12 px-6 md:px-12 transition-colors ${theme === "white" ? "bg-[#14A3C7]" : "bg-black"}`}>
         <div className="max-w-7xl mx-auto">
-          <div className={`cta-banner p-12 md:p-20 rounded-[4rem] flex flex-col md:flex-row items-center justify-between gap-12 border ${theme === "white" ? "bg-black text-white border-white/10" : "bg-white text-black border-black/10"}`}>
-            <div className="space-y-6 text-center md:text-left">
-              <h2 className="text-4xl md:text-6xl font-serif font-black uppercase tracking-tighter leading-none">
+          <div className={`cta-banner p-10 md:p-16 rounded-[3.5rem] flex flex-col md:flex-row items-center justify-between gap-10 border ${theme === "white" ? "bg-black text-white border-white/10" : "bg-white text-black border-black/10"}`}>
+            <div className="space-y-4 text-center md:text-left">
+              <h2 className="text-3xl md:text-5xl font-sans font-extrabold uppercase tracking-tight leading-tight">
                 Get Paid to <br />
                 <span className={theme === "white" ? "text-[#14A3C7]" : "text-[#14A3C7]"}>
                   Recycle.
                 </span>
               </h2>
-              <p className={`text-xl font-light max-w-md ${theme === "white" ? "text-white/60" : "text-black/60"}`}>
+              <p className={`text-base md:text-lg font-normal max-w-md ${theme === "white" ? "text-white/70" : "text-black/70"}`}>
                 Every coin you earn is ₹1 value. Payouts are based on brand, condition, and market demand.
               </p>
             </div>
             <Link
               href="https://play.google.com/store/apps/details?id=com.BworthGo"
               target="_blank"
-              className={`px-12 py-8 rounded-full font-black uppercase tracking-widest text-lg transition-all hover:scale-105 shadow-2xl ${theme === "white" ? "bg-[#14A3C7] text-white" : "bg-black text-white"
+              className={`px-10 py-6 rounded-full font-sans font-extrabold uppercase tracking-widest text-base transition-all hover:scale-105 shadow-2xl ${theme === "white" ? "bg-[#14A3C7] text-white" : "bg-black text-white"
                 }`}
             >
               GET COINS NOW
@@ -229,77 +229,71 @@ export default function Home() {
           }`}
       >
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col lg:flex-row gap-20 items-start mb-12">
+          <div className="flex flex-col lg:flex-row gap-16 items-start mb-12">
             <div className="flex-1">
-              <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
-                <h2 className={`mission-title text-6xl md:text-9xl font-serif font-black uppercase tracking-tighter leading-none`}>
-                  {t.hero.mission_title_our} <br />{" "}
-                  <span className={`text-6xl md:text-9xl font-serif font-black uppercase tracking-tighter ${theme === "white" ? "text-[#14A3C7]" : "text-black"} leading-none`}>
+              <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+                <h2 className={`mission-title text-3xl md:text-5xl font-sans font-extrabold uppercase tracking-tight leading-tight`}>
+                  {t.hero.mission_title_our}{" "}
+                  <span className={`text-3xl md:text-5xl font-sans font-extrabold uppercase tracking-tight ${theme === "white" ? "text-[#14A3C7]" : "text-black"}`}>
                     {t.hero.mission_title_mission}
                   </span>
                 </h2>
                 
                 {/* Impact Statistics - High Contrast */}
-                <div className="flex flex-wrap gap-12 md:gap-16">
+                <div className="flex flex-wrap gap-8 md:gap-12">
                   <div className="mission-stat-card group">
-                    <p className={`text-5xl md:text-7xl font-serif font-black tracking-tighter mb-2 transition-transform group-hover:scale-110 duration-500 ${theme === "white" ? "text-black" : "text-white"}`}>
-                      {t.hero.items_recycled.split(' ')[0]}
+                    <p className={`text-4xl md:text-5xl font-sans font-extrabold tracking-tight mb-1 transition-transform group-hover:scale-105 duration-500 ${theme === "white" ? "text-black" : "text-white"}`}>
+                      {(t.hero.items_recycled || "25,000+ kg").split(' ')[0]}
                     </p>
-                    <p className={`text-[10px] md:text-xs tracking-[0.4em] uppercase font-black transition-colors ${theme === "white" ? "text-[#14A3C7]" : "text-black"}`}>
-                      {t.hero.items_recycled.split(' ').slice(1).join(' ')}
+                    <p className={`text-[10px] md:text-xs tracking-[0.25em] uppercase font-bold transition-colors ${theme === "white" ? "text-[#14A3C7]" : "text-black"}`}>
+                      {(t.hero.items_recycled || "Clothes Recycled").split(' ').slice(1).join(' ')}
                     </p>
                   </div>
                   <div className="mission-stat-card group">
-                    <p className={`text-5xl md:text-7xl font-serif font-black tracking-tighter mb-2 transition-transform group-hover:scale-110 duration-500 ${theme === "white" ? "text-black" : "text-white"}`}>
-                      {t.hero.brand_partners.split(' ')[0]}
+                    <p className={`text-4xl md:text-5xl font-sans font-extrabold tracking-tight mb-1 transition-transform group-hover:scale-105 duration-500 ${theme === "white" ? "text-black" : "text-white"}`}>
+                      {(t.hero.brand_partners || "500+ Tons").split(' ')[0]}
                     </p>
-                    <p className={`text-[10px] md:text-xs tracking-[0.4em] uppercase font-black transition-colors ${theme === "white" ? "text-[#14A3C7]" : "text-black"}`}>
-                      {t.hero.brand_partners.split(' ').slice(1).join(' ')}
+                    <p className={`text-[10px] md:text-xs tracking-[0.25em] uppercase font-bold transition-colors ${theme === "white" ? "text-[#14A3C7]" : "text-black"}`}>
+                      {(t.hero.brand_partners || "CO₂ Saved").split(' ').slice(1).join(' ')}
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-start">
-                <div className="mission-desc space-y-8">
-                  <div className="flex items-center gap-4">
-                    <span className={`w-12 h-[2px] rounded-full ${theme === "white" ? "bg-[#14A3C7]" : "bg-black"}`}></span>
-                    <h3 className={`text-xl md:text-2xl font-black uppercase tracking-[0.2em] ${theme === "white" ? "text-black" : "text-white"}`}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
+                <div className="mission-desc space-y-6">
+                  <div className="flex items-center gap-3">
+                    <span className={`w-10 h-[2px] rounded-full ${theme === "white" ? "bg-[#14A3C7]" : "bg-black"}`}></span>
+                    <h3 className={`text-lg md:text-xl font-bold uppercase tracking-wider ${theme === "white" ? "text-black" : "text-white"}`}>
                       {t.hero.mission_heading}
                     </h3>
                   </div>
 
-                  <p className={`text-2xl md:text-3xl font-serif italic leading-snug ${theme === "white" ? "text-black/80" : "text-white"}`}>
+                  <p className={`text-xl md:text-2xl font-sans font-semibold leading-relaxed ${theme === "white" ? "text-black/80" : "text-white"}`}>
                     {t.hero.mission_desc}
                   </p>
                 </div>
 
-                <div className="mission-footer space-y-8">
-                  <p className={`text-xl md:text-2xl font-light leading-relaxed ${theme === "white" ? "text-black/60" : "text-white/70"}`}>
+                <div className="mission-footer space-y-6">
+                  <p className={`text-base md:text-lg font-normal leading-relaxed ${theme === "white" ? "text-black/70" : "text-white/80"}`}>
                     {t.hero.mission_footer_desc}
                   </p>
                   
                   <Link
                     href="/our-mission"
-                    className={`inline-flex items-center gap-6 group py-4 px-8 rounded-full border transition-all duration-300 font-black uppercase tracking-[0.2em] text-sm ${
+                    className={`inline-flex items-center gap-4 group py-3.5 px-7 rounded-full border transition-all duration-300 font-bold uppercase tracking-wider text-xs md:text-sm ${
                       theme === "white" 
                         ? "border-black text-black hover:bg-[#14A3C7] hover:text-white hover:border-transparent" 
                         : "border-black text-black hover:bg-white hover:text-black hover:border-transparent"
                     }`}
                   >
-                    {t.hero.read_story}
-                    <div className="w-10 h-10 rounded-full bg-current/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
-                        <ArrowRightCircle size={20} />
-                    </div>
+                    <span>{t.hero.read_story}</span>
+                    <ArrowRightCircle size={18} />
                   </Link>
                 </div>
               </div>
             </div>
-
-
           </div>
-
-
         </div>
       </section>
 

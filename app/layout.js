@@ -1,4 +1,4 @@
-import { Poppins, Playfair_Display } from "next/font/google";
+import { Poppins, Playfair_Display, Outfit } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import { ThemeProvider } from "./context/ThemeContext";
@@ -12,6 +12,12 @@ const poppins = Poppins({
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+});
+
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800", "900"],
 });
@@ -164,7 +170,7 @@ export default function RootLayout({ children }) {
         <link rel="canonical" href={baseUrl} />
       </head>
       <body
-        className={`${poppins.variable} ${playfair.variable} antialiased font-sans`}
+        className={`${poppins.variable} ${playfair.variable} ${outfit.variable} antialiased font-sans`}
         suppressHydrationWarning
       >
           <ThemeProvider>

@@ -16,10 +16,7 @@ export default function OurVision() {
       {/* Header Section */}
       <section className="relative pt-40 pb-20 px-6 md:px-12">
         <div className="max-w-7xl mx-auto">
-          <Link href="/" className="inline-flex items-center gap-2 font-black tracking-[0.4em] text-[10px] uppercase mb-12 group transition-colors">
-            <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-            {t.common.back_home}
-          </Link>
+
 
           <motion.div
             initial={{ opacity: 0, y: 30 }}
