@@ -4,14 +4,18 @@ export async function GET() {
   const baseUrl = "https://www.bworth.co.in";
   const pages = [
     { path: "", changefreq: "weekly", priority: 1.0 },
+    { path: "/b2c", changefreq: "weekly", priority: 0.9 },
+    { path: "/b2b", changefreq: "monthly", priority: 0.8 },
+    { path: "/brands", changefreq: "weekly", priority: 0.8 },
+    { path: "/carbon-calculator", changefreq: "weekly", priority: 0.8 },
+    { path: "/blog", changefreq: "daily", priority: 0.9 },
     { path: "/about-us", changefreq: "monthly", priority: 0.8 },
     { path: "/our-mission", changefreq: "monthly", priority: 0.7 },
     { path: "/our-vision", changefreq: "monthly", priority: 0.7 },
-    { path: "/brands", changefreq: "weekly", priority: 0.8 },
-    { path: "/b2b", changefreq: "monthly", priority: 0.7 },
     { path: "/contact-us", changefreq: "monthly", priority: 0.6 },
     { path: "/privacy-policy", changefreq: "yearly", priority: 0.5 },
     { path: "/terms-of-use", changefreq: "yearly", priority: 0.5 },
+    { path: "/returns-exchange-refunds-policy", changefreq: "yearly", priority: 0.5 },
   ];
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

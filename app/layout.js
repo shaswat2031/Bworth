@@ -2,7 +2,6 @@ import { Poppins, Playfair_Display, Outfit } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import { ThemeProvider } from "./context/ThemeContext";
-import Loading from "./loading";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -174,7 +173,6 @@ export default function RootLayout({ children }) {
         suppressHydrationWarning
       >
           <ThemeProvider>
-            <Loading />
             <Navbar />
             {children}
           </ThemeProvider>

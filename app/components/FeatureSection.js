@@ -1,153 +1,347 @@
 "use client";
+import React, { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
-import { Truck, Coins, ShoppingBag } from "lucide-react";
+import {
+  Truck,
+  Coins,
+  ShoppingBag,
+  ArrowRight,
+  CheckCircle2,
+} from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 import { translations as t } from "../utils/translations";
 
 export default function FeatureSection() {
-    const { theme } = useTheme();
+  const { theme } = useTheme();
 
-    const features = [
-        {
-            icon: <Truck size={40} strokeWidth={1.5} />,
-            title: t.features.buyback_title,
-            desc: t.features.buyback_desc,
-            accent: "#14A3C7"
-        },
-        {
-            icon: <Coins size={40} strokeWidth={1.5} />,
-            title: t.features.events_title,
-            desc: t.features.events_desc,
-            accent: "#FBBF24" // Golden for coins
-        },
-        {
-            icon: <ShoppingBag size={40} strokeWidth={1.5} />,
-            title: t.features.marketplace_title,
-            desc: t.features.marketplace_desc,
-            accent: "#10B981" // Green for sustainability/recycling
-        }
-    ];
+  // The 3 Step Cards with truck stop positions at the START of each card (next to the logo)
+  const features = [
+    {
+      stepTag: "Step 01 • Doorstep Pickup",
+      icon: <Truck size={26} strokeWidth={2} />,
+      title: t.features.buyback_title || "Book Doorstep Pickup",
+      desc:
+        t.features.buyback_desc ||
+        "Book a doorstep pickup slot on the BWorth app to list and sell your unused clothes easily.",
+      accent: "#14A3C7",
+      badgeColor: "bg-sky-500/10 text-[#14A3C7] border-sky-500/25",
+      perks: ["2-Minute App Booking", "Free Doorstep Collection", "Any Brand / Condition"],
+      actionText: "Instant Pickup Dispatch",
+    },
+    {
+      stepTag: "Step 02 • Instant Payback",
+      icon: <Coins size={26} strokeWidth={2} />,
+      title: t.features.events_title || "Earn Instant BWC Coins",
+      desc:
+        t.features.events_desc ||
+        "Receive instant payback directly in your BWorth wallet as soon as clothes are collected (1 BWC Coin = ₹1 real value).",
+      accent: "#F59E0B",
+      badgeColor: "bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/25",
+      perks: ["1 BWC = ₹1 Guaranteed Value", "Direct Wallet Credit", "Zero Commission Fees"],
+      actionText: "Instant Liquid Rewards",
+    },
+    {
+      stepTag: "Step 03 • Redeem & Buy",
+      icon: <ShoppingBag size={26} strokeWidth={2} />,
+      title: t.features.marketplace_title || "Buy or Recycle",
+      desc:
+        t.features.marketplace_desc ||
+        "Use your earned BWC coins to buy new clothes directly on the BWorth platform, or recycle for a better planet.",
+      accent: "#10B981",
+      badgeColor: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/25",
+      perks: ["Top Fashion Brand Partners", "100% Zero-Landfill Guarantee", "Traceable Carbon Credits"],
+      actionText: "Circular Fashion Ecosystem",
+    },
+  ];
 
-    return (
-        <section
-            className={`py-24 px-6 md:px-12 relative overflow-hidden transition-colors duration-700 ${theme === "white"
-                ? "bg-[#F8FAFC]"
-                : "bg-black"
-                }`}
-        >
-            {/* Ambient Background Glows */}
-            <div className={`absolute top-0 left-1/4 w-96 h-96 blur-[120px] rounded-full opacity-20 pointer-events-none ${theme === "white" ? "bg-[#14A3C7]" : "bg-[#14A3C7]/40"}`}></div>
-            <div className={`absolute bottom-0 right-1/4 w-96 h-96 blur-[120px] rounded-full opacity-10 pointer-events-none ${theme === "white" ? "bg-blue-200" : "bg-blue-900/40"}`}></div>
+  // Starting positions at each card (next to the emoji/logo)
+  const TRUCK_POSITIONS = [10.5, 44.0, 77.5];
 
-            <div className="max-w-7xl mx-auto relative z-10">
-                {/* Header */}
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-16">
-                    <div className="max-w-2xl space-y-4">
-                        <motion.div
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6 }}
-                            className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full border border-[#14A3C7]/30 bg-[#14A3C7]/10"
-                        >
-                            <span className="w-2 h-2 rounded-full bg-[#14A3C7] animate-ping" />
-                            <span className="text-xs font-black uppercase tracking-[0.25em] text-[#14A3C7]">
-                                HOW IT WORKS
-                            </span>
-                        </motion.div>
-                        <motion.h2
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.7 }}
-                            className={`text-3xl sm:text-4xl lg:text-5xl font-sans font-extrabold uppercase tracking-tight leading-tight ${
-                                theme === "white" ? "text-black" : "text-white"
-                            }`}
-                        >
-                            Sell Your Clothes <br />
-                            <span className="text-[#14A3C7] italic">Easily.</span>
-                        </motion.h2>
-                    </div>
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.7, delay: 0.1 }}
-                        className={`text-base sm:text-lg font-medium max-w-md leading-relaxed ${
-                            theme === "white" ? "text-black/70" : "text-white/70"
-                        }`}
-                    >
-                        {t.features.desc}
-                    </motion.p>
-                </div>
+  // Moving truck position & active step state
+  const [activeStep, setActiveStep] = useState(0);
+  const [truckPos, setTruckPos] = useState(TRUCK_POSITIONS[0]);
+  const [isLooping, setIsLooping] = useState(false);
+  const [isDriving, setIsDriving] = useState(false);
 
-                {/* 3 Step Cards with Interactive Flow */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-                    {features.map((f, i) => (
-                        <motion.div
-                            key={i}
-                            initial={{ opacity: 0, y: 35 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: i * 0.15 }}
-                            whileHover={{ y: -10 }}
-                            className={`group relative p-8 sm:p-10 rounded-[2.5rem] border transition-all duration-500 flex flex-col justify-between shadow-2xl overflow-hidden ${
-                                theme === "white"
-                                    ? "bg-white border-black/10 hover:border-[#14A3C7]/40 shadow-black/5"
-                                    : "bg-[#0d1f2b] border-white/15 hover:border-white/30 shadow-black/40"
-                            }`}
-                        >
-                            {/* Subtle Ambient Step Accent Glow */}
-                            <div 
-                                className="absolute -top-20 -right-20 w-48 h-48 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none blur-3xl"
-                                style={{ backgroundColor: f.accent }}
-                            />
+  // Auto-drive the truck smoothly from card start to card start
+  const driveToNext = useCallback(() => {
+    setActiveStep((prev) => {
+      if (prev < 2) {
+        const next = prev + 1;
+        setIsDriving(true);
+        setTruckPos(TRUCK_POSITIONS[next]);
+        setTimeout(() => setIsDriving(false), 1000);
+        return next;
+      } else {
+        // At Card 3: truck drives off the right edge, then loops smoothly back into Card 1
+        setIsDriving(true);
+        setIsLooping(true);
+        setTruckPos(108); // Exit smoothly off-screen to the right
 
-                            <div className="space-y-6 relative z-10">
-                                {/* Top Row: Colored Icon Box + Large Step Badge */}
-                                <div className="flex items-center justify-between">
-                                    <div 
-                                        className="p-4 rounded-2xl transition-transform duration-300 group-hover:scale-110 shadow-lg"
-                                        style={{ backgroundColor: `${f.accent}15`, color: f.accent }}
-                                    >
-                                        {f.icon}
-                                    </div>
-                                    <span 
-                                        className="text-xl font-mono font-black tracking-widest px-4 py-1.5 rounded-full border shadow-inner"
-                                        style={{ borderColor: `${f.accent}40`, color: f.accent, backgroundColor: `${f.accent}10` }}
-                                    >
-                                        0{i + 1}
-                                    </span>
-                                </div>
+        setTimeout(() => {
+          // Relocate invisibly to the left edge while off-screen
+          setTruckPos(-8);
+          setTimeout(() => {
+            setIsLooping(false);
+            setTruckPos(TRUCK_POSITIONS[0]); // Drive into Card 1's starting dock
+            setTimeout(() => setIsDriving(false), 1000);
+          }, 50);
+        }, 900);
 
-                                <div className="space-y-3">
-                                    <div className="inline-block px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-white/5 border border-white/10 opacity-75">
-                                        {i === 0 && "Step 01 • Doorstep Pickup"}
-                                        {i === 1 && "Step 02 • Instant Payback"}
-                                        {i === 2 && "Step 03 • Redeem & Buy"}
-                                    </div>
-                                    <h3 className={`text-xl sm:text-2xl font-sans font-bold uppercase tracking-tight ${
-                                        theme === "white" ? "text-black" : "text-white"
-                                    }`}>
-                                        {f.title}
-                                    </h3>
-                                    <p className={`text-base sm:text-lg leading-relaxed font-medium ${
-                                        theme === "white" ? "text-black/75" : "text-white/80"
-                                    }`}>
-                                        {f.desc}
-                                    </p>
-                                </div>
-                            </div>
-                        </motion.div>
-                    ))}
-                </div>
+        return 0;
+      }
+    });
+  }, [TRUCK_POSITIONS]);
+
+  // Exactly 2 seconds stoppage at each card + 1 second drive duration = 3000ms interval
+  useEffect(() => {
+    const interval = setInterval(driveToNext, 3000);
+    return () => clearInterval(interval);
+  }, [driveToNext]);
+
+  const selectCard = (index) => {
+    setActiveStep(index);
+    setIsDriving(true);
+    setTruckPos(TRUCK_POSITIONS[index]);
+    setTimeout(() => setIsDriving(false), 1000);
+  };
+
+  return (
+    <section
+      className={`py-18 md:py-24 px-6 md:px-12 relative overflow-hidden transition-colors duration-500 ${
+        theme === "white" ? "bg-gradient-to-b from-[#f8fdff] via-slate-50 to-[#f3f9fc]" : "bg-black"
+      }`}
+    >
+      {/* Ambient Radial Background Glows */}
+      <div className="pointer-events-none absolute top-10 left-1/4 w-96 h-96 bg-[#14A3C7]/10 blur-[130px] rounded-full" />
+      <div className="pointer-events-none absolute bottom-10 right-1/4 w-96 h-96 bg-[#10B981]/10 blur-[130px] rounded-full" />
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Section Header */}
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 mb-12 sm:mb-14">
+          <div className="max-w-2xl space-y-3">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className={`text-3xl sm:text-4xl lg:text-5xl font-sans font-black uppercase tracking-tight leading-tight ${
+                theme === "white" ? "text-slate-900" : "text-white"
+              }`}
+            >
+              Sell Your Clothes{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#14A3C7] via-[#0ea5e9] to-[#0284c7] italic">
+                Easily.
+              </span>
+            </motion.h2>
+            <p
+              className={`text-base sm:text-lg font-medium leading-relaxed ${
+                theme === "white" ? "text-slate-600" : "text-slate-300"
+              }`}
+            >
+              {t.features.desc ||
+                "Give fashion a second life. Schedule a doorstep pickup, earn BWorth Coins, and buy or recycle."}
+            </p>
+          </div>
+        </div>
+
+        {/* ── THE 3 CARDS CONTAINER (With ample padding so borders never cut off) ─── */}
+        <div className="relative py-4 -my-2">
+          {/* Smooth Running Delivery Truck (parks at the START of each card next to the logo) */}
+          <div
+            className="absolute top-[68px] hidden md:block z-30 pointer-events-none transform -translate-x-1/2 -translate-y-1/2"
+            style={{
+              left: `${truckPos}%`,
+              transition: isLooping
+                ? truckPos < 0
+                  ? "none"
+                  : "left 900ms cubic-bezier(0.25, 0.1, 0.25, 1)"
+                : "left 1000ms cubic-bezier(0.25, 0.1, 0.25, 1)",
+            }}
+          >
+            <div className="relative flex flex-col items-center">
+              {/* Realistic Driving Suspension Bounce (active while driving) */}
+              <div className={isDriving ? "animate-[truckBounce_0.35s_infinite_alternate_ease-in-out]" : ""}>
+                <svg viewBox="0 0 56 30" className="w-13 h-7 sm:w-14 sm:h-8 drop-shadow-md">
+                  {/* Truck Cargo Box */}
+                  <rect
+                    x="2"
+                    y="3"
+                    width="34"
+                    height="19"
+                    rx="3"
+                    className={theme === "white" ? "fill-slate-900" : "fill-white"}
+                  />
+                  {/* Eco Leaf Emblem on Cargo */}
+                  <path
+                    d="M17 11 C21 11 23 15 23 15 C23 15 19 17 16 15 C14.5 13.8 15 11 17 11 Z"
+                    className="fill-[#14A3C7]"
+                  />
+                  {/* Cab Body */}
+                  <path
+                    d="M36 8 L47 8 L52 15 L52 22 L36 22 Z"
+                    className={theme === "white" ? "fill-slate-900" : "fill-white"}
+                  />
+                  {/* Windshield */}
+                  <path
+                    d="M39 10 L45 10 L49 15 L39 15 Z"
+                    className={theme === "white" ? "fill-sky-100" : "fill-slate-900"}
+                  />
+                  {/* Headlight */}
+                  <rect x="51" y="17" width="2" height="3" rx="1" fill="#F59E0B" />
+
+                  {/* Front Wheel with Spinning Spokes (active while driving) */}
+                  <circle
+                    cx="44"
+                    cy="23.5"
+                    r="4.2"
+                    className={theme === "white" ? "fill-slate-950" : "fill-white"}
+                  />
+                  <g className={`origin-[44px_23.5px] ${isDriving ? "animate-[spin_0.5s_linear_infinite]" : ""}`}>
+                    <circle cx="44" cy="23.5" r="2.2" className="fill-slate-400" />
+                    <line x1="44" y1="21.3" x2="44" y2="25.7" stroke="white" strokeWidth="0.8" />
+                    <line x1="41.8" y1="23.5" x2="46.2" y2="23.5" stroke="white" strokeWidth="0.8" />
+                  </g>
+
+                  {/* Rear Wheel with Spinning Spokes (active while driving) */}
+                  <circle
+                    cx="12"
+                    cy="23.5"
+                    r="4.2"
+                    className={theme === "white" ? "fill-slate-950" : "fill-white"}
+                  />
+                  <g className={`origin-[12px_23.5px] ${isDriving ? "animate-[spin_0.5s_linear_infinite]" : ""}`}>
+                    <circle cx="12" cy="23.5" r="2.2" className="fill-slate-400" />
+                    <line x1="12" y1="21.3" x2="12" y2="25.7" stroke="white" strokeWidth="0.8" />
+                    <line x1="9.8" y1="23.5" x2="14.2" y2="23.5" stroke="white" strokeWidth="0.8" />
+                  </g>
+                </svg>
+              </div>
+
+              {/* Driving Motion Shadow */}
+              <div className="w-12 h-1.5 bg-black/20 dark:bg-black/40 rounded-full blur-[2px] mt-0.5" />
             </div>
+          </div>
 
-            <style jsx>{`
-                .feature-card:hover {
-                    box-shadow: 0 40px 80px -20px rgba(0,0,0,0.1);
-                }
-            `}</style>
-        </section>
-    );
+          {/* The 3 Cards in Clean 3-Column Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 relative z-0">
+            {features.map((f, i) => {
+              const isCurrent = activeStep === i;
+
+              return (
+                <div
+                  key={i}
+                  onClick={() => selectCard(i)}
+                  className={`group relative p-7 sm:p-8 rounded-3xl border-2 flex flex-col justify-between transition-all duration-500 cursor-pointer ${
+                    isCurrent
+                      ? theme === "white"
+                        ? "bg-white shadow-[0_20px_45px_rgba(20,163,199,0.18)] -translate-y-1"
+                        : "bg-[#0c202e] shadow-[0_20px_45px_rgba(20,163,199,0.28)] -translate-y-1"
+                      : theme === "white"
+                      ? "bg-white/95 border-slate-200/80 shadow-[0_4px_25px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.06)] hover:border-slate-300"
+                      : "bg-[#0c1f2c] border-white/10 shadow-[0_4px_25px_rgba(0,0,0,0.3)] hover:border-white/20"
+                  }`}
+                  style={{
+                    borderColor: isCurrent ? f.accent : undefined,
+                  }}
+                >
+                  {/* Subtle Corner Step Accent Glow on Active */}
+                  <div
+                    className="absolute -top-16 -right-16 w-36 h-36 rounded-full transition-opacity duration-500 pointer-events-none blur-2xl"
+                    style={{
+                      backgroundColor: f.accent,
+                      opacity: isCurrent ? 0.25 : 0,
+                    }}
+                  />
+
+                  <div className="space-y-6 relative z-10">
+                    {/* Top Row: Icon Container on Left + Truck Parking Dock at the Starting */}
+                    <div className="flex items-center min-h-[52px]">
+                      <div className="flex items-center gap-3">
+                        <div
+                          className="w-13 h-13 rounded-2xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110 shadow-xs shrink-0"
+                          style={{
+                            backgroundColor: `${f.accent}15`,
+                            color: f.accent,
+                            border: `1px solid ${f.accent}30`,
+                          }}
+                        >
+                          {f.icon}
+                        </div>
+
+                        {/* Dedicated space for truck parking right by the icon/logo */}
+                        <div className="w-14 h-8 shrink-0 hidden md:block" />
+                      </div>
+                    </div>
+
+                    {/* Content Block */}
+                    <div className="space-y-2.5">
+                      <div
+                        className={`inline-block px-2.5 py-0.5 rounded-md text-[10px] font-black uppercase tracking-wider border ${f.badgeColor}`}
+                      >
+                        {f.stepTag}
+                      </div>
+
+                      <h3
+                        className={`text-xl sm:text-2xl font-sans font-bold tracking-tight transition-colors ${
+                          theme === "white"
+                            ? isCurrent
+                              ? "text-slate-900"
+                              : "text-slate-900 group-hover:text-[#14A3C7]"
+                            : isCurrent
+                            ? "text-white"
+                            : "text-white group-hover:text-cyan-300"
+                        }`}
+                      >
+                        {f.title}
+                      </h3>
+
+                      <p
+                        className={`text-xs sm:text-sm leading-relaxed ${
+                          theme === "white" ? "text-slate-600" : "text-slate-300"
+                        }`}
+                      >
+                        {f.desc}
+                      </p>
+                    </div>
+
+                    {/* Perks Checklist */}
+                    <div className="space-y-2 pt-2 border-t border-slate-100 dark:border-white/10">
+                      {f.perks.map((perk, pIdx) => (
+                        <div
+                          key={pIdx}
+                          className="flex items-center gap-2 text-xs font-semibold text-slate-700 dark:text-slate-300"
+                        >
+                          <CheckCircle2
+                            size={13}
+                            style={{ color: f.accent }}
+                            className="shrink-0"
+                          />
+                          <span>{perk}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Bottom Action Ribbon */}
+                  <div
+                    className="mt-6 pt-3.5 border-t border-slate-100 dark:border-white/10 flex items-center justify-between text-xs font-bold"
+                    style={{ color: f.accent }}
+                  >
+                    <span className="uppercase tracking-wider font-extrabold text-[11px]">
+                      {f.actionText}
+                    </span>
+                    <ArrowRight
+                      size={14}
+                      className="group-hover:translate-x-1 transition-transform opacity-75 group-hover:opacity-100"
+                    />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }

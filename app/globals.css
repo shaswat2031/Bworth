@@ -81,3 +81,91 @@
     box-shadow: 0 0 50px -12px rgba(255, 255, 255, 0.05);
   }
 }
+
+/* ── Hero badge perimeter orbit ──────────────────────────────
+   Keyframe travels clockwise: TL → TR → BR → BL → TL
+   Time is proportional to side length for constant visual speed
+   (horizontal sides ~280px = 20% each, vertical ~420px = 30% each)
+────────────────────────────────────────────────────────────── */
+@keyframes badge-perimeter {
+  0%   { left: 0%;   top: 0%;   }   /* top-left corner     */
+  20%  { left: 100%; top: 0%;   }   /* top-right corner    */
+  50%  { left: 100%; top: 100%; }   /* bottom-right corner */
+  70%  { left: 0%;   top: 100%; }   /* bottom-left corner  */
+  100% { left: 0%;   top: 0%;   }   /* back to top-left    */
+}
+
+.badge-perimeter-orbit {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 30;
+  animation: badge-perimeter 24s linear infinite;
+  pointer-events: none;
+}
+.badge-perimeter-orbit > * { pointer-events: auto; }
+
+.badge-p1 { animation-delay: 0s;   }
+.badge-p2 { animation-delay: -8s;  }
+.badge-p3 { animation-delay: -16s; }
+
+/* ── Infinite Marquee Smooth Glide ────────────────────────── */
+@keyframes marquee-glide {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee-slow {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: marquee-glide 55s linear infinite;
+}
+
+@media (max-width: 640px) {
+  .animate-marquee-slow {
+    animation-duration: 42s;
+  }
+}
+
+.marquee-track-hover:hover .animate-marquee-slow {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee-slow {
+    animation: none;
+    overflow-x: auto;
+  }
+}
+
+/* ── Hide Scrollbar Utility ───────────────────────────────── */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes progress {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes truckBounce {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-1.5px);
+  }
+}
+

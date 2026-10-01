@@ -212,6 +212,13 @@ export default function ContactSection() {
                 <Send size={16} className="group-hover:translate-x-1 transition-transform" />
               </button>
 
+              {/* Consent / Authorization Notice */}
+              <p className={`text-[11px] leading-relaxed text-center mt-3.5 px-1 transition-colors ${
+                isWhite ? "text-slate-500" : "text-slate-400"
+              }`}>
+                I authorize Bworth and its representatives to contact me regarding products, services, offers, and enquiries via phone calls, WhatsApp, SMS, email, and RCS using the contact details provided by me.
+              </p>
+
               {submitStatus.message && (
                 <p className={`text-xs font-bold uppercase text-center mt-2 ${
                   submitStatus.type === "success" ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"

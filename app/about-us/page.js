@@ -3,7 +3,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowLeft, Sparkles, Quote, Building2, Leaf, Calendar, ShieldCheck, Award, Users, ArrowRight } from "lucide-react";
-import ProfileCard from "../components/ProfileCard";
 import Footer from "../components/Footer";
 import ContactSection from "../components/ContactSection";
 import { useTheme } from "../context/ThemeContext";
@@ -18,11 +17,11 @@ export default function AboutUs() {
       isWhite ? "bg-slate-50 text-slate-900" : "bg-[#061217] text-white"
     }`}>
       {/* Hero Section */}
-      <section className="relative pt-32 pb-16 px-6 md:px-12 overflow-hidden">
+      <section className="relative pt-28 pb-8 px-6 md:px-12 overflow-hidden">
         {/* Ambient Radial Glow */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-full max-w-6xl h-96 bg-[#14A3C7]/15 blur-[140px] rounded-full pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto relative z-10 space-y-6">
+        <div className="max-w-7xl mx-auto relative z-10 space-y-4">
 
 
           <motion.div
@@ -53,14 +52,14 @@ export default function AboutUs() {
       </section>
 
       {/* Live Company Metrics Strip */}
-      <section className="px-6 md:px-12 mb-16">
+      <section className="px-6 md:px-12 mb-8">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className={`grid grid-cols-2 md:grid-cols-4 gap-4 p-6 sm:p-8 rounded-3xl border shadow-xl backdrop-blur-xl ${
+            className={`grid grid-cols-2 md:grid-cols-4 gap-4 p-5 sm:p-6 rounded-3xl border shadow-xl backdrop-blur-xl ${
               isWhite
                 ? "bg-white border-slate-200 text-slate-900 shadow-slate-200/50"
                 : "bg-[#081822] border-white/15 text-white shadow-black/80"
@@ -106,17 +105,17 @@ export default function AboutUs() {
       </section>
 
       {/* Main Narrative & Story Section */}
-      <section className="pb-24 px-6 md:px-12">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+      <section className="pb-10 px-6 md:px-12">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
           
           {/* Left Column: Mission Overview */}
-          <div className="lg:col-span-5 space-y-6">
+          <div className="lg:col-span-5 space-y-4">
             <motion.div
               initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="space-y-4"
+              className="space-y-3"
             >
               <span className="text-xs font-black uppercase tracking-widest text-[#14A3C7]">
                 THE BWORTH STORY
@@ -142,13 +141,13 @@ export default function AboutUs() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className={`p-8 rounded-3xl border shadow-xl relative overflow-hidden ${
+              className={`p-6 rounded-3xl border shadow-xl relative overflow-hidden ${
                 isWhite
                   ? "bg-gradient-to-br from-cyan-50 via-white to-emerald-50 border-[#14A3C7]/30 text-slate-900"
                   : "bg-gradient-to-br from-[#09202b] via-[#081822] to-[#041219] border-[#14A3C7]/40 text-white"
               }`}
             >
-              <Quote className="w-10 h-10 text-[#14A3C7]/30 mb-4" />
+              <Quote className="w-8 h-8 text-[#14A3C7]/30 mb-3" />
               <p className="text-base sm:text-lg font-serif italic font-bold leading-relaxed mb-4 text-[#14A3C7]">
                 {t.about_page.quote}
               </p>
@@ -165,13 +164,13 @@ export default function AboutUs() {
           </div>
 
           {/* Right Column: Detailed Impact & Flagship Buyback */}
-          <div className="lg:col-span-7 space-y-8">
+          <div className="lg:col-span-7 space-y-4">
             <motion.div
               initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className={`p-8 sm:p-10 rounded-3xl border shadow-xl space-y-6 ${
+              className={`p-6 sm:p-8 rounded-3xl border shadow-xl space-y-4 ${
                 isWhite
                   ? "bg-white border-slate-200 text-slate-900 shadow-slate-200/50"
                   : "bg-[#081822] border-white/15 text-white shadow-black/80"
@@ -209,93 +208,137 @@ export default function AboutUs() {
         </div>
       </section>
 
-      {/* Founder / Visionary Leadership Section */}
-      <section className={`py-24 px-6 md:px-12 border-t transition-colors ${
+      {/* Founders & Leadership Section */}
+      <section className={`py-12 px-6 md:px-12 border-t transition-colors ${
         isWhite ? "bg-slate-100 border-slate-200" : "bg-[#041016] border-white/10"
       }`}>
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+        <div className="max-w-7xl mx-auto space-y-8">
           
-          {/* Left Column: Interactive 3D Profile Card */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-5 flex justify-center"
-          >
-            <div className="w-full max-w-sm">
-              <ProfileCard
-                name={t.about_page.founder_name}
-                title={t.about_page.founder_title}
-                handle="dheerajanand"
-                status={t.about_page.founder_status}
-                contactText={t.about_page.connect}
-                avatarUrl="/profile.jpeg"
-                miniAvatarUrl="/profile.jpeg"
-                showUserInfo={true}
-                enableTilt={true}
-                enableMobileTilt={true}
-                showBehindGlow={true}
-                showOverlayInfo={false}
-                behindGlowColor="rgba(20, 163, 199, 0.4)"
-                innerGradient="linear-gradient(145deg, #0b1d26 30%, #14A3C7 100%)"
-                onContactClick={() => window.open("https://www.linkedin.com/in/dheeraj-anand-b6b407100/", "_blank")}
-              />
-            </div>
-          </motion.div>
-
-          {/* Right Column: Leadership Vision */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-7 space-y-6"
-          >
+          <div className="space-y-2 text-center max-w-2xl mx-auto">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#14A3C7]/15 border border-[#14A3C7]/30 text-[#14A3C7]">
               <Award size={16} />
               <span className="text-xs font-black uppercase tracking-widest">{t.about_page.leadership}</span>
             </div>
 
-            <h2 className={`text-3xl sm:text-5xl lg:text-6xl font-serif font-black uppercase tracking-tight leading-tight ${
+            <h2 className={`text-3xl sm:text-5xl font-serif font-black uppercase tracking-tight leading-tight ${
               isWhite ? "text-slate-900" : "text-white"
             }`}>
-              {t.about_page.visionary} <br />
-              <span className="text-[#14A3C7] italic">{t.about_page.leader_title}</span>
+              {t.about_page.visionary} <span className="text-[#14A3C7] italic">{t.about_page.leader_title}</span>
             </h2>
+            <p className={`text-sm sm:text-base ${isWhite ? "text-slate-600" : "text-slate-400"}`}>
+              The visionaries driving sustainable circular fashion and empowering conscious consumerism.
+            </p>
+          </div>
 
-            <div className={`p-8 sm:p-10 rounded-3xl border shadow-xl space-y-4 ${
-              isWhite
-                ? "bg-white border-slate-200 text-slate-900 shadow-slate-200/50"
-                : "bg-[#081822] border-white/15 text-white shadow-black/80"
-            }`}>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-amber-400/20 text-amber-500 flex items-center justify-center shrink-0 font-black text-sm">
-                  18Y
-                </div>
-                <div>
-                  <h4 className="text-base font-black uppercase tracking-wider">18 Years Expertise</h4>
-                  <p className={`text-xs ${isWhite ? "text-slate-500" : "text-slate-400"}`}>Business Building & Environmental Strategy</p>
-                </div>
+          {/* Dual Founders Grid */}
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-8 items-stretch">
+            
+            {/* Dheeraj Anand - Founder */}
+            <motion.div
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className={`p-6 sm:p-7 rounded-3xl border shadow-xl flex flex-col sm:flex-row items-center sm:items-stretch gap-6 ${
+                isWhite
+                  ? "bg-white border-slate-200 text-slate-900 shadow-slate-200/50"
+                  : "bg-[#081822] border-white/15 text-white shadow-black/80"
+              }`}
+            >
+              {/* Photo Frame Left */}
+              <div className="w-36 h-44 sm:w-44 sm:h-auto min-h-[180px] rounded-2xl overflow-hidden border-2 border-[#14A3C7]/40 shadow-xl shrink-0 relative bg-slate-900">
+                <img
+                  src="/profile.jpeg"
+                  alt="Dheeraj Anand"
+                  className="w-full h-full object-cover"
+                />
               </div>
 
-              <p className={`text-base sm:text-lg font-normal leading-relaxed ${
-                isWhite ? "text-slate-700" : "text-slate-300"
-              }`}>
-                {t.about_page.leader_desc}
-              </p>
+              {/* Content Right */}
+              <div className="flex-1 flex flex-col justify-between space-y-3 text-center sm:text-left">
+                <div className="space-y-2">
+                  <span className="inline-block text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-md bg-[#14A3C7]/15 text-[#14A3C7] border border-[#14A3C7]/30">
+                    {t.about_page.founder_title}
+                  </span>
+                  <h3 className="text-xl sm:text-2xl font-serif font-black uppercase tracking-tight">
+                    {t.about_page.founder_name}
+                  </h3>
+                  <p className={`text-xs font-semibold ${isWhite ? "text-slate-500" : "text-slate-400"}`}>
+                    18+ Years Business & Environmental Strategy
+                  </p>
+                  <p className={`text-xs sm:text-sm font-normal leading-relaxed ${
+                    isWhite ? "text-slate-700" : "text-slate-300"
+                  }`}>
+                    {t.about_page.leader_desc}
+                  </p>
+                </div>
 
-              <a
-                href="https://www.linkedin.com/in/dheeraj-anand-b6b407100/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#14A3C7] text-white font-black text-xs uppercase tracking-widest hover:bg-[#0c7f9c] transition-all shadow-lg group mt-2"
-              >
-                <span>CONNECT WITH FOUNDER</span>
-                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-              </a>
-            </div>
-          </motion.div>
+                <div className="pt-2">
+                  <a
+                    href="https://www.linkedin.com/in/dheeraj-anand-b6b407100/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#14A3C7] text-white font-black text-xs uppercase tracking-widest hover:bg-[#0c7f9c] transition-all shadow-md group"
+                  >
+                    <span>CONNECT ON LINKEDIN</span>
+                    <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Venkatesh Lakhani - Co-Founder */}
+            <motion.div
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className={`p-6 sm:p-7 rounded-3xl border shadow-xl flex flex-col sm:flex-row items-center sm:items-stretch gap-6 ${
+                isWhite
+                  ? "bg-white border-slate-200 text-slate-900 shadow-slate-200/50"
+                  : "bg-[#081822] border-white/15 text-white shadow-black/80"
+              }`}
+            >
+              {/* Photo Frame Left */}
+              <div className="w-36 h-44 sm:w-44 sm:h-auto min-h-[180px] rounded-2xl overflow-hidden border-2 border-[#14A3C7]/40 shadow-xl shrink-0 bg-gradient-to-br from-[#0a2330] via-[#0c7f9c] to-[#14A3C7] flex flex-col items-center justify-center text-white relative">
+                <span className="font-serif font-black text-4xl sm:text-5xl tracking-tight">VL</span>
+                <span className="text-[10px] font-black uppercase tracking-widest opacity-80 mt-1">CO-FOUNDER</span>
+              </div>
+
+              {/* Content Right */}
+              <div className="flex-1 flex flex-col justify-between space-y-3 text-center sm:text-left">
+                <div className="space-y-2">
+                  <span className="inline-block text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-md bg-[#14A3C7]/15 text-[#14A3C7] border border-[#14A3C7]/30">
+                    {t.about_page.cofounder_title}
+                  </span>
+                  <h3 className="text-xl sm:text-2xl font-serif font-black uppercase tracking-tight">
+                    {t.about_page.cofounder_name}
+                  </h3>
+                  <p className={`text-xs font-semibold ${isWhite ? "text-slate-500" : "text-slate-400"}`}>
+                    {t.about_page.cofounder_status}
+                  </p>
+                  <p className={`text-xs sm:text-sm font-normal leading-relaxed ${
+                    isWhite ? "text-slate-700" : "text-slate-300"
+                  }`}>
+                    {t.about_page.cofounder_desc}
+                  </p>
+                </div>
+
+                <div className="pt-2">
+                  <a
+                    href="https://www.linkedin.com/in/venkateshlakhani/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#14A3C7] text-white font-black text-xs uppercase tracking-widest hover:bg-[#0c7f9c] transition-all shadow-md group"
+                  >
+                    <span>CONNECT ON LINKEDIN</span>
+                    <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+
+          </div>
 
         </div>
       </section>

@@ -362,7 +362,7 @@ const ProfileCardComponent = ({
         '--angle': '-45deg',
         transform: 'translate3d(0, 0, 1px)',
         overflow: 'hidden',
-        zIndex: 3,
+        zIndex: 1,
         background: 'transparent',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
@@ -408,7 +408,7 @@ const ProfileCardComponent = ({
     )`,
         mixBlendMode: 'overlay',
         filter: 'brightness(0.8) contrast(1.2)',
-        zIndex: 4,
+        zIndex: 2,
         gridArea: '1 / -1',
         borderRadius: cardRadius,
         pointerEvents: 'none'
@@ -483,11 +483,13 @@ const ProfileCardComponent = ({
                                 transform: 'translateZ(2px)',
                                 gridArea: '1 / -1',
                                 borderRadius: cardRadius,
-                                pointerEvents: 'none'
+                                pointerEvents: 'none',
+                                zIndex: 5,
+                                position: 'relative'
                             }}
                         >
                             <img
-                                className="w-full absolute left-1/2 bottom-[-1px] backface-hidden will-change-transform transition-transform duration-[120ms] ease-out brightness-100 contrast-110"
+                                className="w-full absolute left-1/2 bottom-[-1px] backface-hidden will-change-transform transition-transform duration-[120ms] ease-out"
                                 src={avatarUrl}
                                 alt={`${name || 'User'} avatar`}
                                 loading="lazy"

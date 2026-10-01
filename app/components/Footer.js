@@ -24,6 +24,7 @@ export default function Footer() {
     { name: t.footer.vision, href: '/our-vision' },
     { name: "Carbon Calculator", href: '/carbon-calculator' },
     { name: t.footer.brands, href: '/brands' },
+    { name: "Blog", href: '/blog' },
     { name: t.footer.contact, href: '/contact-us' },
   ];
 

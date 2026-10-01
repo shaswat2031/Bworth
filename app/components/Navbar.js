@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowRight, Sun, Moon, ChevronDown, Smartphone, Building2, Calculator, Leaf } from "lucide-react";
+import { Menu, X, ArrowRight, Sun, Moon, ChevronDown, Smartphone, Building2, Calculator, Leaf, BookOpen } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 import { translations as t } from "../utils/translations";
 
@@ -30,22 +30,16 @@ export default function Navbar() {
 
   const solutionOptions = [
     {
-      name: "B2C",
+      name: "Business to Consumer",
       desc: "Doorstep Pickup & BWC Rewards",
       href: "/b2c",
       icon: Smartphone,
     },
     {
-      name: "B2B",
+      name: "Business to Business",
       desc: "Enterprise & Brand Circular Tech",
       href: "/b2b",
       icon: Building2,
-    },
-    {
-      name: "Carbon Calculator",
-      desc: "ISO & LCA Impact Assessment",
-      href: "/carbon-calculator",
-      icon: Calculator,
     },
   ];
 
@@ -59,6 +53,7 @@ export default function Navbar() {
     },
     { name: "CARBON CALCULATOR", href: "/carbon-calculator" },
     { name: t.navbar.brands, href: "/brands" },
+    { name: t.navbar.blog || "BLOG", href: "/blog" },
     { name: t.navbar.about, href: "/about-us" },
   ];
 
@@ -95,15 +90,14 @@ export default function Navbar() {
         initial={{ y: -80, opacity: 0, scale: 0.95 }}
         animate={{ y: 0, opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-4 sm:top-5 left-1/2 -translate-x-1/2 z-[80] w-[94%] max-w-6xl rounded-full transition-all duration-500 px-4 sm:px-6 py-2.5 sm:py-3 ${
-          theme === "white"
+        className={`fixed top-4 sm:top-5 left-1/2 -translate-x-1/2 z-[80] w-[94%] max-w-6xl rounded-full transition-all duration-500 px-4 sm:px-6 py-2.5 sm:py-3 ${theme === "white"
             ? scrolled
               ? "bg-white/90 backdrop-blur-2xl border border-black/10 shadow-2xl shadow-black/10"
               : "bg-white/80 backdrop-blur-xl border border-black/10 shadow-lg shadow-black/5"
             : scrolled
               ? "bg-[#0b1d26]/90 backdrop-blur-2xl border border-white/20 shadow-2xl shadow-black/50"
               : "bg-[#0b1d26]/75 backdrop-blur-xl border border-white/15 shadow-xl shadow-black/30"
-        }`}
+          }`}
       >
         <div className="flex justify-between items-center relative">
           {/* Logo */}
@@ -114,19 +108,14 @@ export default function Navbar() {
               width={0}
               height={0}
               sizes="100vw"
-              className={`h-8 sm:h-10 w-auto object-contain transition-all duration-500 group-hover:scale-105 ${
-                theme === "white" ? "" : "brightness-0 invert"
-              }`}
+              className={`h-8 sm:h-10 w-auto object-contain transition-all duration-500 group-hover:scale-105 ${theme === "white" ? "" : "brightness-0 invert"
+                }`}
             />
           </Link>
 
-          {/* Pill Container Desktop Navigation */}
+          {/* Desktop Navigation */}
           <div
-            className={`hidden lg:flex items-center gap-1 p-1.5 rounded-full border transition-all relative ${
-              theme === "white"
-                ? "bg-black/5 border-black/10"
-                : "bg-white/10 border-white/15"
-            }`}
+            className="hidden lg:flex items-center gap-1 relative"
             onMouseLeave={() => {
               setHoveredPath(pathname);
               setDropdownOpen(false);
@@ -148,25 +137,23 @@ export default function Navbar() {
                   >
                     <button
                       onClick={() => setDropdownOpen(!dropdownOpen)}
-                      className={`relative px-5 py-2 rounded-full text-xs font-black uppercase tracking-[0.2em] transition-all duration-300 flex items-center gap-1.5 ${
-                        isActive || isHovered || dropdownOpen
+                      className={`relative px-3.5 xl:px-5 py-2 rounded-full text-xs font-black uppercase tracking-[0.15em] xl:tracking-[0.2em] transition-all duration-300 flex items-center gap-1.5 ${isActive || isHovered || dropdownOpen
                           ? theme === "white"
                             ? "text-[#14A3C7]"
                             : "text-white"
                           : theme === "white"
-                          ? "text-black/60 hover:text-black"
-                          : "text-white/70 hover:text-white"
-                      }`}
+                            ? "text-black/60 hover:text-black"
+                            : "text-white/70 hover:text-white"
+                        }`}
                     >
                       {/* Sliding Pill Background Animation */}
                       {(isHovered || dropdownOpen) && (
                         <motion.div
                           layoutId="navbar-pill-hover"
-                          className={`absolute inset-0 rounded-full -z-10 shadow-sm ${
-                            theme === "white"
-                              ? "bg-white border border-[#14A3C7]/30 shadow-md"
+                          className={`absolute inset-0 rounded-full -z-10 shadow-sm ${theme === "white"
+                              ? "bg-[#14A3C7]/10 border border-[#14A3C7]/30 shadow-xs"
                               : "bg-white/20 border border-white/30 shadow-md"
-                          }`}
+                            }`}
                           transition={{ type: "spring", stiffness: 450, damping: 32 }}
                         />
                       )}
@@ -185,11 +172,10 @@ export default function Navbar() {
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: 8, scale: 0.95 }}
                           transition={{ duration: 0.2 }}
-                          className={`absolute top-full mt-3 left-1/2 -translate-x-1/2 w-72 p-2 rounded-2xl border shadow-2xl backdrop-blur-2xl transition-all duration-300 z-[100] ${
-                            theme === "white"
+                          className={`absolute top-full mt-3 left-1/2 -translate-x-1/2 w-80 p-2 rounded-2xl border shadow-2xl backdrop-blur-2xl transition-all duration-300 z-[100] ${theme === "white"
                               ? "bg-white/95 border-black/10 text-slate-900 shadow-xl shadow-black/10"
                               : "bg-[#0b1d26]/95 border-white/20 text-white shadow-2xl shadow-black/70"
-                          }`}
+                            }`}
                         >
                           <div className="space-y-1">
                             {link.options.map((opt) => (
@@ -197,11 +183,10 @@ export default function Navbar() {
                                 key={opt.name}
                                 href={opt.href}
                                 onClick={() => setDropdownOpen(false)}
-                                className={`flex items-center gap-3 p-3 rounded-xl transition-all group ${
-                                  theme === "white"
+                                className={`flex items-center gap-3 p-3 rounded-xl transition-all group ${theme === "white"
                                     ? "hover:bg-[#14A3C7]/10"
                                     : "hover:bg-white/10"
-                                }`}
+                                  }`}
                               >
                                 <div className="w-9 h-9 rounded-xl bg-[#14A3C7]/20 text-[#14A3C7] flex items-center justify-center shrink-0 group-hover:bg-[#14A3C7] group-hover:text-white transition-colors shadow-sm">
                                   <opt.icon size={18} />
@@ -230,25 +215,23 @@ export default function Navbar() {
                   key={link.name}
                   href={link.href}
                   onMouseEnter={() => setHoveredPath(link.href)}
-                  className={`relative px-5 py-2 rounded-full text-xs font-black uppercase tracking-[0.2em] transition-all duration-300 ${
-                    isActive || isHovered
+                  className={`relative px-3.5 xl:px-5 py-2 rounded-full text-xs font-black uppercase tracking-[0.15em] xl:tracking-[0.2em] transition-all duration-300 ${isActive || isHovered
                       ? theme === "white"
                         ? "text-[#14A3C7]"
                         : "text-white"
                       : theme === "white"
-                      ? "text-black/60 hover:text-black"
-                      : "text-white/70 hover:text-white"
-                  }`}
+                        ? "text-black/60 hover:text-black"
+                        : "text-white/70 hover:text-white"
+                    }`}
                 >
                   {/* Sliding Pill Background Animation */}
                   {isHovered && (
                     <motion.div
                       layoutId="navbar-pill-hover"
-                      className={`absolute inset-0 rounded-full -z-10 shadow-sm ${
-                        theme === "white"
-                          ? "bg-white border border-[#14A3C7]/30 shadow-md"
+                      className={`absolute inset-0 rounded-full -z-10 shadow-sm ${theme === "white"
+                          ? "bg-[#14A3C7]/10 border border-[#14A3C7]/30 shadow-xs"
                           : "bg-white/20 border border-white/30 shadow-md"
-                      }`}
+                        }`}
                       transition={{ type: "spring", stiffness: 450, damping: 32 }}
                     />
                   )}
@@ -268,11 +251,10 @@ export default function Navbar() {
             {/* Theme Toggle - Desktop Pill Button */}
             <button
               onClick={() => toggleTheme(theme === "blue" ? "white" : "blue")}
-              className={`hidden lg:flex items-center gap-2 px-3.5 py-2 rounded-full transition-all duration-300 hover:scale-105 active:scale-95 text-xs font-bold ${
-                theme === "white"
+              className={`hidden lg:flex items-center gap-2 px-3.5 py-2 rounded-full transition-all duration-300 hover:scale-105 active:scale-95 text-xs font-bold ${theme === "white"
                   ? "bg-black/5 text-black hover:bg-black/10 border border-black/10"
                   : "bg-white/10 text-white hover:bg-white/20 border border-white/15"
-              }`}
+                }`}
               title={theme === "blue" ? "Switch to Light Mode" : "Switch to Dark Mode"}
             >
               <motion.div
@@ -288,11 +270,10 @@ export default function Navbar() {
             {/* Mobile Hamburger Button */}
             <button
               onClick={() => setIsOpen(true)}
-              className={`lg:hidden flex items-center gap-2 px-4 py-2 rounded-full transition-all active:scale-95 group shadow-xl ${
-                theme === "white"
+              className={`lg:hidden flex items-center gap-2 px-4 py-2 rounded-full transition-all active:scale-95 group shadow-xl ${theme === "white"
                   ? "bg-black text-white shadow-black/10"
                   : "bg-white text-black shadow-white/10"
-              }`}
+                }`}
             >
               <Menu size={18} className="group-hover:rotate-90 transition-transform" />
             </button>
@@ -308,17 +289,15 @@ export default function Navbar() {
             animate="open"
             exit="closed"
             variants={menuVariants}
-            className={`fixed inset-0 z-[100] flex flex-col md:flex-row overflow-hidden ${
-              theme === "white" ? "bg-white text-black" : "bg-[#14A3C7] text-white"
-            }`}
+            className={`fixed inset-0 z-[100] flex flex-col md:flex-row overflow-hidden ${theme === "white" ? "bg-white text-black" : "bg-[#14A3C7] text-white"
+              }`}
           >
             {/* Left side info (Desktop view inside drawer) */}
             <div
-              className={`hidden md:flex w-1/3 border-r flex-col justify-between p-8 xl:p-12 ${
-                theme === "white"
+              className={`hidden md:flex w-1/3 border-r flex-col justify-between p-8 xl:p-12 ${theme === "white"
                   ? "bg-black/[0.02] border-black/5"
                   : "bg-white/[0.02] border-white/5"
-              }`}
+                }`}
             >
               <div>
                 <Link href="/" className="block" onClick={() => setIsOpen(false)}>
@@ -328,15 +307,13 @@ export default function Navbar() {
                     width={0}
                     height={0}
                     sizes="100vw"
-                    className={`h-16 w-auto object-contain mb-6 ${
-                      theme === "white" ? "" : "brightness-0 invert"
-                    }`}
+                    className={`h-16 w-auto object-contain mb-6 ${theme === "white" ? "" : "brightness-0 invert"
+                      }`}
                   />
                 </Link>
                 <p
-                  className={`mt-6 max-w-xs font-medium leading-relaxed text-sm xl:text-base ${
-                    theme === "white" ? "text-black/60" : "text-white"
-                  }`}
+                  className={`mt-6 max-w-xs font-medium leading-relaxed text-sm xl:text-base ${theme === "white" ? "text-black/60" : "text-white"
+                    }`}
                 >
                   {t.navbar.desc}
                 </p>
@@ -347,11 +324,10 @@ export default function Navbar() {
                   onClick={() =>
                     toggleTheme(theme === "blue" ? "white" : "blue")
                   }
-                  className={`flex items-center gap-3 transition-colors cursor-pointer group ${
-                    theme === "white"
+                  className={`flex items-center gap-3 transition-colors cursor-pointer group ${theme === "white"
                       ? "text-black/40 hover:text-[#14A3C7]"
                       : "text-white hover:text-[#14A3C7]"
-                  }`}
+                    }`}
                 >
                   {theme === "blue" ? <Sun size={18} /> : <Moon size={18} />}
                   <span className="text-xs font-bold uppercase tracking-widest">
@@ -360,9 +336,8 @@ export default function Navbar() {
                 </div>
 
                 <div
-                  className={`text-[10px] uppercase tracking-[0.2em] font-bold ${
-                    theme === "white" ? "text-black/30" : "text-white/30"
-                  }`}
+                  className={`text-[10px] uppercase tracking-[0.2em] font-bold ${theme === "white" ? "text-black/30" : "text-white/30"
+                    }`}
                 >
                   © {new Date().getFullYear()} BEWORTH TECHNOLOGIES
                 </div>
@@ -372,9 +347,8 @@ export default function Navbar() {
             {/* Right side navigation links */}
             <div className="flex-1 flex flex-col h-full overflow-y-auto">
               <div
-                className={`sticky top-0 z-10 flex justify-between items-center p-6 md:p-8 backdrop-blur-sm ${
-                  theme === "white" ? "bg-white/80" : "bg-[#14A3C7]/80"
-                }`}
+                className={`sticky top-0 z-10 flex justify-between items-center p-6 md:p-8 backdrop-blur-sm ${theme === "white" ? "bg-white/80" : "bg-[#14A3C7]/80"
+                  }`}
               >
                 <div className="md:hidden">
                   <Image
@@ -383,9 +357,8 @@ export default function Navbar() {
                     width={0}
                     height={0}
                     sizes="100vw"
-                    className={`h-10 w-auto object-contain ${
-                      theme === "white" ? "" : "brightness-0 invert"
-                    }`}
+                    className={`h-10 w-auto object-contain ${theme === "white" ? "" : "brightness-0 invert"
+                      }`}
                   />
                 </div>
 
@@ -406,11 +379,10 @@ export default function Navbar() {
 
                   <button
                     onClick={() => setIsOpen(false)}
-                    className={`flex items-center gap-2 px-5 py-2.5 transition-all border rounded-full group ${
-                      theme === "white"
+                    className={`flex items-center gap-2 px-5 py-2.5 transition-all border rounded-full group ${theme === "white"
                         ? "hover:bg-black hover:text-white border-black/10 bg-black/5"
                         : "hover:bg-white hover:text-black border-white/10 bg-white/5"
-                    }`}
+                      }`}
                   >
                     <span className="text-[10px] font-bold uppercase tracking-widest">
                       {t.navbar.close}
@@ -431,9 +403,8 @@ export default function Navbar() {
                     <Link
                       href="/"
                       onClick={() => setIsOpen(false)}
-                      className={`flex items-center justify-between py-3 border-b transition-all duration-300 ${
-                        theme === "white" ? "border-black/5" : "border-white/5"
-                      }`}
+                      className={`flex items-center justify-between py-3 border-b transition-all duration-300 ${theme === "white" ? "border-black/5" : "border-white/5"
+                        }`}
                     >
                       <span className="text-2xl sm:text-3xl font-serif font-black uppercase">
                         {t.navbar.home}
@@ -447,14 +418,13 @@ export default function Navbar() {
                     <Link
                       href="/b2c"
                       onClick={() => setIsOpen(false)}
-                      className={`flex items-center justify-between py-3 border-b transition-all duration-300 ${
-                        theme === "white" ? "border-black/5" : "border-white/5"
-                      }`}
+                      className={`flex items-center justify-between py-3 border-b transition-all duration-300 ${theme === "white" ? "border-black/5" : "border-white/5"
+                        }`}
                     >
                       <div className="flex items-center gap-3">
                         <Smartphone size={22} className="text-[#14A3C7]" />
-                        <span className="text-2xl sm:text-3xl font-serif font-black uppercase">
-                          B2C (CONSUMER)
+                        <span className="text-xl sm:text-2xl font-serif font-black uppercase">
+                          BUSINESS TO CONSUMER
                         </span>
                       </div>
                       <ArrowRight size={24} />
@@ -466,14 +436,13 @@ export default function Navbar() {
                     <Link
                       href="/b2b"
                       onClick={() => setIsOpen(false)}
-                      className={`flex items-center justify-between py-3 border-b transition-all duration-300 ${
-                        theme === "white" ? "border-black/5" : "border-white/5"
-                      }`}
+                      className={`flex items-center justify-between py-3 border-b transition-all duration-300 ${theme === "white" ? "border-black/5" : "border-white/5"
+                        }`}
                     >
                       <div className="flex items-center gap-3">
                         <Building2 size={22} className="text-[#14A3C7]" />
-                        <span className="text-2xl sm:text-3xl font-serif font-black uppercase">
-                          B2B (ENTERPRISE)
+                        <span className="text-xl sm:text-2xl font-serif font-black uppercase">
+                          BUSINESS TO BUSINESS
                         </span>
                       </div>
                       <ArrowRight size={24} />
@@ -485,9 +454,8 @@ export default function Navbar() {
                     <Link
                       href="/carbon-calculator"
                       onClick={() => setIsOpen(false)}
-                      className={`flex items-center justify-between py-3 border-b transition-all duration-300 ${
-                        theme === "white" ? "border-black/5" : "border-white/5"
-                      }`}
+                      className={`flex items-center justify-between py-3 border-b transition-all duration-300 ${theme === "white" ? "border-black/5" : "border-white/5"
+                        }`}
                     >
                       <div className="flex items-center gap-3">
                         <Calculator size={22} className="text-[#14A3C7]" />
@@ -504,13 +472,30 @@ export default function Navbar() {
                     <Link
                       href="/brands"
                       onClick={() => setIsOpen(false)}
-                      className={`flex items-center justify-between py-3 border-b transition-all duration-300 ${
-                        theme === "white" ? "border-black/5" : "border-white/5"
-                      }`}
+                      className={`flex items-center justify-between py-3 border-b transition-all duration-300 ${theme === "white" ? "border-black/5" : "border-white/5"
+                        }`}
                     >
                       <span className="text-2xl sm:text-3xl font-serif font-black uppercase">
                         {t.navbar.brands}
                       </span>
+                      <ArrowRight size={24} />
+                    </Link>
+                  </motion.div>
+
+                  {/* Blog Link */}
+                  <motion.div variants={linkVariants} className="group">
+                    <Link
+                      href="/blog"
+                      onClick={() => setIsOpen(false)}
+                      className={`flex items-center justify-between py-3 border-b transition-all duration-300 ${theme === "white" ? "border-black/5" : "border-white/5"
+                        }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <BookOpen size={22} className="text-[#14A3C7]" />
+                        <span className="text-2xl sm:text-3xl font-serif font-black uppercase">
+                          {t.navbar.blog || "BLOG"}
+                        </span>
+                      </div>
                       <ArrowRight size={24} />
                     </Link>
                   </motion.div>
@@ -520,9 +505,8 @@ export default function Navbar() {
                     <Link
                       href="/about-us"
                       onClick={() => setIsOpen(false)}
-                      className={`flex items-center justify-between py-3 border-b transition-all duration-300 ${
-                        theme === "white" ? "border-black/5" : "border-white/5"
-                      }`}
+                      className={`flex items-center justify-between py-3 border-b transition-all duration-300 ${theme === "white" ? "border-black/5" : "border-white/5"
+                        }`}
                     >
                       <span className="text-2xl sm:text-3xl font-serif font-black uppercase text-[#14A3C7]">
                         {t.navbar.about}
@@ -534,9 +518,8 @@ export default function Navbar() {
                 </div>
 
                 <div
-                  className={`mt-12 md:hidden flex justify-between text-[10px] font-bold tracking-widest uppercase ${
-                    theme === "white" ? "text-black/30" : "text-white/60"
-                  }`}
+                  className={`mt-12 md:hidden flex justify-between text-[10px] font-bold tracking-widest uppercase ${theme === "white" ? "text-black/30" : "text-white/60"
+                    }`}
                 >
                   <span>{t.navbar.sustainability}</span>
                   <span>{t.navbar.fashion}</span>

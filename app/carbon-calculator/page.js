@@ -1,28 +1,30 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useTheme } from "../context/ThemeContext";
 import { motion } from "framer-motion";
 import {
-  Calculator,
   Leaf,
   Droplets,
   Trash2,
   ArrowRight,
-  RefreshCw,
-  TrendingDown,
+  RotateCcw,
   Car,
   Trees,
   ShowerHead,
   Smartphone,
+  Coins,
   Sparkles,
-  ShieldCheck
+  Info,
+  Zap,
+  Truck,
+  Recycle,
 } from "lucide-react";
 
-// Custom High-Quality Vector Icons for Apparel Categories
+// Clean Vector Icons for Apparel Categories
 const TShirtIcon = ({ size = 20, className = "" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
     <path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23Z" />
@@ -52,67 +54,77 @@ const DressIcon = ({ size = 20, className = "" }) => (
   </svg>
 );
 
-// Standardized Peer-Reviewed Garment LCA Benchmarks (ThredUp / Green Story & UNEP LCA Market Research)
+// Standardized Peer-Reviewed Garment LCA Benchmarks (UNEP & Ellen MacArthur Foundation)
 const GARMENT_TYPES = [
   {
     id: "tshirt",
     name: "T-Shirts & Tops",
     icon: TShirtIcon,
     avgWeightKg: 0.25,
-    co2ePerItem: 3.0, // 3.0 kg CO2e per item (Cotton/Polyester blend LCA benchmark)
-    waterPerItem: 2500, // 2,500 Liters per item (UNEP standard)
-    landfillPerKg: 1.0,
+    co2ePerItem: 3.0,
+    waterPerItem: 2500,
     bwcCoinsPerItem: 35,
-    description: "T-shirts, tops & polo shirts"
+    tag: "Cotton / Poly Blends",
   },
   {
     id: "jeans",
-    name: "Denim Jeans & Trousers",
+    name: "Denim & Trousers",
     icon: PantsIcon,
     avgWeightKg: 0.65,
-    co2ePerItem: 13.0, // 13.0 kg CO2e per item (Denim manufacturing LCA)
-    waterPerItem: 7500, // 7,500 Liters per item (Ellen MacArthur Foundation standard)
-    landfillPerKg: 1.0,
+    co2ePerItem: 13.0,
+    waterPerItem: 7500,
     bwcCoinsPerItem: 120,
-    description: "Jeans, pants & denim bottoms"
+    tag: "Heavy Twill & Denim",
   },
   {
     id: "jackets",
     name: "Jackets & Outerwear",
     icon: JacketIcon,
     avgWeightKg: 1.20,
-    co2ePerItem: 20.0, // 20.0 kg CO2e per item (Heavy outerwear LCA benchmark)
-    waterPerItem: 4500, // 4,500 Liters per item (Dyeing & processing LCA)
-    landfillPerKg: 1.0,
+    co2ePerItem: 20.0,
+    waterPerItem: 4500,
     bwcCoinsPerItem: 250,
-    description: "Jackets, coats & winterwear"
+    tag: "Layered Fabrics & Coats",
   },
   {
     id: "ethnic",
     name: "Dresses & Ethnic Wear",
     icon: DressIcon,
     avgWeightKg: 0.55,
-    co2ePerItem: 8.5, // 8.5 kg CO2e per item (Ethnic/Dress fabric LCA)
-    waterPerItem: 3800, // 3,800 Liters per item (Textile washing LCA)
-    landfillPerKg: 1.0,
+    co2ePerItem: 8.5,
+    waterPerItem: 3800,
     bwcCoinsPerItem: 95,
-    description: "Dresses, sarees & ethnic wear"
-  }
+    tag: "Sarees, Kurtas & Dresses",
+  },
+];
+
+const PRESETS = [
+  {
+    name: "Small Bag",
+    items: { tshirt: 3, jeans: 1, jackets: 0, ethnic: 1 },
+  },
+  {
+    name: "Medium Box",
+    items: { tshirt: 6, jeans: 3, jackets: 1, ethnic: 2 },
+  },
+  {
+    name: "Full Wardrobe",
+    items: { tshirt: 12, jeans: 5, jackets: 3, ethnic: 4 },
+  },
 ];
 
 export default function CarbonCalculatorPage() {
   const { theme } = useTheme();
 
-  // Quantities per garment ID
+  // Quantities per garment ID (default to ~9 items)
   const [quantities, setQuantities] = useState({
     tshirt: 4,
     jeans: 2,
     jackets: 1,
-    ethnic: 2
+    ethnic: 2,
   });
 
-  // Compute Totals
-  const computeImpact = () => {
+  const impact = useMemo(() => {
     let totalWeightKg = 0;
     let totalVirginCO2eKg = 0;
     let totalWaterLiters = 0;
@@ -123,25 +135,24 @@ export default function CarbonCalculatorPage() {
       const count = quantities[item.id] || 0;
       if (count > 0) {
         totalGarmentCount += count;
-        const weightKg = count * item.avgWeightKg;
-        totalWeightKg += weightKg;
+        totalWeightKg += count * item.avgWeightKg;
         totalVirginCO2eKg += count * item.co2ePerItem;
         totalWaterLiters += count * item.waterPerItem;
         totalBwcCoins += count * item.bwcCoinsPerItem;
       }
     });
 
-    const efficiencyFactor = 0.88; // 88% net avoided virgin footprint factor (accounting for 12% transport/sorting logistics)
+    // 88% net avoided virgin footprint factor (accounting for transport/sorting logistics)
+    const efficiencyFactor = 0.88;
     const avoidedCO2eKg = totalVirginCO2eKg * efficiencyFactor;
     const avoidedWaterLiters = totalWaterLiters * efficiencyFactor;
     const divertedLandfillKg = totalWeightKg;
-    const avoidedEutrophicationGrams = avoidedCO2eKg * 14.2; // PO4-eq metric
 
-    // Real world equivalencies (US EPA & EU Environment Agency Benchmarks)
-    const kmCarDriven = Math.round(avoidedCO2eKg * 8.0); // 1 kg CO2e = ~8.0 km driven by avg passenger car (125g CO2/km)
-    const treeYears = (avoidedCO2eKg / 22.0).toFixed(1); // 1 mature tree absorbs ~22 kg CO2e annually
-    const showerDays = Math.round(avoidedWaterLiters / 65.0); // 65 L water per standard shower
-    const smartphoneCharges = Math.round(avoidedCO2eKg / 0.0082); // 1 smartphone charge = ~8.2g CO2e
+    // Equivalencies (US EPA & EEA benchmarks)
+    const kmCarDriven = Math.round(avoidedCO2eKg * 8.0);
+    const treeYears = (avoidedCO2eKg / 22.0).toFixed(1);
+    const showerDays = Math.round(avoidedWaterLiters / 65.0);
+    const smartphoneCharges = Math.round(avoidedCO2eKg / 0.0082);
 
     return {
       totalGarmentCount,
@@ -150,389 +161,632 @@ export default function CarbonCalculatorPage() {
       avoidedCO2eMetricTons: (avoidedCO2eKg / 1000.0).toFixed(3),
       avoidedWaterLiters: Math.round(avoidedWaterLiters).toLocaleString(),
       divertedLandfillKg: divertedLandfillKg.toFixed(1),
-      avoidedEutrophicationGrams: avoidedEutrophicationGrams.toFixed(0),
       totalBwcCoins: Math.round(totalBwcCoins),
-      kmCarDriven,
+      kmCarDriven: kmCarDriven.toLocaleString(),
       treeYears,
-      showerDays,
-      smartphoneCharges
+      showerDays: showerDays.toLocaleString(),
+      smartphoneCharges: smartphoneCharges.toLocaleString(),
     };
-  };
-
-  const impact = computeImpact();
+  }, [quantities]);
 
   const handleQuantityChange = (id, delta) => {
     setQuantities((prev) => ({
       ...prev,
-      [id]: Math.max(0, (prev[id] || 0) + delta)
+      [id]: Math.max(0, (prev[id] || 0) + delta),
     }));
   };
 
-  const handleSliderChange = (id, val) => {
-    setQuantities((prev) => ({
-      ...prev,
-      [id]: Math.max(0, parseInt(val) || 0)
-    }));
+  const handleApplyPreset = (presetItems) => {
+    setQuantities(presetItems);
+  };
+
+  const handleReset = () => {
+    setQuantities({ tshirt: 0, jeans: 0, jackets: 0, ethnic: 0 });
   };
 
   return (
     <div
       className={`min-h-screen font-sans selection:bg-[#14A3C7] selection:text-white transition-colors duration-300 ${
-        theme === "white" ? "bg-[#F8FAFC] text-slate-900" : "bg-[#071319] text-white"
+        theme === "white" ? "bg-[#f8fafc] text-slate-900" : "bg-[#061118] text-white"
       }`}
     >
       <Navbar />
 
-      <main className="pt-28 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-16">
-        {/* HERO SECTION & METHODOLOGY BANNER */}
-        <section className="text-center space-y-6 max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-black uppercase tracking-widest bg-[#14A3C7]/10 text-[#14A3C7] border-[#14A3C7]/20 shadow-sm"
-          >
-            <ShieldCheck size={16} />
-            <span>Eco Savings Calculator</span>
-          </motion.div>
+      <main className="pt-28 sm:pt-32 pb-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto space-y-12">
+        {/* ── HEADER ───────────────────────────────────────────────── */}
+        <section className="text-center max-w-2xl mx-auto space-y-3">
+          <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-[#14A3C7]">
+            <Sparkles size={12} className="text-[#14A3C7]" />
+            <span>MEASURE YOUR ENVIRONMENTAL IMPACT</span>
+          </div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-3xl sm:text-5xl lg:text-6xl font-serif font-black tracking-tight leading-tight"
+          <h1
+            className={`text-3xl sm:text-4xl lg:text-5xl font-sans font-black tracking-tight leading-tight uppercase ${
+              theme === "white" ? "text-slate-950" : "text-white"
+            }`}
           >
-            Clothing Environmental <br />
-            <span className="bg-gradient-to-r from-[#14A3C7] via-teal-400 to-emerald-400 bg-clip-text text-transparent">
-              Impact Calculator
+            Clothing Resource{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#14A3C7] to-teal-500">
+              Calculator
             </span>
-          </motion.h1>
+          </h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className={`text-base sm:text-lg leading-relaxed max-w-2xl mx-auto ${
+          <p
+            className={`text-sm sm:text-base leading-relaxed ${
               theme === "white" ? "text-slate-600" : "text-slate-300"
             }`}
           >
-            See how much carbon emissions, clean water, and trash waste you save by recycling and giving your unused clothes a second life with BWorth.
-          </motion.p>
-
-          {/* LCA Standards Badges Row */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex flex-wrap justify-center gap-3 pt-2 text-[11px] font-bold"
-          >
-            {[
-              "Carbon Saved",
-              "Clean Water Saved",
-              "Zero Dump Waste",
-              "Instant Eco Savings"
-            ].map((badge, idx) => (
-              <span
-                key={idx}
-                className={`px-3 py-1 rounded-md border ${
-                  theme === "white"
-                    ? "bg-white border-slate-200 text-slate-600"
-                    : "bg-white/5 border-white/10 text-slate-300"
-                }`}
-              >
-                ✓ {badge}
-              </span>
-            ))}
-          </motion.div>
+            Calculate the exact emissions, water, and landfill waste averted when you divert pre-loved clothes into certified circular recycling with BWorth.
+          </p>
         </section>
 
-        {/* MAIN CALCULATOR INTERACTIVE SECTION */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-
-          {/* LEFT COLUMN: Garment Input & Recovery Pathway (7 Cols) */}
-          <div className="lg:col-span-7 space-y-8">
-            
-            {/* Step 1: Select Garment Quantities */}
+        {/* ── CALCULATOR BODY: 2 COLUMNS ──────────────────────────── */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+          {/* ── LEFT: GARMENT SELECTOR (7 Cols) ───────────────────── */}
+          <div className="lg:col-span-7 space-y-4">
             <div
-              className={`p-6 sm:p-8 rounded-3xl border shadow-xl transition-all ${
+              className={`p-5 sm:p-7 rounded-3xl border transition-all ${
                 theme === "white"
-                  ? "bg-white border-slate-200 shadow-slate-200/50"
-                  : "bg-[#0b1d26] border-white/10 shadow-black/40"
+                  ? "bg-white border-slate-200/90 shadow-sm"
+                  : "bg-[#0a1824]/90 border-white/10 shadow-xl"
               }`}
             >
-              <div className="flex items-center justify-between mb-6">
+              {/* Presets and Header Controls */}
+              <div className="flex flex-wrap items-center justify-between gap-3 pb-5 border-b border-slate-200/70 dark:border-white/10">
                 <div>
-                  <div className="flex items-center gap-2 text-[#14A3C7] text-xs font-black uppercase tracking-widest">
-                    <span>YOUR CLOTHES</span>
-                  </div>
-                  <h2 className="text-xl sm:text-2xl font-serif font-black mt-1">
-                    Choose Your Clothes
+                  <h2
+                    className={`text-sm font-black uppercase tracking-wider ${
+                      theme === "white" ? "text-slate-900" : "text-white"
+                    }`}
+                  >
+                    Select Wardrobe Items
                   </h2>
+                  <p className="text-xs text-slate-400">
+                    Adjust item quantities to simulate savings
+                  </p>
                 </div>
+
                 <button
-                  onClick={() =>
-                    setQuantities({
-                      tshirt: 0,
-                      jeans: 0,
-                      jackets: 0,
-                      ethnic: 0
-                    })
-                  }
-                  className="text-xs font-bold text-slate-400 hover:text-[#14A3C7] flex items-center gap-1 transition-colors"
+                  onClick={handleReset}
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-400 hover:text-[#14A3C7] transition-colors"
                 >
-                  <RefreshCw size={12} /> Reset
+                  <RotateCcw size={12} />
+                  <span>Reset</span>
                 </button>
               </div>
 
-              <div className="space-y-6">
+              {/* Quick Presets Bar */}
+              <div className="pt-3.5 pb-2 flex flex-wrap items-center gap-2">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mr-1">
+                  Presets:
+                </span>
+                {PRESETS.map((preset) => (
+                  <button
+                    key={preset.name}
+                    onClick={() => handleApplyPreset(preset.items)}
+                    className={`px-3 py-1 rounded-full text-xs font-semibold border transition-all cursor-pointer ${
+                      theme === "white"
+                        ? "bg-slate-100 hover:bg-slate-200/80 border-slate-200 text-slate-700"
+                        : "bg-white/5 hover:bg-white/10 border-white/10 text-slate-300"
+                    }`}
+                  >
+                    {preset.name}
+                  </button>
+                ))}
+              </div>
+
+              {/* Garment Cards List */}
+              <div className="space-y-3 pt-3">
                 {GARMENT_TYPES.map((item) => {
                   const count = quantities[item.id] || 0;
+                  const itemWeight = (count * item.avgWeightKg).toFixed(1);
+
                   return (
                     <div
                       key={item.id}
-                      className={`p-4 sm:p-5 rounded-2xl border transition-all ${
+                      className={`p-3.5 sm:p-4 rounded-2xl border transition-all duration-200 flex items-center justify-between gap-3 ${
                         count > 0
                           ? theme === "white"
-                            ? "bg-sky-50/50 border-[#14A3C7]/40"
-                            : "bg-[#14A3C7]/10 border-[#14A3C7]/40"
+                            ? "bg-cyan-50/40 border-[#14A3C7]/40 shadow-xs"
+                            : "bg-[#14A3C7]/10 border-[#14A3C7]/40 shadow-xs"
                           : theme === "white"
-                          ? "bg-slate-50/70 border-slate-200/80 hover:border-slate-300"
-                          : "bg-white/5 border-white/5 hover:border-white/15"
+                          ? "bg-slate-50/60 border-slate-200/80 hover:border-slate-300"
+                          : "bg-white/[0.03] border-white/10 hover:border-white/20"
                       }`}
                     >
-                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                        <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-xl bg-[#14A3C7]/15 text-[#14A3C7] flex items-center justify-center shrink-0 shadow-sm border border-[#14A3C7]/20">
-                            <item.icon size={20} />
-                          </div>
-                          <div>
-                            <h3 className="font-bold text-base flex items-center gap-2">
-                              {item.name}
-                            </h3>
-                            <p
-                              className={`text-xs ${
-                                theme === "white" ? "text-slate-500" : "text-slate-400"
-                              }`}
-                            >
-                              {item.description} • ~{item.avgWeightKg} kg each
-                            </p>
-                          </div>
+                      {/* Left: Icon & Details */}
+                      <div className="flex items-center gap-3 min-w-0">
+                        <div
+                          className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border ${
+                            count > 0
+                              ? "bg-[#14A3C7] text-white border-[#14A3C7]"
+                              : theme === "white"
+                              ? "bg-white border-slate-200 text-slate-700"
+                              : "bg-white/5 border-white/10 text-slate-300"
+                          }`}
+                        >
+                          <item.icon size={19} />
                         </div>
 
-                        {/* Increment / Decrement Counter Controls */}
-                        <div className="flex items-center justify-between sm:justify-end gap-3">
-                          <div className="flex items-center gap-2 bg-black/5 dark:bg-white/10 p-1 rounded-full border border-black/10 dark:border-white/10">
-                            <button
-                              onClick={() => handleQuantityChange(item.id, -1)}
-                              className="w-8 h-8 rounded-full bg-white dark:bg-white/20 flex items-center justify-center font-bold text-sm shadow-sm hover:scale-105 active:scale-95 transition-transform"
+                        <div className="min-w-0">
+                          <div className="flex items-center gap-2">
+                            <h3
+                              className={`text-xs sm:text-sm font-bold uppercase tracking-tight truncate ${
+                                theme === "white" ? "text-slate-900" : "text-white"
+                              }`}
                             >
-                              -
-                            </button>
-                            <span className="w-8 text-center font-black text-sm">
-                              {count}
-                            </span>
-                            <button
-                              onClick={() => handleQuantityChange(item.id, 1)}
-                              className="w-8 h-8 rounded-full bg-[#14A3C7] text-white flex items-center justify-center font-bold text-sm shadow-sm hover:scale-105 active:scale-95 transition-transform"
-                            >
-                              +
-                            </button>
+                              {item.name}
+                            </h3>
                           </div>
+                          <p className="text-[11px] text-slate-400 leading-tight">
+                            {item.tag} • ~{item.avgWeightKg} kg/pc
+                          </p>
                         </div>
                       </div>
 
-                      {/* Interactive Slider Input */}
-                      <div className="mt-3 pt-3 border-t border-black/5 dark:border-white/5 flex items-center gap-4">
-                        <input
-                          type="range"
-                          min="0"
-                          max="50"
-                          value={count}
-                          onChange={(e) => handleSliderChange(item.id, e.target.value)}
-                          className="w-full accent-[#14A3C7] cursor-pointer h-1.5 bg-slate-200 dark:bg-white/20 rounded-lg"
-                        />
-                        <span className="text-[11px] font-bold text-[#14A3C7] shrink-0">
-                          {(count * item.avgWeightKg).toFixed(1)} kg total weight
-                        </span>
+                      {/* Right: Stepper & Weight */}
+                      <div className="flex items-center gap-3 shrink-0">
+                        {count > 0 && (
+                          <span className="hidden sm:inline-block text-[11px] font-mono font-bold text-[#14A3C7]">
+                            {itemWeight} kg
+                          </span>
+                        )}
+
+                        <div className="flex items-center gap-1.5 p-1 rounded-full border border-slate-200 dark:border-white/15 bg-white dark:bg-white/5">
+                          <button
+                            onClick={() => handleQuantityChange(item.id, -1)}
+                            disabled={count <= 0}
+                            className={`w-7 h-7 rounded-full flex items-center justify-center font-bold text-xs transition-all ${
+                              count <= 0
+                                ? "opacity-30 cursor-not-allowed"
+                                : "hover:bg-slate-100 dark:hover:bg-white/20 active:scale-95 cursor-pointer"
+                            }`}
+                          >
+                            –
+                          </button>
+                          <span className="w-6 text-center font-mono font-black text-xs">
+                            {count}
+                          </span>
+                          <button
+                            onClick={() => handleQuantityChange(item.id, 1)}
+                            className="w-7 h-7 rounded-full bg-[#14A3C7] hover:bg-[#0fa0c3] text-white flex items-center justify-center font-bold text-xs active:scale-95 transition-all cursor-pointer"
+                          >
+                            +
+                          </button>
+                        </div>
                       </div>
                     </div>
                   );
                 })}
               </div>
+
+              {/* Methodology Citation Footnote */}
+              <div className="pt-5 mt-4 border-t border-slate-200/70 dark:border-white/10 flex items-center gap-2 text-[11px] text-slate-400">
+                <Info size={13} className="shrink-0 text-[#14A3C7]" />
+                <span>
+                  Metrics standardized via ISO 14040/44 textile lifecycle assessment benchmarks.
+                </span>
+              </div>
             </div>
           </div>
 
-          {/* RIGHT COLUMN: Real-Time Dynamic Impact Results Card (5 Cols) */}
-          <div className="lg:col-span-5 space-y-8 sticky top-28">
+          {/* ── RIGHT: DYNAMIC IMPACT DASHBOARD (5 Cols) ─────────── */}
+          <div className="lg:col-span-5 space-y-4 lg:sticky lg:top-24">
             <div
-              className={`p-6 sm:p-8 rounded-3xl border shadow-2xl relative overflow-hidden transition-all ${
+              className={`p-6 sm:p-7 rounded-3xl border transition-all relative overflow-hidden ${
                 theme === "white"
-                  ? "bg-slate-900 text-white border-slate-800 shadow-slate-900/30"
-                  : "bg-[#0c2430] text-white border-white/20 shadow-black/70"
+                  ? "bg-white text-slate-900 border-slate-200/90 shadow-[0_20px_50px_rgba(0,0,0,0.06)]"
+                  : "bg-[#09161F] text-white border-white/15 shadow-2xl"
               }`}
             >
-              {/* Background Glow */}
-              <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#14A3C7]/20 rounded-full blur-3xl pointer-events-none" />
+              {/* Subtle Ambient Glow */}
+              <div className="absolute -top-20 -right-20 w-48 h-48 bg-[#14A3C7]/15 rounded-full blur-3xl pointer-events-none" />
 
-              <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
-                <div className="flex items-center gap-2">
-                  <Sparkles size={18} className="text-[#14A3C7]" />
-                  <span className="text-xs font-black uppercase tracking-widest text-[#14A3C7]">
-                    YOUR SAVINGS RESULT
-                  </span>
-                </div>
-                <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-white/10 border border-white/15">
+              {/* Card Header */}
+              <div
+                className={`flex items-center justify-between pb-4 border-b ${
+                  theme === "white" ? "border-slate-100" : "border-white/10"
+                }`}
+              >
+                <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#14A3C7]">
+                  TOTAL SAVINGS ESTIMATE
+                </span>
+                <span
+                  className={`text-[11px] font-mono font-semibold px-2.5 py-0.5 rounded-full border ${
+                    theme === "white"
+                      ? "bg-slate-100/80 text-slate-700 border-slate-200"
+                      : "bg-white/10 text-white border-white/15"
+                  }`}
+                >
                   {impact.totalGarmentCount} Items ({impact.totalWeightKg} kg)
                 </span>
               </div>
 
-              {/* PRIMARY KPI: Avoided CO2e */}
-              <div className="space-y-2 mb-8">
-                <p className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-                  <TrendingDown size={14} className="text-emerald-400" />
-                  Total Carbon Emissions Saved (CO₂)
-                </p>
-                <div className="flex items-baseline gap-3">
-                  <span className="text-4xl sm:text-5xl font-serif font-black tracking-tight text-emerald-400">
+              {/* Primary KPI: CO₂e Avoided */}
+              <div className="py-5 space-y-1">
+                <span
+                  className={`text-[10px] font-mono font-bold uppercase tracking-wider block ${
+                    theme === "white" ? "text-slate-500" : "text-slate-400"
+                  }`}
+                >
+                  Avoided Carbon Emissions (CO₂e)
+                </span>
+                <div className="flex items-baseline gap-2">
+                  <span
+                    className={`text-4xl sm:text-5xl font-sans font-black tracking-tight ${
+                      theme === "white" ? "text-emerald-600" : "text-emerald-400"
+                    }`}
+                  >
                     {impact.avoidedCO2eKg}
                   </span>
-                  <span className="text-lg font-bold text-slate-300">
-                    kg CO₂
+                  <span
+                    className={`text-lg font-bold ${
+                      theme === "white" ? "text-slate-600" : "text-slate-300"
+                    }`}
+                  >
+                    kg CO₂e
                   </span>
                 </div>
-                <p className="text-xs text-slate-400">
-                  Equal to <span className="text-white font-bold">{impact.avoidedCO2eMetricTons} Metric Tons</span> of carbon stopped from dirtying our air.
+                <p
+                  className={`text-[11px] ${
+                    theme === "white" ? "text-slate-500" : "text-slate-400"
+                  }`}
+                >
+                  Equal to{" "}
+                  <span
+                    className={`font-semibold ${
+                      theme === "white" ? "text-slate-900" : "text-white"
+                    }`}
+                  >
+                    {impact.avoidedCO2eMetricTons} metric tons
+                  </span>{" "}
+                  of emissions prevented.
                 </p>
               </div>
 
-              {/* SECONDARY METRICS GRID */}
-              <div className="grid grid-cols-2 gap-4 pt-4 border-t border-white/10 mb-8">
-                <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10">
-                  <div className="flex items-center gap-2 text-sky-400 text-xs font-bold mb-1">
-                    <Droplets size={16} /> Clean Water Saved
-                  </div>
-                  <p className="text-xl sm:text-2xl font-serif font-black text-white">
+              {/* 3 Secondary Metric Cards */}
+              <div
+                className={`grid grid-cols-3 gap-2.5 py-4 border-t border-b ${
+                  theme === "white" ? "border-slate-100" : "border-white/10"
+                }`}
+              >
+                <div
+                  className={`p-2.5 rounded-xl border text-center ${
+                    theme === "white"
+                      ? "bg-slate-50/80 border-slate-200/80"
+                      : "bg-white/5 border-white/10"
+                  }`}
+                >
+                  <Droplets size={14} className="text-[#14A3C7] mx-auto mb-1" />
+                  <p
+                    className={`text-sm sm:text-base font-black leading-tight ${
+                      theme === "white" ? "text-slate-900" : "text-white"
+                    }`}
+                  >
                     {impact.avoidedWaterLiters}
                   </p>
-                  <p className="text-[11px] text-slate-400">Liters of water saved</p>
-                </div>
-
-                <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10">
-                  <div className="flex items-center gap-2 text-amber-400 text-xs font-bold mb-1">
-                    <Trash2 size={16} /> Dump Waste Prevented
-                  </div>
-                  <p className="text-xl sm:text-2xl font-serif font-black text-white">
-                    {impact.divertedLandfillKg}
+                  <p className="text-[9px] uppercase font-bold text-slate-400 mt-0.5">
+                    Liters Water
                   </p>
-                  <p className="text-[11px] text-slate-400">kg of clothes kept out of trash</p>
                 </div>
-              </div>
 
-              {/* REAL WORLD EQUIVALENCY BENCHMARKS */}
-              <div className="space-y-3 mb-8">
-                <h4 className="text-xs font-black uppercase tracking-wider text-slate-400">
-                  What This Savings Means
-                </h4>
-                <div className="grid grid-cols-2 gap-3 text-xs">
-                  <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/5">
-                    <Car size={16} className="text-emerald-400 shrink-0" />
-                    <div>
-                      <p className="font-bold text-white">{impact.kmCarDriven} km</p>
-                      <p className="text-[10px] text-slate-400">Car driving saved</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/5">
-                    <Trees size={16} className="text-emerald-400 shrink-0" />
-                    <div>
-                      <p className="font-bold text-white">{impact.treeYears} Trees</p>
-                      <p className="text-[10px] text-slate-400">Trees needed for 1 year</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/5">
-                    <ShowerHead size={16} className="text-sky-400 shrink-0" />
-                    <div>
-                      <p className="font-bold text-white">{impact.showerDays} Days</p>
-                      <p className="text-[10px] text-slate-400">Home showers saved</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/5">
-                    <Smartphone size={16} className="text-purple-400 shrink-0" />
-                    <div>
-                      <p className="font-bold text-white">{impact.smartphoneCharges.toLocaleString()}</p>
-                      <p className="text-[10px] text-slate-400">Full phone charges</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* ACTION BUTTONS */}
-              <div className="space-y-3">
-                <Link
-                  href="/#how-it-works"
-                  className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-[#14A3C7] to-teal-500 text-white font-black text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-[#14A3C7]/30 hover:scale-[1.02] active:scale-[0.98] transition-all text-center"
+                <div
+                  className={`p-2.5 rounded-xl border text-center ${
+                    theme === "white"
+                      ? "bg-slate-50/80 border-slate-200/80"
+                      : "bg-white/5 border-white/10"
+                  }`}
                 >
-                  <span>Book Doorstep Pickup Now</span>
-                  <ArrowRight size={16} />
+                  <Trash2 size={14} className="text-amber-500 mx-auto mb-1" />
+                  <p
+                    className={`text-sm sm:text-base font-black leading-tight ${
+                      theme === "white" ? "text-slate-900" : "text-white"
+                    }`}
+                  >
+                    {impact.divertedLandfillKg} kg
+                  </p>
+                  <p className="text-[9px] uppercase font-bold text-slate-400 mt-0.5">
+                    Dump Prevented
+                  </p>
+                </div>
+
+                <div
+                  className={`p-2.5 rounded-xl border text-center ${
+                    theme === "white"
+                      ? "bg-slate-50/80 border-slate-200/80"
+                      : "bg-white/5 border-white/10"
+                  }`}
+                >
+                  <Coins size={14} className="text-emerald-500 mx-auto mb-1" />
+                  <p
+                    className={`text-sm sm:text-base font-black leading-tight ${
+                      theme === "white" ? "text-emerald-600" : "text-emerald-400"
+                    }`}
+                  >
+                    ₹{impact.totalBwcCoins}
+                  </p>
+                  <p className="text-[9px] uppercase font-bold text-slate-400 mt-0.5">
+                    Est. BWC Coins
+                  </p>
+                </div>
+              </div>
+
+              {/* Equivalency Context Grid */}
+              <div className="py-4 space-y-2.5">
+                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 block">
+                  Real-World Equivalents
+                </span>
+
+                <div className="grid grid-cols-2 gap-2 text-xs">
+                  <div
+                    className={`flex items-center gap-2 p-2 rounded-xl border ${
+                      theme === "white"
+                        ? "bg-slate-50/80 border-slate-100"
+                        : "bg-white/[0.04] border-transparent"
+                    }`}
+                  >
+                    <Car size={14} className="text-emerald-600 dark:text-emerald-400 shrink-0" />
+                    <div>
+                      <p
+                        className={`font-bold text-[11px] ${
+                          theme === "white" ? "text-slate-900" : "text-white"
+                        }`}
+                      >
+                        {impact.kmCarDriven} km
+                      </p>
+                      <p className="text-[9px] text-slate-400 leading-none">Driving offset</p>
+                    </div>
+                  </div>
+
+                  <div
+                    className={`flex items-center gap-2 p-2 rounded-xl border ${
+                      theme === "white"
+                        ? "bg-slate-50/80 border-slate-100"
+                        : "bg-white/[0.04] border-transparent"
+                    }`}
+                  >
+                    <Trees size={14} className="text-emerald-600 dark:text-emerald-400 shrink-0" />
+                    <div>
+                      <p
+                        className={`font-bold text-[11px] ${
+                          theme === "white" ? "text-slate-900" : "text-white"
+                        }`}
+                      >
+                        {impact.treeYears} Trees
+                      </p>
+                      <p className="text-[9px] text-slate-400 leading-none">Absorption / year</p>
+                    </div>
+                  </div>
+
+                  <div
+                    className={`flex items-center gap-2 p-2 rounded-xl border ${
+                      theme === "white"
+                        ? "bg-slate-50/80 border-slate-100"
+                        : "bg-white/[0.04] border-transparent"
+                    }`}
+                  >
+                    <ShowerHead size={14} className="text-[#14A3C7] dark:text-sky-400 shrink-0" />
+                    <div>
+                      <p
+                        className={`font-bold text-[11px] ${
+                          theme === "white" ? "text-slate-900" : "text-white"
+                        }`}
+                      >
+                        {impact.showerDays} Days
+                      </p>
+                      <p className="text-[9px] text-slate-400 leading-none">Daily showers</p>
+                    </div>
+                  </div>
+
+                  <div
+                    className={`flex items-center gap-2 p-2 rounded-xl border ${
+                      theme === "white"
+                        ? "bg-slate-50/80 border-slate-100"
+                        : "bg-white/[0.04] border-transparent"
+                    }`}
+                  >
+                    <Smartphone size={14} className="text-indigo-500 dark:text-purple-400 shrink-0" />
+                    <div>
+                      <p
+                        className={`font-bold text-[11px] ${
+                          theme === "white" ? "text-slate-900" : "text-white"
+                        }`}
+                      >
+                        {impact.smartphoneCharges}
+                      </p>
+                      <p className="text-[9px] text-slate-400 leading-none">Phone charges</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Conversion CTA */}
+              <div className="pt-2">
+                <Link
+                  href="https://play.google.com/store/apps/details?id=com.BworthGo"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-3.5 px-4 rounded-xl bg-[#14A3C7] hover:bg-[#0fa0c3] text-white font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg transition-all active:scale-95 text-center cursor-pointer"
+                >
+                  <span>Book Doorstep Pickup</span>
+                  <ArrowRight size={14} />
                 </Link>
               </div>
+            </div>
+          </div>
+        </div>
 
+        {/* ── LIFECYCLE STAGE BREAKDOWN (REDESIGNED 5-COLUMN PROCESS GRID) ── */}
+        <section
+          className={`p-6 sm:p-8 rounded-3xl border transition-all ${
+            theme === "white"
+              ? "bg-white border-slate-200/90 shadow-sm"
+              : "bg-[#0a1824]/90 border-white/10 shadow-xl"
+          }`}
+        >
+          {/* Section Header */}
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6">
+            <div className="space-y-1">
+              <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#14A3C7]">
+                CIRCULAR LIFECYCLE ANALYSIS
+              </span>
+              <h2
+                className={`text-xl sm:text-2xl font-sans font-black uppercase tracking-tight ${
+                  theme === "white" ? "text-slate-900" : "text-white"
+                }`}
+              >
+                Where Do Your Carbon Savings Come From?
+              </h2>
+              <p className="text-xs text-slate-500 dark:text-slate-400 max-w-xl">
+                Giving clothes a second life eliminates emissions across 5 major phases of virgin textile production.
+              </p>
+            </div>
+
+            <div className="flex items-center gap-2 self-start sm:self-auto px-3 py-1.5 rounded-full border border-slate-200/80 dark:border-white/10 text-xs font-semibold bg-slate-50 dark:bg-white/5">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-slate-600 dark:text-slate-300 text-[11px]">
+                100% Avoided Footprint
+              </span>
             </div>
           </div>
 
-        </div>
-
-        {/* LCA STAGE BREAKDOWN BAR CHART */}
-        <section
-          className={`p-8 rounded-3xl border shadow-xl transition-all ${
-            theme === "white"
-              ? "bg-white border-slate-200"
-              : "bg-[#0b1d26] border-white/10"
-          }`}
-        >
-          <div className="max-w-3xl mb-8">
-            <span className="text-[#14A3C7] text-xs font-black uppercase tracking-widest">
-              HOW IT HELPS
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-serif font-black mt-1">
-              How Recycling Clothes Saves Our Earth
-            </h2>
-            <p
-              className={`text-xs sm:text-sm mt-2 ${
-                theme === "white" ? "text-slate-600" : "text-slate-400"
-              }`}
-            >
-              When you recycle clothes instead of throwing them away, you save energy and raw materials needed to make brand new clothes.
-            </p>
+          {/* Unified 100% Cumulative Segmented Bar */}
+          <div className="mb-6 space-y-1.5">
+            <div className="h-3 w-full bg-slate-100 dark:bg-white/10 rounded-full overflow-hidden flex gap-1 p-0.5">
+              {[
+                { share: 38, color: "bg-emerald-500", name: "Farming" },
+                { share: 29, color: "bg-[#14A3C7]", name: "Dyeing" },
+                { share: 18, color: "bg-blue-500", name: "Spinning" },
+                { share: 9, color: "bg-indigo-500", name: "Assembly" },
+                { share: 6, color: "bg-teal-400", name: "Landfill" },
+              ].map((segment, idx) => (
+                <div
+                  key={idx}
+                  style={{ width: `${segment.share}%` }}
+                  title={`${segment.name}: ${segment.share}%`}
+                  className={`h-full ${segment.color} rounded-full transition-all duration-300 hover:opacity-85`}
+                />
+              ))}
+            </div>
+            <div className="flex justify-between text-[10px] font-mono text-slate-400 px-1">
+              <span>0% Avoided Extraction</span>
+              <span>100% Circular Savings</span>
+            </div>
           </div>
 
-          <div className="space-y-6">
+          {/* 5-Column Grid Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-3.5">
             {[
-              { stage: "1. Saving raw cotton & farming materials", share: 38, co2: (impact.avoidedCO2eKg * 0.38).toFixed(1), color: "bg-emerald-500" },
-              { stage: "2. Stopping toxic fabric dyeing & chemical washing", share: 29, co2: (impact.avoidedCO2eKg * 0.29).toFixed(1), color: "bg-[#14A3C7]" },
-              { stage: "3. Saving machine electricity from spinning thread", share: 18, co2: (impact.avoidedCO2eKg * 0.18).toFixed(1), color: "bg-cyan-500" },
-              { stage: "4. Cutting factory stitching & transport pollution", share: 9, co2: (impact.avoidedCO2eKg * 0.09).toFixed(1), color: "bg-blue-500" },
-              { stage: "5. Stopping trash dump pollution & dirty gases", share: 6, co2: (impact.avoidedCO2eKg * 0.06).toFixed(1), color: "bg-teal-400" }
-            ].map((item, idx) => (
-              <div key={idx} className="space-y-2">
-                <div className="flex justify-between text-xs font-bold">
-                  <span>{item.stage}</span>
-                  <span className="text-[#14A3C7]">
-                    {item.share}% ({item.co2} kg CO₂)
-                  </span>
+              {
+                num: "01",
+                title: "Raw Material & Farming",
+                share: 38,
+                desc: "Prevents water-heavy cotton cultivation and petrochemical synthesis.",
+                color: "text-emerald-500",
+                badgeBorder: "border-t-emerald-500",
+                icon: <Leaf size={15} className="text-emerald-500" />,
+                iconBox: "bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-500/30",
+              },
+              {
+                num: "02",
+                title: "Wet Dyeing & Processing",
+                share: 29,
+                desc: "Eliminates toxic chemical wastewater, heavy dyes, and boiler heat emissions.",
+                color: "text-[#14A3C7]",
+                badgeBorder: "border-t-[#14A3C7]",
+                icon: <Droplets size={15} className="text-[#14A3C7]" />,
+                iconBox: "bg-cyan-50 dark:bg-cyan-950/40 border-cyan-200 dark:border-cyan-500/30",
+              },
+              {
+                num: "03",
+                title: "Spinning & Grid Energy",
+                share: 18,
+                desc: "Cuts high-draw industrial electricity consumed during yarn spinning.",
+                color: "text-blue-500",
+                badgeBorder: "border-t-blue-500",
+                icon: <Zap size={15} className="text-blue-500" />,
+                iconBox: "bg-blue-50 dark:bg-blue-950/40 border-blue-200 dark:border-blue-500/30",
+              },
+              {
+                num: "04",
+                title: "Assembly & Logistics",
+                share: 9,
+                desc: "Reduces factory fabric cutting scraps and cross-border maritime shipping.",
+                color: "text-indigo-500",
+                badgeBorder: "border-t-indigo-500",
+                icon: <Truck size={15} className="text-indigo-500" />,
+                iconBox: "bg-indigo-50 dark:bg-indigo-950/40 border-indigo-200 dark:border-indigo-500/30",
+              },
+              {
+                num: "05",
+                title: "Landfill Methane",
+                share: 6,
+                desc: "Halts anaerobic textile decomposition and greenhouse landfill gases.",
+                color: "text-teal-500",
+                badgeBorder: "border-t-teal-400",
+                icon: <Recycle size={15} className="text-teal-500" />,
+                iconBox: "bg-teal-50 dark:bg-teal-950/40 border-teal-200 dark:border-teal-500/30",
+              },
+            ].map((stage, idx) => {
+              const stageCO2 = (impact.avoidedCO2eKg * (stage.share / 100)).toFixed(1);
+              return (
+                <div
+                  key={idx}
+                  className={`p-4 rounded-2xl border transition-all duration-300 flex flex-col justify-between border-t-[3px] ${stage.badgeBorder} ${
+                    theme === "white"
+                      ? "bg-slate-50/70 border-slate-200/80 hover:bg-white hover:shadow-md hover:-translate-y-0.5"
+                      : "bg-white/[0.03] border-white/10 hover:bg-white/8 hover:border-white/20 hover:-translate-y-0.5"
+                  }`}
+                >
+                  <div className="space-y-2.5">
+                    {/* Header: Icon & Step */}
+                    <div className="flex items-center justify-between">
+                      <div
+                        className={`w-7 h-7 rounded-lg flex items-center justify-center border ${stage.iconBox}`}
+                      >
+                        {stage.icon}
+                      </div>
+                      <span className="text-[10px] font-mono font-bold text-slate-400">
+                        {stage.num}
+                      </span>
+                    </div>
+
+                    {/* Stats */}
+                    <div>
+                      <div className="flex items-baseline gap-1">
+                        <span
+                          className={`text-xl sm:text-2xl font-black font-sans tracking-tight ${stage.color}`}
+                        >
+                          {stage.share}%
+                        </span>
+                        <span className="text-[10px] font-bold text-slate-400">
+                          share
+                        </span>
+                      </div>
+                      <p className="text-[11px] font-mono font-bold text-slate-700 dark:text-slate-300">
+                        ~{stageCO2} kg CO₂
+                      </p>
+                    </div>
+
+                    {/* Title & Desc */}
+                    <div className="space-y-1">
+                      <h4
+                        className={`text-xs font-bold uppercase tracking-tight leading-snug ${
+                          theme === "white" ? "text-slate-900" : "text-white"
+                        }`}
+                      >
+                        {stage.title}
+                      </h4>
+                      <p className="text-[11px] leading-relaxed text-slate-500 dark:text-slate-400">
+                        {stage.desc}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <div className="h-3 w-full bg-slate-100 dark:bg-white/10 rounded-full overflow-hidden">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    animate={{ width: `${item.share}%` }}
-                    transition={{ duration: 0.8, delay: idx * 0.1 }}
-                    className={`h-full ${item.color} rounded-full`}
-                  />
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </section>
-
       </main>
 
       <Footer />
