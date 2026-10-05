@@ -381,7 +381,7 @@ export default function Brands() {
                 className={`text-base sm:text-lg leading-relaxed font-normal ${isWhite ? "text-slate-700" : "text-slate-200"
                   }`}
               >
-                We help homegrown Indian fashion labels and apparel makers monetize surplus stock and eliminate unsold inventory risk.
+                We help Indian clothing brands sell their extra inventory quickly without any loss or waste.
               </p>
             </div>
 
@@ -411,7 +411,7 @@ export default function Brands() {
                   className={`text-sm sm:text-base mt-2 leading-relaxed font-medium ${isWhite ? "text-slate-700" : "text-slate-300"
                     }`}
                 >
-                  Supporting domestic apparel creators and ethical manufacturers nationwide.
+                  Supporting local clothing creators and ethical apparel makers nationwide.
                 </p>
               </div>
 
@@ -439,7 +439,7 @@ export default function Brands() {
                   className={`text-sm sm:text-base mt-2 leading-relaxed font-medium ${isWhite ? "text-slate-700" : "text-slate-300"
                     }`}
                 >
-                  Moving excess stock directly to active buyers and certified recyclers.
+                  Selling extra stock directly to real buyers so no clothes end up in landfills.
                 </p>
               </div>
 
@@ -467,7 +467,7 @@ export default function Brands() {
                   className={`text-sm sm:text-base mt-2 leading-relaxed font-medium ${isWhite ? "text-slate-700" : "text-slate-300"
                     }`}
                 >
-                  Selling your collection to 25,000+ conscious shoppers.
+                  Selling your fashion collection to active buyers across 100+ cities in India.
                 </p>
               </div>
             </div>
