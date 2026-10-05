@@ -48,11 +48,11 @@ const duplicatedLive = [...livePartners, ...livePartners, ...livePartners];
 // Brand Offerings
 const offerings = [
   {
-    number: "01",
-    title: "Zero Logistic Charges",
-    subtitle: "100% Paid by BWorth",
+    number: "",
+    title: "",
+    subtitle: "100% Taken Care of by BWorth",
     description:
-      "BWorth pays for all delivery and return costs. You pay zero shipping fees, zero delivery charges, and no operational burden.",
+      "BWorth takes care of all delivery and return costs. You incur zero shipping fees, zero delivery charges, and no operational burden.",
     points: [
       "Zero forward and return delivery fees",
       "Free doorstep pickups across India",
@@ -64,8 +64,8 @@ const offerings = [
     accent: "text-[#14A3C7]",
   },
   {
-    number: "02",
-    title: "Money Back Guarantee",
+    number: "",
+    title: "",
     subtitle: "Zero Risk on Your Stock",
     description:
       "We commit to real sales. If your products do not sell through our circular marketplace, BWorth provides a direct Money Back Guarantee.",
@@ -80,8 +80,8 @@ const offerings = [
     accent: "text-amber-500",
   },
   {
-    number: "03",
-    title: "Return Assurance Guarantee",
+    number: "",
+    title: "",
     subtitle: "Strict Quality Checks on Every Return",
     description:
       "We stop return fraud. Our in-house team checks every returned item by hand to ensure original tags, fresh condition, and zero damage.",
@@ -170,8 +170,8 @@ export default function Brands() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`inline-flex items-center gap-4 p-3.5 pr-8 rounded-full border shadow-xl transition-all duration-300 hover:scale-105 group ${isWhite
-                    ? "bg-white border-slate-300 text-slate-900 hover:border-[#14A3C7]"
-                    : "bg-[#081822] border-white/20 text-white hover:border-[#14A3C7]"
+                  ? "bg-white border-slate-300 text-slate-900 hover:border-[#14A3C7]"
+                  : "bg-[#081822] border-white/20 text-white hover:border-[#14A3C7]"
                   }`}
               >
                 <div className="w-12 h-12 rounded-full bg-[#14A3C7] text-white flex items-center justify-center shadow-md group-hover:bg-[#0d84a3] transition-colors">
@@ -194,8 +194,8 @@ export default function Brands() {
       {/* ── SECTION 2: BRAND MARQUEE SHOWCASE ── */}
       <section
         className={`py-10 relative overflow-hidden border-y ${isWhite
-            ? "bg-slate-100/70 border-slate-200/80"
-            : "bg-[#081720] border-white/10"
+          ? "bg-slate-100/70 border-slate-200/80"
+          : "bg-[#081720] border-white/10"
           }`}
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 mb-4">
@@ -237,8 +237,8 @@ export default function Brands() {
               <div
                 key={`live-${idx}`}
                 className={`w-40 sm:w-48 h-20 sm:h-22 px-4 py-2 rounded-2xl border flex items-center justify-center transition-all ${isWhite
-                    ? "bg-white border-slate-200/90 shadow-xs hover:border-[#14A3C7]"
-                    : "bg-[#0b1d28] border-white/10 hover:border-[#14A3C7]"
+                  ? "bg-white border-slate-200/90 shadow-xs hover:border-[#14A3C7]"
+                  : "bg-[#0b1d28] border-white/10 hover:border-[#14A3C7]"
                   }`}
               >
                 <Image
@@ -285,8 +285,8 @@ export default function Brands() {
               <div
                 key={idx}
                 className={`rounded-3xl border overflow-hidden flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 ${isWhite
-                    ? "bg-white border-slate-200/90 shadow-md hover:shadow-xl hover:border-[#14A3C7]/50"
-                    : "bg-[#091823] border-white/15 shadow-xl hover:border-cyan-400/40"
+                  ? "bg-white border-slate-200/90 shadow-md hover:shadow-xl hover:border-[#14A3C7]/50"
+                  : "bg-[#091823] border-white/15 shadow-xl hover:border-cyan-400/40"
                   }`}
               >
                 {/* Visual Image Banner with Clean Badge */}
@@ -308,7 +308,7 @@ export default function Brands() {
 
                   <div className="absolute bottom-4 left-5 right-5 text-white space-y-1">
                     <span className="text-xs sm:text-sm font-mono font-extrabold text-[#14A3C7] uppercase tracking-wider block">
-                      {item.number} / OFFERING
+                      {item.number}
                     </span>
                     <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-tight leading-tight drop-shadow-sm">
                       {item.title}
@@ -357,8 +357,8 @@ export default function Brands() {
       {/* ── SECTION 4: "MAKE IN INDIA" & CRAFTSMANSHIP SPOTLIGHT ── */}
       <section
         className={`py-16 sm:py-20 px-4 sm:px-6 lg:px-8 border-y ${isWhite
-            ? "bg-slate-100/60 border-slate-200/80"
-            : "bg-[#07151e] border-white/10"
+          ? "bg-slate-100/60 border-slate-200/80"
+          : "bg-[#07151e] border-white/10"
           }`}
       >
         <div className="max-w-6xl mx-auto">
@@ -389,14 +389,14 @@ export default function Brands() {
             <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div
                 className={`p-5 sm:p-6 rounded-2xl border ${isWhite
-                    ? "bg-white border-slate-200/90 shadow-xs"
-                    : "bg-white/5 border-white/10"
+                  ? "bg-white border-slate-200/90 shadow-xs"
+                  : "bg-white/5 border-white/10"
                   }`}
               >
                 <div
                   className={`w-11 h-11 rounded-xl flex items-center justify-center font-bold text-sm mb-3.5 ${isWhite
-                      ? "bg-amber-50 text-amber-600 border border-amber-200/60"
-                      : "bg-amber-950/40 text-amber-400 border border-amber-500/30"
+                    ? "bg-amber-50 text-amber-600 border border-amber-200/60"
+                    : "bg-amber-950/40 text-amber-400 border border-amber-500/30"
                     }`}
                 >
                   <Building2 size={20} />
@@ -417,14 +417,14 @@ export default function Brands() {
 
               <div
                 className={`p-5 sm:p-6 rounded-2xl border ${isWhite
-                    ? "bg-white border-slate-200/90 shadow-xs"
-                    : "bg-white/5 border-white/10"
+                  ? "bg-white border-slate-200/90 shadow-xs"
+                  : "bg-white/5 border-white/10"
                   }`}
               >
                 <div
                   className={`w-11 h-11 rounded-xl flex items-center justify-center font-bold text-sm mb-3.5 ${isWhite
-                      ? "bg-cyan-50 text-[#14A3C7] border border-cyan-200/60"
-                      : "bg-cyan-950/40 text-[#14A3C7] border border-cyan-500/30"
+                    ? "bg-cyan-50 text-[#14A3C7] border border-cyan-200/60"
+                    : "bg-cyan-950/40 text-[#14A3C7] border border-cyan-500/30"
                     }`}
                 >
                   <Zap size={20} />
@@ -445,14 +445,14 @@ export default function Brands() {
 
               <div
                 className={`p-5 sm:p-6 rounded-2xl border ${isWhite
-                    ? "bg-white border-slate-200/90 shadow-xs"
-                    : "bg-white/5 border-white/10"
+                  ? "bg-white border-slate-200/90 shadow-xs"
+                  : "bg-white/5 border-white/10"
                   }`}
               >
                 <div
                   className={`w-11 h-11 rounded-xl flex items-center justify-center font-bold text-sm mb-3.5 ${isWhite
-                      ? "bg-emerald-50 text-emerald-600 border border-emerald-200/60"
-                      : "bg-emerald-950/40 text-emerald-400 border border-emerald-500/30"
+                    ? "bg-emerald-50 text-emerald-600 border border-emerald-200/60"
+                    : "bg-emerald-950/40 text-emerald-400 border border-emerald-500/30"
                     }`}
                 >
                   <TrendingUp size={20} />
@@ -500,27 +500,27 @@ export default function Brands() {
             {
               step: "01",
               title: "Apply Online",
-              desc: "Complete the 2-minute brand onboarding form with your catalog and brand details.",
+              desc: "Fill out a quick 2-minute brand form with your catalog and contact details.",
               tag: "2 MINUTES",
             },
             {
               step: "02",
               title: "Catalog Sync",
-              desc: "Our partner team reviews your collection and sets up automated logistics mapping.",
+              desc: "Our partner team reviews your collection and connects your products to our delivery network.",
               tag: "24-48 HOURS",
             },
             {
               step: "03",
               title: "Sell & Scale",
-              desc: "Your label goes live to 25k+ buyers. BWorth handles all doorstep collection & delivery.",
+              desc: "Your brand goes live. BWorth takes care of all customer pickups, packing, and deliveries.",
               tag: "ZERO SHIPPING FEES",
             },
           ].map((s, idx) => (
             <div
               key={idx}
               className={`p-6 sm:p-8 rounded-3xl border transition-all ${isWhite
-                  ? "bg-white border-slate-200/90 shadow-sm hover:shadow-md"
-                  : "bg-white/5 border-white/10 hover:border-white/20"
+                ? "bg-white border-slate-200/90 shadow-sm hover:shadow-md"
+                : "bg-white/5 border-white/10 hover:border-white/20"
                 }`}
             >
               <div className="flex items-center justify-between mb-4">
@@ -529,8 +529,8 @@ export default function Brands() {
                 </span>
                 <span
                   className={`text-xs font-mono font-bold px-3 py-1 rounded-lg uppercase tracking-wide ${isWhite
-                      ? "bg-slate-100 text-slate-800"
-                      : "bg-white/10 text-slate-200"
+                    ? "bg-slate-100 text-slate-800"
+                    : "bg-white/10 text-slate-200"
                     }`}
                 >
                   {s.tag}
@@ -579,8 +579,8 @@ export default function Brands() {
                   key={idx}
                   onClick={() => setActiveFaq(isOpen ? -1 : idx)}
                   className={`p-5 sm:p-6 rounded-2xl border transition-all cursor-pointer ${isWhite
-                      ? "bg-white border-slate-200 hover:border-slate-300 shadow-xs"
-                      : "bg-[#091823] border-white/10 hover:border-white/20"
+                    ? "bg-white border-slate-200 hover:border-slate-300 shadow-xs"
+                    : "bg-[#091823] border-white/10 hover:border-white/20"
                     }`}
                 >
                   <div className="flex items-center justify-between gap-4">
@@ -608,8 +608,8 @@ export default function Brands() {
                       >
                         <p
                           className={`pt-3.5 text-sm sm:text-base leading-relaxed border-t mt-3.5 font-normal ${isWhite
-                              ? "text-slate-700 border-slate-100"
-                              : "text-slate-300 border-white/10"
+                            ? "text-slate-700 border-slate-100"
+                            : "text-slate-300 border-white/10"
                             }`}
                         >
                           {faq.a}
@@ -629,13 +629,13 @@ export default function Brands() {
         <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-r from-slate-950 via-[#0a2333] to-[#0d3448] text-white border border-white/20 shadow-2xl relative overflow-hidden text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="space-y-3 max-w-xl">
             <span className="text-xs sm:text-sm font-mono font-bold uppercase tracking-widest text-[#14A3C7]">
-              JOIN THE CIRCULAR NETWORK
+              GROW YOUR BRAND
             </span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-sans font-black uppercase tracking-tight text-white leading-tight">
-              Ready to Expand Your Reach With Zero Logistics Burden?
+              Ready to Expand Your Reach With Zero Delivery Costs?
             </h2>
             <p className="text-sm sm:text-base text-slate-300">
-              Apply today to get onboarded within 48 hours and unlock guaranteed sell-through.
+              Apply today to get onboarded within 48 hours and unlock guaranteed sales.
             </p>
           </div>
 
