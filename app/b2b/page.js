@@ -2,7 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowLeft, Building2, School, Globe, Users, ArrowRight, Sparkles, Handshake } from "lucide-react";
+import { ArrowLeft, Building2, School, Users, ArrowRight, Sparkles, Handshake } from "lucide-react";
 import Footer from "../components/Footer";
 import ContactSection from "../components/ContactSection";
 import { useTheme } from "../context/ThemeContext";
@@ -22,11 +22,6 @@ export default function B2BEngagement() {
       icon: <School size={26} />,
       title: t.b2b_page.recycling_title,
       desc: t.b2b_page.recycling_desc,
-    },
-    {
-      icon: <Globe size={26} />,
-      title: t.b2b_page.csr_title,
-      desc: t.b2b_page.csr_desc,
     },
     {
       icon: <Users size={26} />,
@@ -160,7 +155,7 @@ export default function B2BEngagement() {
               <p className={`text-sm font-normal leading-relaxed ${
                 isWhite ? "text-slate-600" : "text-slate-300"
               }`}>
-                Partner with BWorth to handle deadstock liquidation, corporate sustainability CSR drives, and institutional garments recycling.
+                Partner with BWorth to handle deadstock liquidation, corporate sustainability initiatives, and institutional garments recycling.
               </p>
 
               <Link

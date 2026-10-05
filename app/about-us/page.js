@@ -95,10 +95,10 @@ export default function AboutUs() {
             <div className="space-y-1 text-center md:text-left">
               <div className="flex items-center justify-center md:justify-start gap-1.5 text-[#14A3C7]">
                 <Award size={18} />
-                <span className="text-[10px] font-black uppercase tracking-widest">EXPERTISE</span>
+                <span className="text-[10px] font-black uppercase tracking-widest">FOUNDER EXP</span>
               </div>
               <p className="text-xl sm:text-2xl font-black font-sans tracking-tight">18+ Years</p>
-              <p className={`text-xs ${isWhite ? "text-slate-500" : "text-slate-400"}`}>Leadership Acumen</p>
+              <p className={`text-xs ${isWhite ? "text-slate-500" : "text-slate-400"}`}>Founder's Industry Track Record</p>
             </div>
           </motion.div>
         </div>
@@ -300,9 +300,12 @@ export default function AboutUs() {
               }`}
             >
               {/* Photo Frame Left */}
-              <div className="w-36 h-44 sm:w-44 sm:h-auto min-h-[180px] rounded-2xl overflow-hidden border-2 border-[#14A3C7]/40 shadow-xl shrink-0 bg-gradient-to-br from-[#0a2330] via-[#0c7f9c] to-[#14A3C7] flex flex-col items-center justify-center text-white relative">
-                <span className="font-serif font-black text-4xl sm:text-5xl tracking-tight">VL</span>
-                <span className="text-[10px] font-black uppercase tracking-widest opacity-80 mt-1">CO-FOUNDER</span>
+              <div className="w-36 h-44 sm:w-44 sm:h-auto min-h-[180px] rounded-2xl overflow-hidden border-2 border-[#14A3C7]/40 shadow-xl shrink-0 relative bg-slate-900">
+                <img
+                  src="/venkatesh.png"
+                  alt="Venkatesh Lakhani"
+                  className="w-full h-full object-cover object-top"
+                />
               </div>
 
               {/* Content Right */}

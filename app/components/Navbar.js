@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowRight, Sun, Moon, ChevronDown, Smartphone, Building2, Calculator, Leaf, BookOpen } from "lucide-react";
+import { Menu, X, ArrowRight, Sun, Moon, ChevronDown, Smartphone, Building2, Calculator, Leaf } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 import { translations as t } from "../utils/translations";
 
@@ -53,7 +53,6 @@ export default function Navbar() {
     },
     { name: "CARBON CALCULATOR", href: "/carbon-calculator" },
     { name: t.navbar.brands, href: "/brands" },
-    { name: t.navbar.blog || "BLOG", href: "/blog" },
     { name: t.navbar.about, href: "/about-us" },
   ];
 
@@ -482,23 +481,6 @@ export default function Navbar() {
                     </Link>
                   </motion.div>
 
-                  {/* Blog Link */}
-                  <motion.div variants={linkVariants} className="group">
-                    <Link
-                      href="/blog"
-                      onClick={() => setIsOpen(false)}
-                      className={`flex items-center justify-between py-3 border-b transition-all duration-300 ${theme === "white" ? "border-black/5" : "border-white/5"
-                        }`}
-                    >
-                      <div className="flex items-center gap-3">
-                        <BookOpen size={22} className="text-[#14A3C7]" />
-                        <span className="text-2xl sm:text-3xl font-serif font-black uppercase">
-                          {t.navbar.blog || "BLOG"}
-                        </span>
-                      </div>
-                      <ArrowRight size={24} />
-                    </Link>
-                  </motion.div>
 
                   {/* About Us Link */}
                   <motion.div variants={linkVariants} className="group">

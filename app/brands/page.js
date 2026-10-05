@@ -174,7 +174,11 @@ export default function Brands() {
                   <p className="text-base sm:text-lg font-black text-[#14A3C7] leading-none">
                     100% Free
                   </p>
-                  <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 mt-1 uppercase">
+                  <p
+                    className={`text-[10px] font-bold mt-1 uppercase ${
+                      isWhite ? "text-slate-700" : "text-slate-300"
+                    }`}
+                  >
                     Logistics Covered
                   </p>
                 </div>
@@ -189,7 +193,11 @@ export default function Brands() {
                   <p className="text-base sm:text-lg font-black text-amber-500 leading-none">
                     Money-Back
                   </p>
-                  <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 mt-1 uppercase">
+                  <p
+                    className={`text-[10px] font-bold mt-1 uppercase ${
+                      isWhite ? "text-slate-700" : "text-slate-300"
+                    }`}
+                  >
                     Growth Guarantee
                   </p>
                 </div>
@@ -204,7 +212,11 @@ export default function Brands() {
                   <p className="text-base sm:text-lg font-black text-emerald-500 leading-none">
                     25,000+
                   </p>
-                  <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 mt-1 uppercase">
+                  <p
+                    className={`text-[10px] font-bold mt-1 uppercase ${
+                      isWhite ? "text-slate-700" : "text-slate-300"
+                    }`}
+                  >
                     Conscious Buyers
                   </p>
                 </div>
@@ -248,14 +260,24 @@ export default function Brands() {
                 <div className="absolute -top-16 -right-16 w-40 h-40 bg-[#14A3C7]/20 rounded-full blur-2xl pointer-events-none" />
 
                 {/* Card Top: Status & Verified Chip */}
-                <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-white/10">
+                <div
+                  className={`flex items-center justify-between pb-4 border-b ${
+                    isWhite ? "border-slate-100" : "border-white/10"
+                  }`}
+                >
                   <div className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
                     <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#14A3C7]">
                       BWORTH BRAND PORTAL
                     </span>
                   </div>
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/30">
+                  <span
+                    className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${
+                      isWhite
+                        ? "bg-emerald-50 text-emerald-700 border-emerald-200"
+                        : "bg-emerald-950/40 text-emerald-400 border-emerald-500/30"
+                    }`}
+                  >
                     VERIFIED PARTNER
                   </span>
                 </div>
@@ -263,11 +285,19 @@ export default function Brands() {
                 {/* Simulated Partner Performance Dashboard */}
                 <div className="py-4 space-y-3">
                   <div className="space-y-1">
-                    <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">
+                    <span
+                      className={`text-[10px] font-mono uppercase tracking-wider ${
+                        isWhite ? "text-slate-500" : "text-slate-400"
+                      }`}
+                    >
                       Circular Sell-Through Uplift
                     </span>
                     <div className="flex items-baseline gap-2">
-                      <span className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white">
+                      <span
+                        className={`text-3xl sm:text-4xl font-black ${
+                          isWhite ? "text-slate-900" : "text-white"
+                        }`}
+                      >
                         +34.8%
                       </span>
                       <span className="text-xs font-bold text-emerald-500">
@@ -284,7 +314,11 @@ export default function Brands() {
                           : "bg-white/5 border-white/10"
                       }`}
                     >
-                      <p className="text-[9px] uppercase font-bold text-slate-400">
+                      <p
+                        className={`text-[9px] uppercase font-bold ${
+                          isWhite ? "text-slate-500" : "text-slate-400"
+                        }`}
+                      >
                         Logistics Expense
                       </p>
                       <p className="text-sm font-black text-emerald-500 mt-0.5">
@@ -299,7 +333,11 @@ export default function Brands() {
                           : "bg-white/5 border-white/10"
                       }`}
                     >
-                      <p className="text-[9px] uppercase font-bold text-slate-400">
+                      <p
+                        className={`text-[9px] uppercase font-bold ${
+                          isWhite ? "text-slate-500" : "text-slate-400"
+                        }`}
+                      >
                         Return Protection
                       </p>
                       <p className="text-sm font-black text-[#14A3C7] mt-0.5">
@@ -310,8 +348,16 @@ export default function Brands() {
                 </div>
 
                 {/* Partner Perks Checklist */}
-                <div className="pt-3 border-t border-slate-100 dark:border-white/10 space-y-2">
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 block">
+                <div
+                  className={`pt-3 border-t space-y-2 ${
+                    isWhite ? "border-slate-100" : "border-white/10"
+                  }`}
+                >
+                  <span
+                    className={`text-[10px] font-mono font-bold uppercase tracking-wider block ${
+                      isWhite ? "text-slate-500" : "text-slate-400"
+                    }`}
+                  >
                     Included In Partnership
                   </span>
 
@@ -323,8 +369,8 @@ export default function Brands() {
                     <div key={idx} className="flex items-center gap-2 text-xs">
                       <CheckCircle2 size={13} className="text-[#14A3C7] shrink-0" />
                       <span
-                        className={`text-[11px] font-medium leading-tight ${
-                          isWhite ? "text-slate-600" : "text-slate-300"
+                        className={`text-[11px] font-semibold leading-tight ${
+                          isWhite ? "text-slate-800" : "text-slate-200"
                         }`}
                       >
                         {perk}
@@ -339,7 +385,11 @@ export default function Brands() {
                     href="https://brand.bworth.co.in/onBoarding"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-black dark:bg-white dark:hover:bg-slate-200 text-white dark:text-slate-900 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all"
+                    className={`w-full py-2.5 px-4 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all ${
+                      isWhite
+                        ? "bg-slate-900 hover:bg-black text-white"
+                        : "bg-white hover:bg-slate-200 text-slate-900"
+                    }`}
                   >
                     <span>Launch Onboarding Portal</span>
                     <ExternalLink size={13} />
@@ -373,7 +423,11 @@ export default function Brands() {
                 Trusted By 25+ Leading Fashion Labels
               </h2>
             </div>
-            <div className="flex items-center gap-1.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+            <div
+              className={`flex items-center gap-1.5 text-xs font-semibold ${
+                isWhite ? "text-emerald-700" : "text-emerald-400"
+              }`}
+            >
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               <span>Live Certified Partners</span>
             </div>
@@ -430,7 +484,11 @@ export default function Brands() {
             What Does BWorth Offer Your Label?
           </h2>
 
-          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+          <p
+            className={`text-xs sm:text-sm font-medium ${
+              isWhite ? "text-slate-600" : "text-slate-300"
+            }`}
+          >
             A risk-free commercial partnership engineered to protect your brand equity and maximize margins.
           </p>
         </div>
@@ -480,17 +538,29 @@ export default function Brands() {
                     <p className={`text-xs font-bold uppercase tracking-wider ${item.accent}`}>
                       {item.subtitle}
                     </p>
-                    <p className="text-xs leading-relaxed text-slate-600 dark:text-slate-300">
+                    <p
+                      className={`text-xs leading-relaxed font-medium ${
+                        isWhite ? "text-slate-700" : "text-slate-200"
+                      }`}
+                    >
                       {item.description}
                     </p>
                   </div>
 
                   {/* Benefit Points */}
-                  <div className="pt-3 border-t border-slate-100 dark:border-white/10 space-y-1.5">
+                  <div
+                    className={`pt-3 border-t space-y-1.5 ${
+                      isWhite ? "border-slate-100" : "border-white/10"
+                    }`}
+                  >
                     {item.points.map((pt, pIdx) => (
                       <div key={pIdx} className="flex items-center gap-2 text-xs">
                         <CheckCircle2 size={13} className="text-emerald-500 shrink-0" />
-                        <span className="text-[11px] font-semibold text-slate-700 dark:text-slate-200">
+                        <span
+                          className={`text-[11px] font-semibold ${
+                            isWhite ? "text-slate-800" : "text-slate-200"
+                          }`}
+                        >
                           {pt}
                         </span>
                       </div>
@@ -525,11 +595,15 @@ export default function Brands() {
                   isWhite ? "text-slate-900" : "text-white"
                 }`}
               >
-                Championing Indian Craftsmanship
+                Championing Indian Brands
               </h2>
 
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                BWorth proudly supports conscious Indian apparel manufacturers, homegrown direct-to-consumer labels, and indigenous artisans by building a transparent circular ecosystem that eliminates dead inventory.
+              <p
+                className={`text-xs sm:text-sm leading-relaxed font-medium ${
+                  isWhite ? "text-slate-700" : "text-slate-200"
+                }`}
+              >
+                We help homegrown Indian fashion labels and apparel makers monetize surplus stock and eliminate unsold inventory risk.
               </p>
             </div>
 
@@ -542,14 +616,28 @@ export default function Brands() {
                     : "bg-white/5 border-white/10"
                 }`}
               >
-                <div className="w-8 h-8 rounded-lg bg-orange-50 dark:bg-orange-950/40 text-orange-600 flex items-center justify-center font-bold text-xs mb-2">
-                  🇮🇳
+                <div
+                  className={`w-8 h-8 rounded-lg flex items-center justify-center font-bold text-xs mb-2.5 ${
+                    isWhite
+                      ? "bg-amber-50 text-amber-600 border border-amber-200/60"
+                      : "bg-amber-950/40 text-amber-400 border border-amber-500/30"
+                  }`}
+                >
+                  <Building2 size={16} />
                 </div>
-                <h4 className="text-xs font-bold uppercase tracking-tight text-slate-900 dark:text-white">
-                  Local Excellence
+                <h4
+                  className={`text-xs font-black uppercase tracking-tight ${
+                    isWhite ? "text-slate-900" : "text-white"
+                  }`}
+                >
+                  Homegrown Labels
                 </h4>
-                <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-normal">
-                  Promoting indigenous talent and ethical apparel production nationwide.
+                <p
+                  className={`text-[11px] mt-1 leading-normal font-medium ${
+                    isWhite ? "text-slate-700" : "text-slate-300"
+                  }`}
+                >
+                  Supporting domestic apparel creators and ethical manufacturers nationwide.
                 </p>
               </div>
 
@@ -560,14 +648,28 @@ export default function Brands() {
                     : "bg-white/5 border-white/10"
                 }`}
               >
-                <div className="w-8 h-8 rounded-lg bg-cyan-50 dark:bg-cyan-950/40 text-[#14A3C7] flex items-center justify-center font-bold text-xs mb-2">
-                  ⚡
+                <div
+                  className={`w-8 h-8 rounded-lg flex items-center justify-center font-bold text-xs mb-2.5 ${
+                    isWhite
+                      ? "bg-cyan-50 text-[#14A3C7] border border-cyan-200/60"
+                      : "bg-cyan-950/40 text-[#14A3C7] border border-cyan-500/30"
+                  }`}
+                >
+                  <Zap size={16} />
                 </div>
-                <h4 className="text-xs font-bold uppercase tracking-tight text-slate-900 dark:text-white">
-                  Zero Waste Stream
+                <h4
+                  className={`text-xs font-black uppercase tracking-tight ${
+                    isWhite ? "text-slate-900" : "text-white"
+                  }`}
+                >
+                  Zero Waste
                 </h4>
-                <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-normal">
-                  Diverting overstocked pieces directly to high-intent shoppers or verified recycling.
+                <p
+                  className={`text-[11px] mt-1 leading-normal font-medium ${
+                    isWhite ? "text-slate-700" : "text-slate-300"
+                  }`}
+                >
+                  Moving excess stock directly to active buyers and certified recyclers.
                 </p>
               </div>
 
@@ -578,14 +680,28 @@ export default function Brands() {
                     : "bg-white/5 border-white/10"
                 }`}
               >
-                <div className="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 flex items-center justify-center font-bold text-xs mb-2">
-                  📈
+                <div
+                  className={`w-8 h-8 rounded-lg flex items-center justify-center font-bold text-xs mb-2.5 ${
+                    isWhite
+                      ? "bg-emerald-50 text-emerald-600 border border-emerald-200/60"
+                      : "bg-emerald-950/40 text-emerald-400 border border-emerald-500/30"
+                  }`}
+                >
+                  <TrendingUp size={16} />
                 </div>
-                <h4 className="text-xs font-bold uppercase tracking-tight text-slate-900 dark:text-white">
+                <h4
+                  className={`text-xs font-black uppercase tracking-tight ${
+                    isWhite ? "text-slate-900" : "text-white"
+                  }`}
+                >
                   Pan-India Reach
                 </h4>
-                <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-normal">
-                  Connecting your catalog to conscious consumers across Tier 1, 2, and 3 cities.
+                <p
+                  className={`text-[11px] mt-1 leading-normal font-medium ${
+                    isWhite ? "text-slate-700" : "text-slate-300"
+                  }`}
+                >
+                  Selling your collection to 25,000+ conscious shoppers across 100+ cities.
                 </p>
               </div>
             </div>
@@ -606,7 +722,11 @@ export default function Brands() {
           >
             Launch in 3 Simple Steps
           </h2>
-          <p className="text-xs text-slate-500 dark:text-slate-400">
+          <p
+            className={`text-xs font-medium ${
+              isWhite ? "text-slate-600" : "text-slate-300"
+            }`}
+          >
             Frictionless integration designed for busy fashion founders and sales teams.
           </p>
         </div>
@@ -644,14 +764,28 @@ export default function Brands() {
                 <span className="text-xl font-black text-[#14A3C7] font-mono">
                   {s.step}
                 </span>
-                <span className="text-[9px] font-mono font-bold px-2 py-0.5 rounded-md bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300">
+                <span
+                  className={`text-[9px] font-mono font-bold px-2 py-0.5 rounded-md ${
+                    isWhite
+                      ? "bg-slate-100 text-slate-700"
+                      : "bg-white/10 text-slate-300"
+                  }`}
+                >
                   {s.tag}
                 </span>
               </div>
-              <h3 className="text-sm font-bold uppercase tracking-tight text-slate-900 dark:text-white mb-1">
+              <h3
+                className={`text-sm font-black uppercase tracking-tight mb-1 ${
+                  isWhite ? "text-slate-900" : "text-white"
+                }`}
+              >
                 {s.title}
               </h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              <p
+                className={`text-xs leading-relaxed font-medium ${
+                  isWhite ? "text-slate-700" : "text-slate-300"
+                }`}
+              >
                 {s.desc}
               </p>
             </div>
@@ -688,12 +822,16 @@ export default function Brands() {
                   onClick={() => setActiveFaq(isOpen ? -1 : idx)}
                   className={`p-4 rounded-2xl border transition-all cursor-pointer ${
                     isWhite
-                      ? "bg-white border-slate-200 hover:border-slate-300"
+                      ? "bg-white border-slate-200 hover:border-slate-300 shadow-xs"
                       : "bg-[#091823] border-white/10 hover:border-white/20"
                   }`}
                 >
                   <div className="flex items-center justify-between gap-3">
-                    <h3 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">
+                    <h3
+                      className={`text-xs sm:text-sm font-bold ${
+                        isWhite ? "text-slate-900" : "text-white"
+                      }`}
+                    >
                       {faq.q}
                     </h3>
                     <ChevronDown
@@ -713,7 +851,13 @@ export default function Brands() {
                         transition={{ duration: 0.2 }}
                         className="overflow-hidden"
                       >
-                        <p className="pt-2 text-xs text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-white/10 mt-2">
+                        <p
+                          className={`pt-2 text-xs leading-relaxed border-t mt-2 font-medium ${
+                            isWhite
+                              ? "text-slate-700 border-slate-100"
+                              : "text-slate-300 border-white/10"
+                          }`}
+                        >
                           {faq.a}
                         </p>
                       </motion.div>

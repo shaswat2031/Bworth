@@ -10,13 +10,9 @@ import {
   Leaf,
   Droplets,
   Trash2,
+  Trees,
   ArrowRight,
   RotateCcw,
-  Car,
-  Trees,
-  ShowerHead,
-  Smartphone,
-  Coins,
   Sparkles,
   Info,
   Zap,
@@ -123,6 +119,7 @@ export default function CarbonCalculatorPage() {
     jackets: 1,
     ethnic: 2,
   });
+  const [hoveredStage, setHoveredStage] = useState(null);
 
   const impact = useMemo(() => {
     let totalWeightKg = 0;
@@ -172,12 +169,16 @@ export default function CarbonCalculatorPage() {
   const handleQuantityChange = (id, delta) => {
     setQuantities((prev) => ({
       ...prev,
-      [id]: Math.max(0, (prev[id] || 0) + delta),
+      [id]: Math.min(50, Math.max(0, (prev[id] || 0) + delta)),
     }));
   };
 
   const handleApplyPreset = (presetItems) => {
-    setQuantities(presetItems);
+    const capped = {};
+    Object.entries(presetItems).forEach(([key, val]) => {
+      capped[key] = Math.min(50, Math.max(0, val));
+    });
+    setQuantities(capped);
   };
 
   const handleReset = () => {
@@ -349,7 +350,12 @@ export default function CarbonCalculatorPage() {
                           </span>
                           <button
                             onClick={() => handleQuantityChange(item.id, 1)}
-                            className="w-7 h-7 rounded-full bg-[#14A3C7] hover:bg-[#0fa0c3] text-white flex items-center justify-center font-bold text-xs active:scale-95 transition-all cursor-pointer"
+                            disabled={count >= 50}
+                            className={`w-7 h-7 rounded-full flex items-center justify-center font-bold text-xs transition-all ${
+                              count >= 50
+                                ? "bg-slate-200 dark:bg-white/10 text-slate-400 cursor-not-allowed opacity-50"
+                                : "bg-[#14A3C7] hover:bg-[#0fa0c3] text-white active:scale-95 cursor-pointer"
+                            }`}
                           >
                             +
                           </button>
@@ -402,39 +408,50 @@ export default function CarbonCalculatorPage() {
                 </span>
               </div>
 
-              {/* Primary KPI: CO₂e Avoided */}
-              <div className="py-5 space-y-1">
-                <span
-                  className={`text-[10px] font-mono font-bold uppercase tracking-wider block ${
-                    theme === "white" ? "text-slate-500" : "text-slate-400"
-                  }`}
-                >
-                  Avoided Carbon Emissions (CO₂e)
-                </span>
-                <div className="flex items-baseline gap-2">
+              {/* Parameter 1: Avoided Carbon Emissions (CO₂e) - BIG SIZE */}
+              <div
+                className={`p-5 sm:p-6 rounded-2xl border transition-all ${
+                  theme === "white"
+                    ? "bg-gradient-to-br from-emerald-50/80 via-white to-emerald-50/30 border-emerald-200/90 shadow-sm"
+                    : "bg-emerald-950/20 border-emerald-500/25"
+                }`}
+              >
+                <div className="flex items-center justify-between mb-2">
                   <span
-                    className={`text-4xl sm:text-5xl font-sans font-black tracking-tight ${
-                      theme === "white" ? "text-emerald-600" : "text-emerald-400"
+                    className={`text-xs sm:text-sm font-mono font-black uppercase tracking-wider ${
+                      theme === "white" ? "text-emerald-800" : "text-emerald-300"
+                    }`}
+                  >
+                    Avoided Carbon Emissions (CO₂e)
+                  </span>
+                  <div className="w-8 h-8 rounded-xl bg-emerald-500/10 flex items-center justify-center">
+                    <Leaf size={18} className="text-emerald-600 dark:text-emerald-400" />
+                  </div>
+                </div>
+                <div className="flex flex-wrap items-baseline gap-2 my-1">
+                  <span
+                    className={`text-4xl sm:text-5xl lg:text-6xl font-sans font-black tracking-tight leading-none ${
+                      theme === "white" ? "text-emerald-700" : "text-emerald-400"
                     }`}
                   >
                     {impact.avoidedCO2eKg}
                   </span>
                   <span
-                    className={`text-lg font-bold ${
-                      theme === "white" ? "text-slate-600" : "text-slate-300"
+                    className={`text-base sm:text-lg font-extrabold whitespace-nowrap ${
+                      theme === "white" ? "text-emerald-800" : "text-emerald-300"
                     }`}
                   >
                     kg CO₂e
                   </span>
                 </div>
                 <p
-                  className={`text-[11px] ${
-                    theme === "white" ? "text-slate-500" : "text-slate-400"
+                  className={`text-xs sm:text-[13px] font-medium mt-1.5 ${
+                    theme === "white" ? "text-slate-600" : "text-slate-300"
                   }`}
                 >
                   Equal to{" "}
                   <span
-                    className={`font-semibold ${
+                    className={`font-bold ${
                       theme === "white" ? "text-slate-900" : "text-white"
                     }`}
                   >
@@ -444,158 +461,110 @@ export default function CarbonCalculatorPage() {
                 </p>
               </div>
 
-              {/* 3 Secondary Metric Cards */}
-              <div
-                className={`grid grid-cols-3 gap-2.5 py-4 border-t border-b ${
-                  theme === "white" ? "border-slate-100" : "border-white/10"
-                }`}
-              >
+              {/* Parameters 2, 3, 4: Resilient 3-Column Metrics Grid */}
+              <div className="grid grid-cols-3 gap-2 sm:gap-2.5">
+                {/* Parameter 2: Liters Water */}
                 <div
-                  className={`p-2.5 rounded-xl border text-center ${
+                  className={`p-2.5 sm:p-3.5 rounded-2xl border text-center flex flex-col justify-between transition-all min-w-0 ${
                     theme === "white"
-                      ? "bg-slate-50/80 border-slate-200/80"
-                      : "bg-white/5 border-white/10"
+                      ? "bg-sky-50/60 border-sky-200/90 shadow-xs"
+                      : "bg-sky-950/20 border-sky-500/25"
                   }`}
                 >
-                  <Droplets size={14} className="text-[#14A3C7] mx-auto mb-1" />
-                  <p
-                    className={`text-sm sm:text-base font-black leading-tight ${
-                      theme === "white" ? "text-slate-900" : "text-white"
-                    }`}
-                  >
-                    {impact.avoidedWaterLiters}
-                  </p>
-                  <p className="text-[9px] uppercase font-bold text-slate-400 mt-0.5">
-                    Liters Water
-                  </p>
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-sky-500/10 flex items-center justify-center mx-auto mb-1.5 shrink-0">
+                    <Droplets size={16} className="text-[#14A3C7]" />
+                  </div>
+                  <div className="min-w-0">
+                    <p
+                      className={`text-base sm:text-xl lg:text-2xl font-black leading-tight tracking-tight whitespace-nowrap ${
+                        theme === "white" ? "text-slate-900" : "text-white"
+                      }`}
+                      title={`${impact.avoidedWaterLiters} Liters`}
+                    >
+                      {impact.avoidedWaterLiters}
+                    </p>
+                    <p
+                      className={`text-[10px] sm:text-[11px] uppercase font-extrabold mt-1 whitespace-nowrap truncate ${
+                        theme === "white" ? "text-sky-800" : "text-sky-300"
+                      }`}
+                    >
+                      Liters Water
+                    </p>
+                  </div>
                 </div>
 
+                {/* Parameter 3: Dump Prevented */}
                 <div
-                  className={`p-2.5 rounded-xl border text-center ${
+                  className={`p-2.5 sm:p-3.5 rounded-2xl border text-center flex flex-col justify-between transition-all min-w-0 ${
                     theme === "white"
-                      ? "bg-slate-50/80 border-slate-200/80"
-                      : "bg-white/5 border-white/10"
+                      ? "bg-amber-50/60 border-amber-200/90 shadow-xs"
+                      : "bg-amber-950/20 border-amber-500/25"
                   }`}
                 >
-                  <Trash2 size={14} className="text-amber-500 mx-auto mb-1" />
-                  <p
-                    className={`text-sm sm:text-base font-black leading-tight ${
-                      theme === "white" ? "text-slate-900" : "text-white"
-                    }`}
-                  >
-                    {impact.divertedLandfillKg} kg
-                  </p>
-                  <p className="text-[9px] uppercase font-bold text-slate-400 mt-0.5">
-                    Dump Prevented
-                  </p>
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-amber-500/10 flex items-center justify-center mx-auto mb-1.5 shrink-0">
+                    <Trash2 size={16} className="text-amber-500" />
+                  </div>
+                  <div className="min-w-0">
+                    <p
+                      className={`text-base sm:text-xl lg:text-2xl font-black leading-tight tracking-tight whitespace-nowrap flex items-baseline justify-center gap-0.5 ${
+                        theme === "white" ? "text-slate-900" : "text-white"
+                      }`}
+                    >
+                      <span>{impact.divertedLandfillKg}</span>
+                      <span
+                        className={`text-[11px] sm:text-xs font-extrabold ${
+                          theme === "white" ? "text-amber-800" : "text-amber-300"
+                        }`}
+                      >
+                        kg
+                      </span>
+                    </p>
+                    <p
+                      className={`text-[10px] sm:text-[11px] uppercase font-extrabold mt-1 whitespace-nowrap truncate ${
+                        theme === "white" ? "text-amber-800" : "text-amber-300"
+                      }`}
+                    >
+                      Dump Prevented
+                    </p>
+                  </div>
                 </div>
 
+                {/* Parameter 4: Trees Equivalent */}
                 <div
-                  className={`p-2.5 rounded-xl border text-center ${
+                  className={`p-2.5 sm:p-3.5 rounded-2xl border text-center flex flex-col justify-between transition-all min-w-0 ${
                     theme === "white"
-                      ? "bg-slate-50/80 border-slate-200/80"
-                      : "bg-white/5 border-white/10"
+                      ? "bg-emerald-50/60 border-emerald-200/90 shadow-xs"
+                      : "bg-emerald-950/20 border-emerald-500/25"
                   }`}
                 >
-                  <Coins size={14} className="text-emerald-500 mx-auto mb-1" />
-                  <p
-                    className={`text-sm sm:text-base font-black leading-tight ${
-                      theme === "white" ? "text-emerald-600" : "text-emerald-400"
-                    }`}
-                  >
-                    ₹{impact.totalBwcCoins}
-                  </p>
-                  <p className="text-[9px] uppercase font-bold text-slate-400 mt-0.5">
-                    Est. BWC Coins
-                  </p>
-                </div>
-              </div>
-
-              {/* Equivalency Context Grid */}
-              <div className="py-4 space-y-2.5">
-                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 block">
-                  Real-World Equivalents
-                </span>
-
-                <div className="grid grid-cols-2 gap-2 text-xs">
-                  <div
-                    className={`flex items-center gap-2 p-2 rounded-xl border ${
-                      theme === "white"
-                        ? "bg-slate-50/80 border-slate-100"
-                        : "bg-white/[0.04] border-transparent"
-                    }`}
-                  >
-                    <Car size={14} className="text-emerald-600 dark:text-emerald-400 shrink-0" />
-                    <div>
-                      <p
-                        className={`font-bold text-[11px] ${
-                          theme === "white" ? "text-slate-900" : "text-white"
-                        }`}
-                      >
-                        {impact.kmCarDriven} km
-                      </p>
-                      <p className="text-[9px] text-slate-400 leading-none">Driving offset</p>
-                    </div>
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-emerald-500/10 flex items-center justify-center mx-auto mb-1.5 shrink-0">
+                    <Trees
+                      size={16}
+                      className={theme === "white" ? "text-emerald-700" : "text-emerald-400"}
+                    />
                   </div>
-
-                  <div
-                    className={`flex items-center gap-2 p-2 rounded-xl border ${
-                      theme === "white"
-                        ? "bg-slate-50/80 border-slate-100"
-                        : "bg-white/[0.04] border-transparent"
-                    }`}
-                  >
-                    <Trees size={14} className="text-emerald-600 dark:text-emerald-400 shrink-0" />
-                    <div>
-                      <p
-                        className={`font-bold text-[11px] ${
-                          theme === "white" ? "text-slate-900" : "text-white"
+                  <div className="min-w-0">
+                    <p
+                      className={`text-base sm:text-xl lg:text-2xl font-black leading-tight tracking-tight whitespace-nowrap flex items-baseline justify-center gap-0.5 ${
+                        theme === "white" ? "text-emerald-700" : "text-emerald-400"
+                      }`}
+                    >
+                      <span>{impact.treeYears}</span>
+                      <span
+                        className={`text-[11px] sm:text-xs font-extrabold ${
+                          theme === "white" ? "text-emerald-800" : "text-emerald-300"
                         }`}
                       >
-                        {impact.treeYears} Trees
-                      </p>
-                      <p className="text-[9px] text-slate-400 leading-none">Absorption / year</p>
-                    </div>
-                  </div>
-
-                  <div
-                    className={`flex items-center gap-2 p-2 rounded-xl border ${
-                      theme === "white"
-                        ? "bg-slate-50/80 border-slate-100"
-                        : "bg-white/[0.04] border-transparent"
-                    }`}
-                  >
-                    <ShowerHead size={14} className="text-[#14A3C7] dark:text-sky-400 shrink-0" />
-                    <div>
-                      <p
-                        className={`font-bold text-[11px] ${
-                          theme === "white" ? "text-slate-900" : "text-white"
-                        }`}
-                      >
-                        {impact.showerDays} Days
-                      </p>
-                      <p className="text-[9px] text-slate-400 leading-none">Daily showers</p>
-                    </div>
-                  </div>
-
-                  <div
-                    className={`flex items-center gap-2 p-2 rounded-xl border ${
-                      theme === "white"
-                        ? "bg-slate-50/80 border-slate-100"
-                        : "bg-white/[0.04] border-transparent"
-                    }`}
-                  >
-                    <Smartphone size={14} className="text-indigo-500 dark:text-purple-400 shrink-0" />
-                    <div>
-                      <p
-                        className={`font-bold text-[11px] ${
-                          theme === "white" ? "text-slate-900" : "text-white"
-                        }`}
-                      >
-                        {impact.smartphoneCharges}
-                      </p>
-                      <p className="text-[9px] text-slate-400 leading-none">Phone charges</p>
-                    </div>
+                        Trees
+                      </span>
+                    </p>
+                    <p
+                      className={`text-[10px] sm:text-[11px] uppercase font-extrabold mt-1 whitespace-nowrap truncate ${
+                        theme === "white" ? "text-emerald-800" : "text-emerald-300"
+                      }`}
+                    >
+                      Absorption / yr
+                    </p>
                   </div>
                 </div>
               </div>
@@ -625,167 +594,279 @@ export default function CarbonCalculatorPage() {
           }`}
         >
           {/* Section Header */}
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6">
-            <div className="space-y-1">
-              <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#14A3C7]">
-                CIRCULAR LIFECYCLE ANALYSIS
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+            <div className="space-y-1.5 max-w-2xl">
+              <span className="text-[11px] font-mono font-bold uppercase tracking-widest text-[#14A3C7] flex items-center gap-1.5">
+                <Sparkles size={12} className="text-[#14A3C7]" />
+                HOW YOUR SAVINGS WORK
               </span>
               <h2
-                className={`text-xl sm:text-2xl font-sans font-black uppercase tracking-tight ${
+                className={`text-2xl sm:text-3xl font-sans font-black uppercase tracking-tight ${
                   theme === "white" ? "text-slate-900" : "text-white"
                 }`}
               >
                 Where Do Your Carbon Savings Come From?
               </h2>
-              <p className="text-xs text-slate-500 dark:text-slate-400 max-w-xl">
-                Giving clothes a second life eliminates emissions across 5 major phases of virgin textile production.
+              <p
+                className={`text-xs sm:text-sm font-semibold leading-relaxed ${
+                  theme === "white" ? "text-slate-700" : "text-slate-200"
+                }`}
+              >
+                Giving clothes a second life stops emissions across all 5 stages of making new clothes from scratch.
               </p>
             </div>
 
-            <div className="flex items-center gap-2 self-start sm:self-auto px-3 py-1.5 rounded-full border border-slate-200/80 dark:border-white/10 text-xs font-semibold bg-slate-50 dark:bg-white/5">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-slate-600 dark:text-slate-300 text-[11px]">
-                100% Avoided Footprint
+            {/* Live Certified Badge with Animated Ping */}
+            <div className="flex items-center gap-2.5 self-start sm:self-auto px-3.5 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-xs font-bold shrink-0 shadow-xs">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+              </span>
+              <span
+                className={`text-[11px] font-mono uppercase tracking-wider font-extrabold ${
+                  theme === "white" ? "text-emerald-800" : "text-emerald-300"
+                }`}
+              >
+                100% Pollution Saved
               </span>
             </div>
           </div>
 
-          {/* Unified 100% Cumulative Segmented Bar */}
-          <div className="mb-6 space-y-1.5">
-            <div className="h-3 w-full bg-slate-100 dark:bg-white/10 rounded-full overflow-hidden flex gap-1 p-0.5">
+          {/* Unified 100% Cumulative Segmented Bar (Interactive + Animated) */}
+          <div className="mb-8 space-y-2">
+            <div className="h-4 w-full bg-slate-100 dark:bg-white/10 rounded-full overflow-hidden flex gap-1 p-0.5 shadow-inner">
               {[
-                { share: 38, color: "bg-emerald-500", name: "Farming" },
-                { share: 29, color: "bg-[#14A3C7]", name: "Dyeing" },
-                { share: 18, color: "bg-blue-500", name: "Spinning" },
-                { share: 9, color: "bg-indigo-500", name: "Assembly" },
-                { share: 6, color: "bg-teal-400", name: "Landfill" },
-              ].map((segment, idx) => (
-                <div
-                  key={idx}
-                  style={{ width: `${segment.share}%` }}
-                  title={`${segment.name}: ${segment.share}%`}
-                  className={`h-full ${segment.color} rounded-full transition-all duration-300 hover:opacity-85`}
-                />
-              ))}
+                { share: 38, color: "bg-emerald-500", name: "Farming", id: 0 },
+                { share: 29, color: "bg-[#14A3C7]", name: "Dyeing", id: 1 },
+                { share: 18, color: "bg-blue-500", name: "Spinning", id: 2 },
+                { share: 9, color: "bg-indigo-500", name: "Assembly", id: 3 },
+                { share: 6, color: "bg-teal-400", name: "Landfill", id: 4 },
+              ].map((segment, idx) => {
+                const isHovered = hoveredStage === segment.id;
+                const isAnyHovered = hoveredStage !== null;
+
+                return (
+                  <motion.div
+                    key={idx}
+                    initial={{ width: 0, opacity: 0 }}
+                    whileInView={{ width: `${segment.share}%`, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: idx * 0.1, ease: "easeOut" }}
+                    onMouseEnter={() => setHoveredStage(segment.id)}
+                    onMouseLeave={() => setHoveredStage(null)}
+                    title={`${segment.name}: ${segment.share}%`}
+                    className={`h-full ${segment.color} rounded-full transition-all duration-300 cursor-pointer ${
+                      isHovered
+                        ? "brightness-125 scale-y-110 shadow-md ring-2 ring-white/50"
+                        : isAnyHovered
+                        ? "opacity-50"
+                        : "hover:opacity-90"
+                    }`}
+                  />
+                );
+              })}
             </div>
-            <div className="flex justify-between text-[10px] font-mono text-slate-400 px-1">
-              <span>0% Avoided Extraction</span>
-              <span>100% Circular Savings</span>
+            <div
+              className={`flex justify-between text-[11px] font-mono font-bold px-1 ${
+                theme === "white" ? "text-slate-700" : "text-slate-300"
+              }`}
+            >
+              <span>0% New Materials Used</span>
+              <span className="text-[#14A3C7] font-black">100% Total Savings (~{impact.avoidedCO2eKg} kg CO₂e)</span>
             </div>
           </div>
 
-          {/* 5-Column Grid Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-3.5">
+          {/* 5-Column Grid Cards with Staggered Entrance Animations & Hover Glow */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-40px" }}
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.08,
+                },
+              },
+            }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5 sm:gap-4"
+          >
             {[
               {
                 num: "01",
-                title: "Raw Material & Farming",
+                title: "Farming & Raw Materials",
                 share: 38,
-                desc: "Prevents water-heavy cotton cultivation and petrochemical synthesis.",
-                color: "text-emerald-500",
+                desc: "Stops wasting huge amounts of water on cotton fields and avoids making polyester plastic from oil.",
+                color: theme === "white" ? "text-emerald-700" : "text-emerald-400",
+                barColor: "bg-emerald-500",
                 badgeBorder: "border-t-emerald-500",
-                icon: <Leaf size={15} className="text-emerald-500" />,
-                iconBox: "bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-500/30",
+                glowShadow: "hover:shadow-emerald-500/15",
+                icon: <Leaf size={16} className={theme === "white" ? "text-emerald-700" : "text-emerald-400"} />,
+                iconBox: theme === "white" ? "bg-emerald-50 border-emerald-300" : "bg-emerald-950/60 border-emerald-500/30",
               },
               {
                 num: "02",
-                title: "Wet Dyeing & Processing",
+                title: "Dyeing & Washing Fabrics",
                 share: 29,
-                desc: "Eliminates toxic chemical wastewater, heavy dyes, and boiler heat emissions.",
-                color: "text-[#14A3C7]",
+                desc: "Stops harmful chemical dyes, polluted factory water, and high heat used to colour new clothes.",
+                color: theme === "white" ? "text-[#0284c7]" : "text-[#14A3C7]",
+                barColor: "bg-[#14A3C7]",
                 badgeBorder: "border-t-[#14A3C7]",
-                icon: <Droplets size={15} className="text-[#14A3C7]" />,
-                iconBox: "bg-cyan-50 dark:bg-cyan-950/40 border-cyan-200 dark:border-cyan-500/30",
+                glowShadow: "hover:shadow-[#14A3C7]/15",
+                icon: <Droplets size={16} className={theme === "white" ? "text-[#0284c7]" : "text-[#14A3C7]"} />,
+                iconBox: theme === "white" ? "bg-sky-50 border-sky-300" : "bg-cyan-950/60 border-cyan-500/30",
               },
               {
                 num: "03",
-                title: "Spinning & Grid Energy",
+                title: "Spinning & Weaving Thread",
                 share: 18,
-                desc: "Cuts high-draw industrial electricity consumed during yarn spinning.",
-                color: "text-blue-500",
+                desc: "Saves massive factory electricity used by heavy machines to spin yarn and weave cloth.",
+                color: theme === "white" ? "text-blue-700" : "text-blue-400",
+                barColor: "bg-blue-500",
                 badgeBorder: "border-t-blue-500",
-                icon: <Zap size={15} className="text-blue-500" />,
-                iconBox: "bg-blue-50 dark:bg-blue-950/40 border-blue-200 dark:border-blue-500/30",
+                glowShadow: "hover:shadow-blue-500/15",
+                icon: <Zap size={16} className={theme === "white" ? "text-blue-700" : "text-blue-400"} />,
+                iconBox: theme === "white" ? "bg-blue-50 border-blue-300" : "bg-blue-950/60 border-blue-500/30",
               },
               {
                 num: "04",
-                title: "Assembly & Logistics",
+                title: "Stitching & Shipping",
                 share: 9,
-                desc: "Reduces factory fabric cutting scraps and cross-border maritime shipping.",
-                color: "text-indigo-500",
+                desc: "Prevents fabric wasted when cutting patterns and cuts fuel burned by global cargo ships.",
+                color: theme === "white" ? "text-indigo-700" : "text-indigo-400",
+                barColor: "bg-indigo-500",
                 badgeBorder: "border-t-indigo-500",
-                icon: <Truck size={15} className="text-indigo-500" />,
-                iconBox: "bg-indigo-50 dark:bg-indigo-950/40 border-indigo-200 dark:border-indigo-500/30",
+                glowShadow: "hover:shadow-indigo-500/15",
+                icon: <Truck size={16} className={theme === "white" ? "text-indigo-700" : "text-indigo-400"} />,
+                iconBox: theme === "white" ? "bg-indigo-50 border-indigo-300" : "bg-indigo-950/60 border-indigo-500/30",
               },
               {
                 num: "05",
-                title: "Landfill Methane",
+                title: "Garbage Dumps & Landfills",
                 share: 6,
-                desc: "Halts anaerobic textile decomposition and greenhouse landfill gases.",
-                color: "text-teal-500",
+                desc: "Keeps clothes out of dump yards, stopping rotting fabrics from releasing harmful methane gas.",
+                color: theme === "white" ? "text-teal-700" : "text-teal-400",
+                barColor: "bg-teal-400",
                 badgeBorder: "border-t-teal-400",
-                icon: <Recycle size={15} className="text-teal-500" />,
-                iconBox: "bg-teal-50 dark:bg-teal-950/40 border-teal-200 dark:border-teal-500/30",
+                glowShadow: "hover:shadow-teal-500/15",
+                icon: <Recycle size={16} className={theme === "white" ? "text-teal-700" : "text-teal-400"} />,
+                iconBox: theme === "white" ? "bg-teal-50 border-teal-300" : "bg-teal-950/60 border-teal-500/30",
               },
             ].map((stage, idx) => {
               const stageCO2 = (impact.avoidedCO2eKg * (stage.share / 100)).toFixed(1);
+              const isHovered = hoveredStage === idx;
+
               return (
-                <div
+                <motion.div
                   key={idx}
-                  className={`p-4 rounded-2xl border transition-all duration-300 flex flex-col justify-between border-t-[3px] ${stage.badgeBorder} ${
-                    theme === "white"
-                      ? "bg-slate-50/70 border-slate-200/80 hover:bg-white hover:shadow-md hover:-translate-y-0.5"
-                      : "bg-white/[0.03] border-white/10 hover:bg-white/8 hover:border-white/20 hover:-translate-y-0.5"
+                  variants={{
+                    hidden: { opacity: 0, y: 24, scale: 0.96 },
+                    visible: {
+                      opacity: 1,
+                      y: 0,
+                      scale: 1,
+                      transition: { duration: 0.5, ease: "easeOut" },
+                    },
+                  }}
+                  whileHover={{
+                    y: -6,
+                    transition: { duration: 0.2 },
+                  }}
+                  onMouseEnter={() => setHoveredStage(idx)}
+                  onMouseLeave={() => setHoveredStage(null)}
+                  className={`p-4 sm:p-5 rounded-2xl border transition-all duration-300 flex flex-col justify-between border-t-[3px] ${
+                    stage.badgeBorder
+                  } ${stage.glowShadow} ${
+                    isHovered
+                      ? theme === "white"
+                        ? "bg-white border-slate-300 shadow-xl ring-2 ring-[#14A3C7]/25"
+                        : "bg-white/[0.08] border-white/30 shadow-xl shadow-black/70 ring-2 ring-[#14A3C7]/30"
+                      : theme === "white"
+                      ? "bg-white border-slate-200 shadow-xs hover:shadow-lg"
+                      : "bg-white/[0.03] border-white/10 hover:bg-white/6 hover:border-white/20"
                   }`}
                 >
-                  <div className="space-y-2.5">
-                    {/* Header: Icon & Step */}
+                  <div className="space-y-3">
+                    {/* Header: Icon & Step Badge */}
                     <div className="flex items-center justify-between">
                       <div
-                        className={`w-7 h-7 rounded-lg flex items-center justify-center border ${stage.iconBox}`}
+                        className={`w-8 h-8 rounded-xl flex items-center justify-center border shadow-xs ${stage.iconBox}`}
                       >
                         {stage.icon}
                       </div>
-                      <span className="text-[10px] font-mono font-bold text-slate-400">
+                      <span
+                        className={`text-xs font-mono font-black ${
+                          theme === "white" ? "text-slate-700" : "text-slate-300"
+                        }`}
+                      >
                         {stage.num}
                       </span>
                     </div>
 
-                    {/* Stats */}
-                    <div>
-                      <div className="flex items-baseline gap-1">
+                    {/* Stats & Progress */}
+                    <div className="space-y-1.5">
+                      <div className="flex items-baseline gap-1.5">
                         <span
-                          className={`text-xl sm:text-2xl font-black font-sans tracking-tight ${stage.color}`}
+                          className={`text-2xl sm:text-3xl font-black font-sans tracking-tight ${stage.color}`}
                         >
                           {stage.share}%
                         </span>
-                        <span className="text-[10px] font-bold text-slate-400">
+                        <span
+                          className={`text-xs font-black uppercase tracking-wider ${
+                            theme === "white" ? "text-slate-700" : "text-slate-300"
+                          }`}
+                        >
                           share
                         </span>
                       </div>
-                      <p className="text-[11px] font-mono font-bold text-slate-700 dark:text-slate-300">
+
+                      {/* Mini Progress Bar */}
+                      <div
+                        className={`w-full h-1.5 rounded-full overflow-hidden ${
+                          theme === "white" ? "bg-slate-200" : "bg-white/15"
+                        }`}
+                      >
+                        <motion.div
+                          initial={{ width: 0 }}
+                          whileInView={{ width: `${stage.share}%` }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.9, delay: 0.2 + idx * 0.1, ease: "easeOut" }}
+                          className={`h-full ${stage.barColor} rounded-full`}
+                        />
+                      </div>
+
+                      <p
+                        className={`text-xs sm:text-[13px] font-mono font-black pt-1 ${
+                          theme === "white" ? "text-slate-900" : "text-slate-100"
+                        }`}
+                      >
                         ~{stageCO2} kg CO₂
                       </p>
                     </div>
 
                     {/* Title & Desc */}
-                    <div className="space-y-1">
+                    <div className="space-y-1.5 pt-1">
                       <h4
-                        className={`text-xs font-bold uppercase tracking-tight leading-snug ${
+                        className={`text-xs sm:text-[13px] font-black uppercase tracking-tight leading-snug font-sans ${
                           theme === "white" ? "text-slate-900" : "text-white"
                         }`}
                       >
                         {stage.title}
                       </h4>
-                      <p className="text-[11px] leading-relaxed text-slate-500 dark:text-slate-400">
+                      <p
+                        className={`text-[11px] sm:text-xs leading-relaxed font-semibold ${
+                          theme === "white" ? "text-slate-700" : "text-slate-200"
+                        }`}
+                      >
                         {stage.desc}
                       </p>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
-          </div>
+          </motion.div>
         </section>
       </main>
 

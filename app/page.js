@@ -10,7 +10,6 @@ import { Globe, ArrowRightCircle, Sparkles, CheckCircle2, ArrowRight, Leaf, Recy
 import Hero from "./components/Hero";
 import GsapTextReveal from "./components/GsapTextReveal";
 import FeatureSection from "./components/FeatureSection";
-import AppDownloadSection from "./components/AppDownloadSection";
 import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
 import { useTheme } from "./context/ThemeContext";
@@ -425,7 +424,6 @@ export default function Home() {
 
 
 
-      <AppDownloadSection />
       <ContactSection />
       <Footer />
     </main>

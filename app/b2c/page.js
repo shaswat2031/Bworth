@@ -2,22 +2,21 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { 
-  ArrowLeft, 
-  Smartphone, 
-  Coins, 
-  Recycle, 
-  Truck, 
-  Zap, 
-  CheckCircle2, 
-  ShieldCheck, 
-  ArrowRight, 
+import {
+  ArrowLeft,
+  Smartphone,
+  Coins,
+  Recycle,
+  Truck,
+  Zap,
+  CheckCircle2,
+  ShieldCheck,
+  ArrowRight,
   Sparkles,
   ShoppingBag,
   Leaf
 } from "lucide-react";
 import Footer from "../components/Footer";
-import AppDownloadSection from "../components/AppDownloadSection";
 import { useTheme } from "../context/ThemeContext";
 import { translations as t } from "../utils/translations";
 
@@ -68,9 +67,8 @@ export default function B2CPage() {
   ];
 
   return (
-    <main className={`min-h-screen transition-colors duration-500 ${
-      isWhite ? "bg-slate-50 text-slate-900" : "bg-[#061217] text-white"
-    }`}>
+    <main className={`min-h-screen transition-colors duration-500 ${isWhite ? "bg-slate-50 text-slate-900" : "bg-[#061217] text-white"
+      }`}>
       {/* Hero Section */}
       <section className="relative pt-32 pb-16 px-6 md:px-12 overflow-hidden">
         {/* Ambient Radial Glow */}
@@ -90,40 +88,28 @@ export default function B2CPage() {
               <span className="text-xs font-black uppercase tracking-widest">B2C CIRCULAR FASHION SOLUTION</span>
             </div>
 
-            <h1 className={`text-4xl sm:text-6xl lg:text-7xl font-serif font-black uppercase tracking-tight leading-[1.05] ${
-              isWhite ? "text-slate-900" : "text-white"
-            }`}>
+            <h1 className={`text-4xl sm:text-6xl lg:text-7xl font-serif font-black uppercase tracking-tight leading-[1.05] ${isWhite ? "text-slate-900" : "text-white"
+              }`}>
               Doorstep Pickup & <br />
               <span className="text-[#14A3C7] italic">BWC Wallet Rewards</span>
             </h1>
 
-            <p className={`text-lg sm:text-2xl font-serif italic max-w-3xl leading-relaxed ${
-              isWhite ? "text-slate-700" : "text-slate-300"
-            }`}>
+            <p className={`text-lg sm:text-2xl font-serif italic max-w-3xl leading-relaxed ${isWhite ? "text-slate-700" : "text-slate-300"
+              }`}>
               Clear wardrobe clutter in minutes. Turn your unused clothes into instant BWorth Coins (1 BWC = ₹1 INR) with free doorstep pickup and 100% zero-landfill eco-recycling.
             </p>
 
             <div className="pt-4 flex flex-wrap items-center gap-4">
               <a
-                href="#app-download-section"
+                href="https://play.google.com/store/apps/details?id=com.BworthGo"
+                target="_blank"
                 className="px-8 py-4 rounded-full bg-[#14A3C7] text-white font-black text-xs uppercase tracking-widest hover:bg-[#0d84a3] transition-all shadow-xl shadow-[#14A3C7]/20 flex items-center gap-2 group"
               >
-                <span>BOOK DOORSTEP PICKUP</span>
+                <span>Download App</span>
                 <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </a>
 
-              <a
-                href="https://play.google.com/store/apps/details?id=com.BworthGo"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`px-8 py-4 rounded-full border font-black text-xs uppercase tracking-widest transition-all ${
-                  isWhite
-                    ? "bg-white border-slate-300 text-slate-900 hover:border-[#14A3C7]"
-                    : "bg-white/10 border-white/20 text-white hover:bg-white/20"
-                }`}
-              >
-                DOWNLOAD APP
-              </a>
+
             </div>
           </motion.div>
         </div>
@@ -134,9 +120,8 @@ export default function B2CPage() {
         <div className="max-w-7xl mx-auto space-y-12">
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <span className="text-xs font-black uppercase tracking-widest text-[#14A3C7]">HOW B2C WORKS</span>
-            <h2 className={`text-3xl sm:text-5xl font-serif font-black uppercase tracking-tight ${
-              isWhite ? "text-slate-900" : "text-white"
-            }`}>
+            <h2 className={`text-3xl sm:text-5xl font-serif font-black uppercase tracking-tight ${isWhite ? "text-slate-900" : "text-white"
+              }`}>
               Simple 3-Step Recycling Process
             </h2>
             <p className={`text-base leading-relaxed ${isWhite ? "text-slate-600" : "text-slate-300"}`}>
@@ -152,11 +137,10 @@ export default function B2CPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.15 }}
-                className={`p-8 rounded-[2.5rem] border shadow-xl flex flex-col justify-between transition-all hover:scale-[1.02] ${
-                  isWhite
-                    ? "bg-white border-slate-200 text-slate-900 shadow-slate-200/50"
-                    : "bg-[#081822] border-white/15 text-white shadow-black/80"
-                }`}
+                className={`p-8 rounded-[2.5rem] border shadow-xl flex flex-col justify-between transition-all hover:scale-[1.02] ${isWhite
+                  ? "bg-white border-slate-200 text-slate-900 shadow-slate-200/50"
+                  : "bg-[#081822] border-white/15 text-white shadow-black/80"
+                  }`}
               >
                 <div className="space-y-6">
                   <div className="flex justify-between items-center">
@@ -190,9 +174,8 @@ export default function B2CPage() {
               <Sparkles size={16} />
               <span className="text-xs font-black uppercase tracking-widest">1 BWC = ₹1 REAL CASH VALUE</span>
             </div>
-            <h2 className={`text-3xl sm:text-5xl font-serif font-black uppercase tracking-tight ${
-              isWhite ? "text-slate-900" : "text-white"
-            }`}>
+            <h2 className={`text-3xl sm:text-5xl font-serif font-black uppercase tracking-tight ${isWhite ? "text-slate-900" : "text-white"
+              }`}>
               BWC Reward Coin Economy
             </h2>
           </div>
@@ -205,11 +188,10 @@ export default function B2CPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.15 }}
-                className={`p-8 sm:p-10 rounded-[2.5rem] border shadow-2xl space-y-6 ${
-                  isWhite
-                    ? "bg-white border-slate-200 text-slate-900 shadow-slate-200/60"
-                    : "bg-[#081822] border-white/15 text-white shadow-black/80"
-                }`}
+                className={`p-8 sm:p-10 rounded-[2.5rem] border shadow-2xl space-y-6 ${isWhite
+                  ? "bg-white border-slate-200 text-slate-900 shadow-slate-200/60"
+                  : "bg-[#081822] border-white/15 text-white shadow-black/80"
+                  }`}
               >
                 <div className={`inline-flex px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border ${col.badgeColor}`}>
                   {col.title}
@@ -232,11 +214,6 @@ export default function B2CPage() {
           </div>
         </div>
       </section>
-
-      {/* Embed Interactive B2C App Section */}
-      <div id="app-download-section">
-        <AppDownloadSection />
-      </div>
 
       <Footer />
     </main>

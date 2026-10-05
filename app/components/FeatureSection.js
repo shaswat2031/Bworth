@@ -24,7 +24,9 @@ export default function FeatureSection() {
         t.features.buyback_desc ||
         "Book a doorstep pickup slot on the BWorth app to list and sell your unused clothes easily.",
       accent: "#14A3C7",
-      badgeColor: "bg-sky-500/10 text-[#14A3C7] border-sky-500/25",
+      accentDark: "#0284C7",
+      badgeLight: "bg-sky-50 text-sky-900 border-sky-300 font-extrabold",
+      badgeDark: "bg-sky-500/15 text-sky-300 border-sky-500/30 font-extrabold",
       perks: ["2-Minute App Booking", "Free Doorstep Collection", "Any Brand / Condition"],
       actionText: "Instant Pickup Dispatch",
     },
@@ -36,19 +38,23 @@ export default function FeatureSection() {
         t.features.events_desc ||
         "Receive instant payback directly in your BWorth wallet as soon as clothes are collected (1 BWC Coin = ₹1 real value).",
       accent: "#F59E0B",
-      badgeColor: "bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/25",
+      accentDark: "#D97706",
+      badgeLight: "bg-amber-50 text-amber-950 border-amber-300 font-extrabold",
+      badgeDark: "bg-amber-500/15 text-amber-300 border-amber-500/30 font-extrabold",
       perks: ["1 BWC = ₹1 Guaranteed Value", "Direct Wallet Credit", "Zero Commission Fees"],
       actionText: "Instant Liquid Rewards",
     },
     {
       stepTag: "Step 03 • Redeem & Buy",
       icon: <ShoppingBag size={26} strokeWidth={2} />,
-      title: t.features.marketplace_title || "Buy or Recycle",
+      title: t.features.marketplace_title || "Buy",
       desc:
         t.features.marketplace_desc ||
-        "Use your earned BWC coins to buy new clothes directly on the BWorth platform, or recycle for a better planet.",
+        "Use your earned BWC coins to buy new clothes directly on the BWorth platform, for a better planet.",
       accent: "#10B981",
-      badgeColor: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/25",
+      accentDark: "#047857",
+      badgeLight: "bg-emerald-50 text-emerald-950 border-emerald-300 font-extrabold",
+      badgeDark: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30 font-extrabold",
       perks: ["Top Fashion Brand Partners", "100% Zero-Landfill Guarantee", "Traceable Carbon Credits"],
       actionText: "Circular Fashion Ecosystem",
     },
@@ -140,7 +146,7 @@ export default function FeatureSection() {
               }`}
             >
               {t.features.desc ||
-                "Give fashion a second life. Schedule a doorstep pickup, earn BWorth Coins, and buy or recycle."}
+                "Give fashion a second life. Schedule a doorstep pickup, earn BWorth Coins, and buy."}
             </p>
           </div>
         </div>
@@ -262,7 +268,7 @@ export default function FeatureSection() {
                           className="w-13 h-13 rounded-2xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110 shadow-xs shrink-0"
                           style={{
                             backgroundColor: `${f.accent}15`,
-                            color: f.accent,
+                            color: theme === "white" && f.accentDark ? f.accentDark : f.accent,
                             border: `1px solid ${f.accent}30`,
                           }}
                         >
@@ -277,7 +283,9 @@ export default function FeatureSection() {
                     {/* Content Block */}
                     <div className="space-y-2.5">
                       <div
-                        className={`inline-block px-2.5 py-0.5 rounded-md text-[10px] font-black uppercase tracking-wider border ${f.badgeColor}`}
+                        className={`inline-block px-2.5 py-0.5 rounded-md text-[10px] font-black uppercase tracking-wider border ${
+                          theme === "white" ? f.badgeLight : f.badgeDark
+                        }`}
                       >
                         {f.stepTag}
                       </div>
@@ -297,8 +305,8 @@ export default function FeatureSection() {
                       </h3>
 
                       <p
-                        className={`text-xs sm:text-sm leading-relaxed ${
-                          theme === "white" ? "text-slate-600" : "text-slate-300"
+                        className={`text-xs sm:text-sm leading-relaxed font-medium ${
+                          theme === "white" ? "text-slate-700" : "text-slate-200"
                         }`}
                       >
                         {f.desc}
@@ -306,18 +314,27 @@ export default function FeatureSection() {
                     </div>
 
                     {/* Perks Checklist */}
-                    <div className="space-y-2 pt-2 border-t border-slate-100 dark:border-white/10">
+                    <div
+                      className={`space-y-2.5 pt-3 border-t ${
+                        theme === "white" ? "border-slate-200" : "border-white/10"
+                      }`}
+                    >
                       {f.perks.map((perk, pIdx) => (
                         <div
                           key={pIdx}
-                          className="flex items-center gap-2 text-xs font-semibold text-slate-700 dark:text-slate-300"
+                          className={`flex items-center gap-2.5 text-xs sm:text-[13px] font-bold ${
+                            theme === "white" ? "text-slate-900" : "text-white"
+                          }`}
                         >
                           <CheckCircle2
-                            size={13}
-                            style={{ color: f.accent }}
+                            size={16}
+                            strokeWidth={2.5}
+                            style={{
+                              color: theme === "white" && f.accentDark ? f.accentDark : f.accent,
+                            }}
                             className="shrink-0"
                           />
-                          <span>{perk}</span>
+                          <span className="font-bold tracking-tight">{perk}</span>
                         </div>
                       ))}
                     </div>
@@ -325,15 +342,20 @@ export default function FeatureSection() {
 
                   {/* Bottom Action Ribbon */}
                   <div
-                    className="mt-6 pt-3.5 border-t border-slate-100 dark:border-white/10 flex items-center justify-between text-xs font-bold"
-                    style={{ color: f.accent }}
+                    className={`mt-6 pt-3.5 border-t flex items-center justify-between text-xs font-bold ${
+                      theme === "white" ? "border-slate-200" : "border-white/10"
+                    }`}
+                    style={{
+                      color: theme === "white" && f.accentDark ? f.accentDark : f.accent,
+                    }}
                   >
-                    <span className="uppercase tracking-wider font-extrabold text-[11px]">
+                    <span className="uppercase tracking-wider font-black text-[11px] sm:text-xs">
                       {f.actionText}
                     </span>
                     <ArrowRight
-                      size={14}
-                      className="group-hover:translate-x-1 transition-transform opacity-75 group-hover:opacity-100"
+                      size={15}
+                      strokeWidth={2.5}
+                      className="group-hover:translate-x-1.5 transition-transform opacity-90 group-hover:opacity-100"
                     />
                   </div>
                 </div>
