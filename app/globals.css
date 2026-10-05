@@ -125,18 +125,52 @@
   animation: marquee-glide 55s linear infinite;
 }
 
+/* ── Infinite Marquee Smooth Glide (Left to Right) ────────── */
+@keyframes marquee-glide-ltr {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0%, 0, 0);
+  }
+}
+
+.animate-marquee-ltr {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: marquee-glide-ltr 65s linear infinite;
+}
+
+.animate-marquee-ltr-offset {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: marquee-glide-ltr 55s linear infinite;
+}
+
 @media (max-width: 640px) {
   .animate-marquee-slow {
     animation-duration: 42s;
   }
+  .animate-marquee-ltr {
+    animation-duration: 48s;
+  }
+  .animate-marquee-ltr-offset {
+    animation-duration: 40s;
+  }
 }
 
-.marquee-track-hover:hover .animate-marquee-slow {
+.marquee-track-hover:hover .animate-marquee-slow,
+.marquee-track-hover:hover .animate-marquee-ltr,
+.marquee-track-hover:hover .animate-marquee-ltr-offset {
   animation-play-state: paused;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-marquee-slow {
+  .animate-marquee-slow,
+  .animate-marquee-ltr,
+  .animate-marquee-ltr-offset {
     animation: none;
     overflow-x: auto;
   }

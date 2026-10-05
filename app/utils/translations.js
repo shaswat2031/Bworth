@@ -82,10 +82,10 @@ export const translations = {
     problem_section: {
         title: "Your wardrobe is full… but unused.",
         subtitle: "We fix that.",
-        pain_1: "Clothes you don’t wear",
-        pain_2: "Low resale value",
-        pain_3: "No easy way to recycle",
-        desc: "Join active users who are turning clutter into value while saving the planet."
+        pain_1: "Clothes you never wear",
+        pain_2: "Low resale prices & bargaining",
+        pain_3: "Guilt of throwing clothes away",
+        desc: "Join thousands of people who clear their cupboards and get paid real cash while helping the planet."
     },
     scroll_banner: {
         text: "SUSTAINABLE FUTURE • EARN REWARDS • RECYCLE FASHION • JOIN THE MOVEMENT"

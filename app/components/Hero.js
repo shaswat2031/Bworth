@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
@@ -11,8 +11,8 @@ import {
   ArrowRight,
   Zap,
   PackageCheck,
+  RefreshCw,
 } from "lucide-react";
-import ScrollBanner from "./ScrollBanner";
 
 /* ── Leaf SVG decoration ── */
 function LeafDecor({ className, size = 32, rotate = 0, opacity = 0.65 }) {
@@ -59,8 +59,64 @@ function ShirtIcon({ size = 20, className = "" }) {
    MAIN HERO EXPORT
 ═══════════════════════════════════════════════════ */
 export default function Hero() {
+  const [activeStep, setActiveStep] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveStep((prev) => (prev + 1) % 4);
+    }, 2200);
+    return () => clearInterval(timer);
+  }, []);
+
+  const circularSteps = [
+    {
+      icon: PackageCheck,
+      label: "COLLECT",
+      step: "01",
+      color: "text-sky-700",
+      activeColor: "text-sky-950 font-black",
+      activeRing: "ring-2 ring-sky-400 bg-sky-100 shadow-md shadow-sky-400/25 border-sky-300",
+      bg: "bg-sky-50 border-sky-200 hover:bg-sky-100/70",
+      iconBg: "bg-sky-500/15 text-sky-600",
+      activeIconBg: "bg-sky-500 text-white shadow-sm shadow-sky-500/40",
+    },
+    {
+      icon: Recycle,
+      label: "REUSE",
+      step: "02",
+      color: "text-emerald-700",
+      activeColor: "text-emerald-950 font-black",
+      activeRing: "ring-2 ring-emerald-400 bg-emerald-100 shadow-md shadow-emerald-400/25 border-emerald-300",
+      bg: "bg-emerald-50 border-emerald-200 hover:bg-emerald-100/70",
+      iconBg: "bg-emerald-500/15 text-emerald-600",
+      activeIconBg: "bg-emerald-500 text-white shadow-sm shadow-emerald-500/40",
+    },
+    {
+      icon: Zap,
+      label: "UPCYCLE",
+      step: "03",
+      color: "text-amber-700",
+      activeColor: "text-amber-950 font-black",
+      activeRing: "ring-2 ring-amber-400 bg-amber-100 shadow-md shadow-amber-400/25 border-amber-300",
+      bg: "bg-amber-50 border-amber-200 hover:bg-amber-100/70",
+      iconBg: "bg-amber-500/15 text-amber-600",
+      activeIconBg: "bg-amber-500 text-white shadow-sm shadow-amber-500/40",
+    },
+    {
+      icon: Leaf,
+      label: "RECYCLE",
+      step: "04",
+      color: "text-teal-700",
+      activeColor: "text-teal-950 font-black",
+      activeRing: "ring-2 ring-teal-400 bg-teal-100 shadow-md shadow-teal-400/25 border-teal-300",
+      bg: "bg-teal-50 border-teal-200 hover:bg-teal-100/70",
+      iconBg: "bg-teal-500/15 text-teal-600",
+      activeIconBg: "bg-teal-500 text-white shadow-sm shadow-teal-500/40",
+    },
+  ];
+
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-[#d0edf8] via-[#dff3fa] to-[#ecf8fd] pt-24 md:pt-28 pb-0">
+    <section className="relative overflow-hidden bg-gradient-to-br from-[#d0edf8] via-[#dff3fa] to-[#ecf8fd] pt-24 md:pt-28 pb-8 sm:pb-12 md:pb-14 min-h-[75vh] lg:min-h-[78vh] flex flex-col justify-center">
 
       {/* Leaf decorations */}
       <LeafDecor className="absolute top-5 left-4 pointer-events-none" size={52} rotate={-25} opacity={0.6} />
@@ -79,52 +135,133 @@ export default function Hero() {
       </div>
 
 
-      {/* 3-column grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 sm:pb-10">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr_1.1fr] gap-6 lg:gap-4 items-center">
+      {/* 3-column grid container spanning edge-to-edge with balanced fluid margins */}
+      <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-6 md:px-8 lg:px-8 xl:px-10 2xl:px-12 py-5 sm:py-7 lg:py-8 flex-1 flex items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[360px_1fr_360px] xl:grid-cols-[420px_1.05fr_420px] 2xl:grid-cols-[460px_1.1fr_460px] gap-6 lg:gap-8 xl:gap-10 2xl:gap-12 items-center w-full">
 
-          {/* ─── LEFT — Box visual ─── */}
+          {/* ─── LEFT — Box visual + Circular Ecosystem Process ─── */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
-            className="flex flex-col items-center lg:items-start"
+            className="flex flex-col items-center lg:items-start w-full"
           >
             {/* Floating box */}
             <motion.div
               animate={{ y: [0, -10, 0], rotate: [0, 1.2, 0, -1.2, 0] }}
               transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-              className="relative w-[260px] sm:w-[290px] lg:w-[265px] xl:w-[305px]"
+              className="relative w-full max-w-[330px] sm:max-w-[360px] lg:max-w-[360px] xl:max-w-[420px] 2xl:max-w-[460px]"
             >
               <div className="rounded-3xl overflow-hidden shadow-2xl border-[5px] border-white">
                 <Image
-                  src="/bworth_closet_box.jpg"
-                  alt="BWorth wardrobe collection box with clothes"
-                  width={310}
-                  height={310}
+                  src="/bworth_box_clean.jpg"
+                  alt="BWorth wardrobe decluttering collection box with clothes"
+                  width={460}
+                  height={460}
                   className="object-cover w-full aspect-square"
                   priority
                 />
               </div>
             </motion.div>
 
-            {/* Icon row */}
-            <div className="mt-4 flex items-center justify-center gap-5 w-[260px] sm:w-[290px] lg:w-[265px] xl:w-[305px]">
-              {[
-                { icon: PackageCheck, label: "COLLECT" },
-                { icon: Recycle, label: "REUSE" },
-                { icon: Zap, label: "UPCYCLE" },
-                { icon: Leaf, label: "RECYCLE" },
-              ].map(({ icon: Icon, label }) => (
-                <div key={label} className="flex flex-col items-center gap-1.5">
-                  <div className="w-10 h-10 rounded-full bg-white shadow-md border border-[#14A3C7]/20 flex items-center justify-center">
-                    <Icon size={16} className="text-[#14A3C7]" />
-                  </div>
-                  <span className="text-[9px] font-black text-gray-500 uppercase tracking-wider">
-                    {label}
-                  </span>
-                </div>
-              ))}
+            {/* Circular Process Highlight Banner — Collect, Reuse, Upcycle, Recycle with Infinite Looping Animation */}
+            <div className="mt-4 w-full max-w-[330px] sm:max-w-[360px] lg:max-w-[360px] xl:max-w-[420px] 2xl:max-w-[460px] rounded-2xl bg-white/95 backdrop-blur-md p-3 border border-[#14A3C7]/30 shadow-xl shadow-sky-950/5">
+              <div className="flex items-center justify-between px-1 pb-2 mb-2 border-b border-sky-100">
+                <span className="text-[10px] font-black uppercase tracking-wider text-sky-900 flex items-center gap-1.5">
+                  <RefreshCw size={11} className="text-[#14A3C7] animate-spin [animation-duration:6s]" />
+                  Circular Lifecycle
+                </span>
+                <span className="text-[9px] font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  100% Closed Loop
+                </span>
+              </div>
+
+              <div className="grid grid-cols-4 gap-1.5 sm:gap-2">
+                {circularSteps.map(({ icon: Icon, label, step, color, activeColor, activeRing, bg, iconBg, activeIconBg }, idx) => {
+                  const isActive = activeStep === idx;
+                  return (
+                    <motion.div
+                      key={label}
+                      animate={{
+                        scale: isActive ? 1.06 : 1,
+                        y: isActive ? -3 : 0,
+                      }}
+                      transition={{ type: "spring", stiffness: 350, damping: 25 }}
+                      onClick={() => setActiveStep(idx)}
+                      onMouseEnter={() => setActiveStep(idx)}
+                      className={`relative flex flex-col items-center justify-center p-1.5 sm:p-2 rounded-xl border transition-all duration-300 cursor-pointer group select-none ${
+                        isActive ? activeRing : bg
+                      }`}
+                    >
+                      <span
+                        className={`absolute top-1 right-1 text-[7.5px] font-black leading-none transition-opacity ${
+                          isActive ? "opacity-100 font-extrabold text-gray-900" : "opacity-45"
+                        }`}
+                      >
+                        {step}
+                      </span>
+                      <motion.div
+                        animate={
+                          isActive
+                            ? {
+                                y: [0, -3, 0],
+                                rotate: [0, -8, 8, 0],
+                              }
+                            : { y: 0, rotate: 0 }
+                        }
+                        transition={{
+                          duration: 1.2,
+                          repeat: isActive ? Infinity : 0,
+                          repeatDelay: 0.6,
+                          ease: "easeInOut",
+                        }}
+                        className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg shadow-xs flex items-center justify-center mb-1 transition-all duration-300 ${
+                          isActive ? activeIconBg : iconBg
+                        }`}
+                      >
+                        <Icon size={14} className="stroke-[2.5]" />
+                      </motion.div>
+                      <span
+                        className={`text-[9px] sm:text-[10px] font-black uppercase tracking-tight leading-none transition-colors duration-300 ${
+                          isActive ? activeColor : color
+                        }`}
+                      >
+                        {label}
+                      </span>
+                    </motion.div>
+                  );
+                })}
+              </div>
+
+              {/* Looping Step Flow Indicator Bar */}
+              <div className="mt-2.5 pt-1.5 border-t border-sky-100/60 flex items-center gap-1 w-full px-0.5">
+                {[0, 1, 2, 3].map((stepIdx) => {
+                  const isActive = activeStep === stepIdx;
+                  const isPassed = activeStep > stepIdx;
+                  return (
+                    <div
+                      key={stepIdx}
+                      onClick={() => setActiveStep(stepIdx)}
+                      className="flex-1 h-1.5 rounded-full overflow-hidden bg-sky-100/80 cursor-pointer"
+                    >
+                      <motion.div
+                        className={`h-full rounded-full ${
+                          isActive
+                            ? "bg-gradient-to-r from-[#14A3C7] to-emerald-400"
+                            : isPassed
+                            ? "bg-[#14A3C7]/40"
+                            : "bg-transparent"
+                        }`}
+                        animate={{
+                          width: isActive || isPassed ? "100%" : "0%",
+                        }}
+                        transition={{ duration: 0.35 }}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </motion.div>
 
@@ -133,17 +270,17 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75, delay: 0.15, ease: "easeOut" }}
-            className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-5 px-0 lg:px-4"
+            className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-5 sm:space-y-6 px-0 lg:px-2 xl:px-4"
           >
             <h1 className="font-black uppercase leading-[0.95] tracking-tight text-gray-900">
-              <span className="block whitespace-nowrap text-[1.85rem] sm:text-[2.7rem] md:text-[3.3rem] lg:text-[2.4rem] xl:text-[3.1rem]">
+              <span className="block whitespace-nowrap text-[1.85rem] sm:text-[2.7rem] md:text-[3.3rem] lg:text-[2.55rem] xl:text-[3.25rem] 2xl:text-[3.7rem]">
                 DECLUTTER YOUR
               </span>
-              <span className="block whitespace-nowrap text-[1.85rem] sm:text-[2.7rem] md:text-[3.3rem] lg:text-[2.4rem] xl:text-[3.1rem]">
+              <span className="block whitespace-nowrap text-[1.85rem] sm:text-[2.7rem] md:text-[3.3rem] lg:text-[2.55rem] xl:text-[3.25rem] 2xl:text-[3.7rem]">
                 WARDROBE TO
               </span>
-              <span className="relative inline-flex items-center gap-2 mt-1.5 max-w-full">
-                <span className="block whitespace-nowrap bg-[#14A3C7] text-white italic rounded-2xl px-4 sm:px-5 py-1.5 sm:py-2 text-[1.45rem] sm:text-[2.2rem] md:text-[2.6rem] lg:text-[1.85rem] xl:text-[2.4rem] leading-tight shadow-xl shadow-[#14A3C7]/25">
+              <span className="relative inline-flex items-center gap-2 mt-2 max-w-full">
+                <span className="block whitespace-nowrap bg-[#14A3C7] text-white italic rounded-2xl px-4 sm:px-5 py-1.5 sm:py-2 text-[1.45rem] sm:text-[2.2rem] md:text-[2.6rem] lg:text-[1.95rem] xl:text-[2.5rem] 2xl:text-[2.85rem] leading-tight shadow-xl shadow-[#14A3C7]/25">
                   TURN INTO VALUE
                 </span>
                 <Zap
@@ -154,19 +291,21 @@ export default function Hero() {
               </span>
             </h1>
 
-            <p className="text-gray-600 text-sm sm:text-[15px] leading-relaxed max-w-[430px] font-medium">
-              BWorth collects your unused wardrobe clutter right from your
-              doorstep, credits instant BWC Coins (1 BWC = ₹1 value), and
-              ensures 100% zero-landfill eco-recycling.
+            {/* Non-repetitive, clear narrative description */}
+            <p className="text-gray-600 text-sm sm:text-[15px] lg:text-[16px] leading-relaxed max-w-[540px] font-medium">
+              Give your pre-loved fashion a purposeful second life. Clear closet clutter
+              effortlessly from home, unlock guaranteed value back, and keep textiles
+              safely in a sustainable circular loop.
             </p>
 
-            {/* Primary Hero CTA */}
-            <div className="flex items-center justify-center lg:justify-start pt-1">
+            {/* App Store & Play Store Action Row */}
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 sm:gap-3 pt-1">
+              {/* Official Google Play Store Button */}
               <Link
                 href="https://play.google.com/store/apps/details?id=com.BworthGo"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative inline-flex items-center gap-3 bg-gray-950 hover:bg-black text-white pl-4 sm:pl-5 pr-4 py-2.5 sm:py-3 rounded-full border border-white/20 shadow-[0_6px_20px_rgba(0,0,0,0.22)] hover:shadow-[0_10px_28px_rgba(20,163,199,0.32)] hover:border-[#14A3C7]/60 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300"
+                className="group relative inline-flex items-center gap-2.5 sm:gap-3 bg-gray-950 hover:bg-black text-white pl-4 sm:pl-5 pr-4 py-2.5 sm:py-3 rounded-full border border-white/20 shadow-[0_6px_20px_rgba(0,0,0,0.22)] hover:shadow-[0_10px_28px_rgba(20,163,199,0.32)] hover:border-[#14A3C7]/60 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300"
               >
                 {/* Official Google Play multicolor icon with frosted circular plate */}
                 <div className="w-7 h-7 rounded-full bg-white/10 border border-white/10 flex items-center justify-center shrink-0">
@@ -191,65 +330,89 @@ export default function Hero() {
                   />
                 </div>
               </Link>
+
+              {/* Apple App Store (Coming Soon for iPhone) */}
+              <div className="inline-flex items-center gap-2.5 bg-slate-900/90 text-white pl-3.5 pr-4 py-2 sm:py-2.5 rounded-full border border-white/20 backdrop-blur-md shadow-md shadow-sky-950/10 select-none">
+                <div className="w-7 h-7 rounded-full bg-white/15 flex items-center justify-center shrink-0">
+                  <svg className="w-3.5 h-3.5 fill-white" viewBox="0 0 170 170">
+                    <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.69-3.04-7.69-7.85-12-14.42-6.53-9.98-11.53-21.36-15-34.12-3.48-12.76-5.22-24.97-5.22-36.63 0-16.1 4.35-29.47 13.06-40.11 8.71-10.64 19.38-16.03 32.02-16.16 4.35 0 9.29 1.15 14.81 3.44 5.53 2.29 9.38 3.5 11.56 3.63 1.95 0 5.86-1.22 11.73-3.68 5.87-2.46 10.81-3.62 14.82-3.48 11.54.49 20.9 4.67 28.09 12.54-9.98 6.08-14.9 14.89-14.77 26.43.14 9.12 3.65 16.78 10.53 22.97 6.87 6.19 14.89 9.53 24.06 10.02-2.18 6.53-4.9 13.16-8.16 19.89zm-31.57-106.84c.14 2.83-.55 5.8-2.07 8.91-1.52 3.11-3.6 5.83-6.24 8.16-2.83 2.45-5.94 4.19-9.33 5.22-.38-2.61-.17-5.32.63-8.13.8-2.81 2.21-5.5 4.23-8.07 2.02-2.57 4.54-4.59 7.56-6.06 3.02-1.47 5.76-2.15 8.22-2.03z" />
+                  </svg>
+                </div>
+                <div className="flex flex-col text-left">
+                  <span className="text-[8.5px] font-black text-[#14A3C7] uppercase tracking-widest leading-none">
+                    COMING SOON
+                  </span>
+                  <span className="text-[11px] font-extrabold text-white leading-tight">
+                    App Store (iOS)
+                  </span>
+                </div>
+              </div>
             </div>
 
-            {/* Feature strip */}
-            <div className="w-full pt-4 border-t border-gray-200/70 grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {/* Distinct, Spacious Feature Cards — Responsive Flow, Never Overflows */}
+            <div className="w-full pt-5 sm:pt-6 border-t border-sky-200/60 grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-2.5 xl:gap-3">
               {[
-                { icon: Truck, title: "Free Doorstep Pickup", sub: "in 2 Minutes" },
-                { icon: Coins, title: "Earn BWC Coins", sub: "1 BWC = ₹1 value" },
-                { icon: Recycle, title: "Zero-Landfill Processing", sub: "100% Responsible" },
-              ].map(({ icon: Icon, title, sub }) => (
-                <div key={title} className="flex items-center gap-2.5">
-                  <div className="w-9 h-9 rounded-full bg-white border border-[#14A3C7]/15 shadow-sm flex items-center justify-center shrink-0">
-                    <Icon size={15} className="text-[#14A3C7]" />
+                {
+                  icon: Truck,
+                  title: "Doorstep Pickup",
+                  sub: "Book in 2 mins",
+                  accent: "bg-sky-500/10 text-sky-600 border-sky-200/60",
+                },
+                {
+                  icon: Coins,
+                  title: "Earn BWC Coins",
+                  sub: "1 BWC = ₹1 Value",
+                  accent: "bg-amber-500/10 text-amber-600 border-amber-200/60",
+                },
+                {
+                  icon: Recycle,
+                  title: "Zero Landfill",
+                  sub: "100% Recycled",
+                  accent: "bg-emerald-500/10 text-emerald-600 border-emerald-200/60",
+                },
+              ].map(({ icon: Icon, title, sub, accent }) => (
+                <div
+                  key={title}
+                  className="flex flex-col sm:flex-col xl:flex-row items-start xl:items-center gap-2 xl:gap-2.5 p-2.5 sm:p-3 rounded-2xl bg-white/95 hover:bg-white border border-sky-200/70 hover:border-[#14A3C7]/50 shadow-xs hover:shadow-md transition-all duration-300 group text-left w-full"
+                >
+                  <div className={`w-8 h-8 rounded-xl ${accent} border flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform`}>
+                    <Icon size={16} />
                   </div>
-                  <div>
-                    <p className="text-[10px] font-black text-gray-800 uppercase tracking-wide leading-tight">
+                  <div className="min-w-0 flex-1 w-full">
+                    <p className="font-sans text-xs sm:text-[12px] xl:text-[12.5px] font-bold text-gray-900 leading-tight">
                       {title}
                     </p>
-                    <p className="text-[9px] text-gray-400 font-semibold">{sub}</p>
+                    <p className="font-sans text-[10px] sm:text-[10.5px] text-gray-500 font-medium leading-tight mt-0.5">
+                      {sub}
+                    </p>
                   </div>
                 </div>
               ))}
             </div>
           </motion.div>
 
-          {/* ─── RIGHT — Tall image + perimeter-orbiting badges ─── */}
-          {/*
-            Padding of 24px gives badges room to sit on all 4 edges without
-            being clipped by the section overflow-hidden.
-            The inner image div uses inset-6 to offset that same padding.
-          */}
+          {/* ─── RIGHT — Editorial Hero Photo + BWORTH Box ─── */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.25, ease: "easeOut" }}
-            className="hidden lg:block relative"
-            style={{ height: 420, padding: 24 }}
+            className="hidden lg:flex items-center justify-center relative w-full h-[450px] xl:h-[510px] 2xl:h-[560px]"
           >
             {/* Main image */}
-            <div
-              className="absolute inset-6 rounded-2xl overflow-hidden shadow-2xl border-4 border-white"
-            >
+            <div className="relative w-full h-full max-w-[350px] xl:max-w-[420px] 2xl:max-w-[460px] rounded-3xl overflow-hidden shadow-2xl border-[5px] border-white">
               <Image
-                src="/bworth_hero_official.jpg"
-                alt="BWorth sustainable clothing collection"
+                src="/bworth_hero_woman.jpg"
+                alt="BWorth sustainable wardrobe collection and rewards"
                 fill
-                className="object-cover"
+                sizes="(max-width: 1280px) 360px, 460px"
+                className="object-cover object-top"
                 priority
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
             </div>
-
           </motion.div>
 
         </div>
-      </div>
-
-      {/* Seamlessly Connected Trust & Benefit Ticker at Hero Base */}
-      <div className="relative w-full mt-2 sm:mt-4">
-        <ScrollBanner />
       </div>
     </section>
   );

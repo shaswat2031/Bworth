@@ -10,7 +10,9 @@ import { Globe, ArrowRightCircle, Sparkles, CheckCircle2, ArrowRight, Leaf, Recy
 import Hero from "./components/Hero";
 import GsapTextReveal from "./components/GsapTextReveal";
 import FeatureSection from "./components/FeatureSection";
+import ScrollImpactBanner from "./components/ScrollImpactBanner";
 import ContactSection from "./components/ContactSection";
+import ReviewMarqueeSection from "./components/ReviewMarqueeSection";
 import Footer from "./components/Footer";
 import { useTheme } from "./context/ThemeContext";
 import { translations as t } from "./utils/translations";
@@ -74,7 +76,7 @@ export default function Home() {
           theme === "white" ? "bg-gradient-to-b from-[#f4fafc] via-white to-white" : "bg-[#091720]"
         }`}
       >
-        <div className="max-w-7xl mx-auto relative z-10">
+        <div className="max-w-[1500px] mx-auto relative z-10">
           {/* Section Header */}
           <div className="text-center mb-8 sm:mb-10 space-y-3">
             <h2
@@ -93,7 +95,7 @@ export default function Home() {
                 theme === "white" ? "text-slate-600" : "text-slate-300"
               }`}
             >
-              <span className="text-[#14A3C7] font-bold">We fix that.</span> Turn dormant clothing clutter into instant wallet cash and guaranteed zero-landfill eco recycling.
+              <span className="text-[#14A3C7] font-bold">We fix that.</span> Turn your unused clothes into instant cash and keep them out of the garbage.
             </p>
           </div>
 
@@ -108,33 +110,33 @@ export default function Home() {
             {[
               {
                 num: "01",
-                tag: "Wardrobe Clutter",
-                title: t.problem_section?.pain_1 || "Clothes you don't wear",
+                tag: "Closet Clutter",
+                title: "Clothes You Never Wear",
                 description:
-                  "Over 70% of clothing sits unworn in closets for months, gathering dust, occupying living space, and depreciating.",
-                stat: "70% Unused Garments",
+                  "Most of us wear only a few favorite clothes. The rest just sits in cupboards for months, taking up space and gathering dust.",
+                stat: "70% Unused Clothes",
                 solution: "Free Doorstep Pickup in 2 Mins",
-                img: "/problem_01.png",
+                img: "/problem_closet_clutter.jpg",
               },
               {
                 num: "02",
-                tag: "Value Depletion",
-                title: t.problem_section?.pain_2 || "Low resale value",
+                tag: "Hard to Sell",
+                title: "Low Resale Prices & Bargaining",
                 description:
-                  "Traditional second-hand thrift platforms charge heavy fees, require lengthy listing chats, and pay pennies on the rupee.",
-                stat: "Guaranteed 1:1 Value",
+                  "Other apps make you take lots of photos, chat with strangers, and bargain for days just to earn a few rupees.",
+                stat: "₹1 Value for 1 Coin",
                 solution: "1 BWC = ₹1 Instant Wallet Cash",
-                img: "/problem_02.png",
+                img: "/problem_resale_value.jpg",
               },
               {
                 num: "03",
-                tag: "Landfill Crisis",
-                title: t.problem_section?.pain_3 || "No easy way to recycle",
+                tag: "Zero Waste",
+                title: "Guilt of Throwing Clothes Away",
                 description:
-                  "Millions of metric tons of wearable fabrics end up in toxic dump yards every year because verified textile recyclers are inaccessible.",
+                  "Throwing away good clothes feels terrible, but recycling is hard. We make sure none of your clothes end up in the trash.",
                 stat: "100% Zero-Landfill",
-                solution: "Traceable Circular Processing",
-                img: "/problem_03.png",
+                solution: "100% Eco-Friendly Recycling",
+                img: "/problem_zero_landfill.jpg",
               },
             ].map((entry, i) => (
               <motion.div
@@ -156,14 +158,21 @@ export default function Home() {
                     src={entry.img}
                     alt={entry.title}
                     fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
                   {/* Subtle Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-black/25 pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/15 to-black/25 pointer-events-none" />
 
+                  {/* Top Category Tag */}
+                  <div className="absolute top-3 left-3.5 z-10 inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-white/90 text-[10px] font-black tracking-wider uppercase">
+                    <span>{entry.num}</span>
+                    <span className="text-white/40">•</span>
+                    <span>{entry.tag}</span>
+                  </div>
 
                   {/* Bottom Stat Chip */}
-                  <div className="absolute bottom-3 left-3.5 z-10 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/20 text-white text-[11px] font-bold">
+                  <div className="absolute bottom-3 left-3.5 z-10 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/75 backdrop-blur-md border border-white/20 text-white text-[11px] font-bold">
                     <span className="w-2 h-2 rounded-full bg-[#14A3C7] animate-pulse" />
                     <span>{entry.stat}</span>
                   </div>
@@ -223,7 +232,7 @@ export default function Home() {
             >
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping shrink-0" />
               <span className="text-xs sm:text-sm font-semibold">
-                Over 25,000+ KG of clothing already collected & recycled
+                Over 25,000+ KG of clothes already collected & recycled
               </span>
             </div>
 
@@ -233,7 +242,7 @@ export default function Home() {
               }`}
             >
               {t.problem_section?.desc ||
-                "Join active users who are turning clutter into value while saving the planet."}
+                "Join thousands of people who clear their cupboards and get paid real cash while helping the planet."}
             </p>
             <div className="problem-line w-20 h-1 bg-[#14A3C7]/40 rounded-full mx-auto mt-4" />
           </div>
@@ -243,32 +252,8 @@ export default function Home() {
         <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-[#14A3C7]/5 blur-3xl rounded-full -z-0" />
       </section>
 
-      {/* Mid-page CTA - Get Coins */}
-      <section className={`pt-6 pb-12 px-6 md:px-12 transition-colors ${theme === "white" ? "bg-[#14A3C7]" : "bg-black"}`}>
-        <div className="max-w-7xl mx-auto">
-          <div className={`cta-banner p-10 md:p-16 rounded-[3.5rem] flex flex-col md:flex-row items-center justify-between gap-10 border ${theme === "white" ? "bg-black text-white border-white/10" : "bg-white text-black border-black/10"}`}>
-            <div className="space-y-4 text-center md:text-left">
-              <h2 className="text-3xl md:text-5xl font-sans font-extrabold uppercase tracking-tight leading-tight">
-                Get Paid to <br />
-                <span className={theme === "white" ? "text-[#14A3C7]" : "text-[#14A3C7]"}>
-                  Recycle.
-                </span>
-              </h2>
-              <p className={`text-base md:text-lg font-normal max-w-md ${theme === "white" ? "text-white/70" : "text-black/70"}`}>
-                Every coin you earn is ₹1 value. Payouts are based on brand, condition, and market demand.
-              </p>
-            </div>
-            <Link
-              href="https://play.google.com/store/apps/details?id=com.BworthGo"
-              target="_blank"
-              className={`px-10 py-6 rounded-full font-sans font-extrabold uppercase tracking-widest text-base transition-all hover:scale-105 shadow-2xl ${theme === "white" ? "bg-[#14A3C7] text-white" : "bg-black text-white"
-                }`}
-            >
-              GET COINS NOW
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Dynamic Scroll-Driven Impact Banner (Left-to-Right based on Up/Down Scroll) */}
+      <ScrollImpactBanner />
 
       <div id="ecosystem">
         <FeatureSection />
@@ -422,7 +407,8 @@ export default function Home() {
         <div className="pointer-events-none absolute -bottom-20 right-10 w-80 h-80 bg-[#14A3C7]/5 blur-3xl rounded-full" />
       </section>
 
-
+      {/* Polished Existing Reviews - Continuous Left-to-Right Reviews Marquee */}
+      <ReviewMarqueeSection />
 
       <ContactSection />
       <Footer />
