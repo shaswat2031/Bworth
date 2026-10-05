@@ -299,16 +299,8 @@ export default function Home() {
                 </p>
               </div>
 
-              {/* Action Button & Trust Guarantee */}
-              <div className="mission-footer pt-2 flex flex-wrap items-center gap-4 sm:gap-6">
-                <Link
-                  href="/our-mission"
-                  className="group inline-flex items-center gap-2.5 bg-[#14A3C7] hover:bg-[#1089a8] text-white px-7 py-3.5 rounded-full font-bold uppercase tracking-wider text-xs sm:text-sm transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105 active:scale-95"
-                >
-                  <span>{t.hero.read_story || "READ OUR FULL STORY"}</span>
-                  <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                </Link>
-
+              {/* Trust Guarantee */}
+              <div className="mission-footer pt-1 flex items-center">
                 <div
                   className={`inline-flex items-center gap-2 text-xs font-semibold ${
                     theme === "white" ? "text-slate-600" : "text-slate-300"
@@ -325,6 +317,8 @@ export default function Home() {
               {[
                 {
                   value: "25,000+",
+                  suffix: "KG",
+                  suffixColor: "text-[#14A3C7]",
                   unit: "KG",
                   label: "Clothes Recycled",
                   desc: "Diverted away from city landfills",
@@ -333,6 +327,8 @@ export default function Home() {
                 },
                 {
                   value: "500+",
+                  suffix: "Tons",
+                  suffixColor: "text-emerald-500",
                   unit: "TONS",
                   label: "CO₂ Offset",
                   desc: "Certified environmental emissions saved",
@@ -373,18 +369,29 @@ export default function Home() {
                     <span className={`w-9 h-9 rounded-xl flex items-center justify-center border ${stat.accent}`}>
                       {stat.icon}
                     </span>
-                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                    <span
+                      className={`text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-md ${
+                        theme === "white"
+                          ? "bg-slate-100 text-slate-600 border border-slate-200/70"
+                          : "bg-white/10 text-slate-300 border border-white/10"
+                      }`}
+                    >
                       {stat.unit}
                     </span>
                   </div>
 
                   <div>
                     <div
-                      className={`text-2xl sm:text-3xl font-sans font-black tracking-tight ${
+                      className={`text-2xl sm:text-3xl font-sans font-black tracking-tight flex items-baseline gap-1.5 ${
                         theme === "white" ? "text-slate-900" : "text-white"
                       }`}
                     >
-                      {stat.value}
+                      <span>{stat.value}</span>
+                      {stat.suffix && (
+                        <span className={`text-xl sm:text-2xl font-black ${stat.suffixColor || "text-[#14A3C7]"}`}>
+                          {stat.suffix}
+                        </span>
+                      )}
                     </div>
                     <div className="text-xs sm:text-sm font-bold text-[#14A3C7] mt-1">
                       {stat.label}

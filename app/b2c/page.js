@@ -50,20 +50,20 @@ export default function B2CPage() {
       title: "HOW TO EARN BWC COINS",
       badgeColor: "bg-[#14A3C7]/15 text-[#14A3C7] border-[#14A3C7]/30",
       items: [
-        "Recycle unused clothes (Earn by weight & brand grade)",
-        "Sell pre-loved fashion directly on BWorth marketplace",
-        "Society & Community Mega Referral Rewards Drives"
-      ]
+        "Give unused clothes (Free doorstep pickup)",
+        "Earn by garment weight & brand grade",
+        "Refer & Earn with friends & family",
+      ],
     },
     {
       title: "HOW TO SPEND BWC COINS",
       badgeColor: "bg-emerald-500/15 text-emerald-500 border-emerald-500/30",
       items: [
-        "Redeem 1:1 on Made-in-India partner brand products",
-        "Get instant checkout discounts on new fashion",
-        "1 BWC Coin = ₹1 INR real cash value guaranteed"
-      ]
-    }
+        "Buy new clothes on the BWorth app",
+        "1 BWC Coin = ₹1 INR guaranteed value",
+        "Redeem 1:1 on partner brand products",
+      ],
+    },
   ];
 
   return (

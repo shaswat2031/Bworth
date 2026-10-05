@@ -80,7 +80,7 @@ export default function AboutUs() {
                 <span className="text-[10px] font-black uppercase tracking-widest">RECYCLED</span>
               </div>
               <p className="text-xl sm:text-2xl font-black font-sans tracking-tight text-emerald-500">25,000+ kg</p>
-              <p className={`text-xs ${isWhite ? "text-slate-500" : "text-slate-400"}`}>Clothes Saved from Landfill</p>
+              <p className={`text-xs ${isWhite ? "text-slate-500" : "text-slate-400"}`}>Clothes Saved from Landfills</p>
             </div>
 
             <div className="space-y-1 text-center md:text-left">
@@ -89,7 +89,7 @@ export default function AboutUs() {
                 <span className="text-[10px] font-black uppercase tracking-widest">CO₂ SAVED</span>
               </div>
               <p className="text-xl sm:text-2xl font-black font-sans tracking-tight text-amber-500">500+ Tons</p>
-              <p className={`text-xs ${isWhite ? "text-slate-500" : "text-slate-400"}`}>Emissions Prevented</p>
+              <p className={`text-xs ${isWhite ? "text-slate-500" : "text-slate-400"}`}>Carbon Emissions Prevented</p>
             </div>
 
             <div className="space-y-1 text-center md:text-left">
@@ -98,7 +98,7 @@ export default function AboutUs() {
                 <span className="text-[10px] font-black uppercase tracking-widest">FOUNDER EXP</span>
               </div>
               <p className="text-xl sm:text-2xl font-black font-sans tracking-tight">18+ Years</p>
-              <p className={`text-xs ${isWhite ? "text-slate-500" : "text-slate-400"}`}>Founder's Industry Track Record</p>
+              <p className={`text-xs ${isWhite ? "text-slate-500" : "text-slate-400"}`}>Experience in Building Businesses</p>
             </div>
           </motion.div>
         </div>
@@ -124,8 +124,8 @@ export default function AboutUs() {
               <h2 className={`text-3xl sm:text-5xl font-serif font-black uppercase tracking-tight leading-tight ${
                 isWhite ? "text-slate-900" : "text-white"
               }`}>
-                Building a Sustainable <br />
-                <span className="text-[#14A3C7] italic">Fashion Ecosystem.</span>
+                Making Fashion Clean & <br />
+                <span className="text-[#14A3C7] italic">Waste-Free for Everyone.</span>
               </h2>
 
               <p className={`text-base sm:text-lg font-normal leading-relaxed ${
@@ -181,7 +181,7 @@ export default function AboutUs() {
               </div>
 
               <h3 className="text-2xl font-serif font-black uppercase tracking-tight">
-                Repurposing & Zero-Landfill
+                Zero Waste & Safe Recycling
               </h3>
 
               <p className={`text-base sm:text-lg font-normal leading-relaxed ${
@@ -194,7 +194,7 @@ export default function AboutUs() {
                 isWhite ? "bg-slate-50 border-slate-200" : "bg-white/5 border-white/10"
               }`}>
                 <h4 className="text-sm font-black uppercase tracking-wider text-[#14A3C7]">
-                  FLAGSHIP BUYBACK PROGRAM
+                  DOORSTEP BUYBACK PROGRAM
                 </h4>
                 <p className={`text-sm sm:text-base font-normal leading-relaxed ${
                   isWhite ? "text-slate-700" : "text-slate-300"
@@ -226,7 +226,7 @@ export default function AboutUs() {
               {t.about_page.visionary} <span className="text-[#14A3C7] italic">{t.about_page.leader_title}</span>
             </h2>
             <p className={`text-sm sm:text-base ${isWhite ? "text-slate-600" : "text-slate-400"}`}>
-              The visionaries driving sustainable circular fashion and empowering conscious consumerism.
+              The dedicated leaders working to make sustainable fashion practical, honest, and easy for everyone.
             </p>
           </div>
 
@@ -264,9 +264,9 @@ export default function AboutUs() {
                     {t.about_page.founder_name}
                   </h3>
                   <p className={`text-xs font-semibold ${isWhite ? "text-slate-500" : "text-slate-400"}`}>
-                    18+ Years Business & Environmental Strategy
+                    {t.about_page.founder_status}
                   </p>
-                  <p className={`text-xs sm:text-sm font-normal leading-relaxed ${
+                  <p className={`text-sm leading-relaxed ${
                     isWhite ? "text-slate-700" : "text-slate-300"
                   }`}>
                     {t.about_page.leader_desc}
@@ -320,7 +320,7 @@ export default function AboutUs() {
                   <p className={`text-xs font-semibold ${isWhite ? "text-slate-500" : "text-slate-400"}`}>
                     {t.about_page.cofounder_status}
                   </p>
-                  <p className={`text-xs sm:text-sm font-normal leading-relaxed ${
+                  <p className={`text-sm leading-relaxed ${
                     isWhite ? "text-slate-700" : "text-slate-300"
                   }`}>
                     {t.about_page.cofounder_desc}
