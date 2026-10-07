@@ -6,19 +6,20 @@ import { ThemeProvider } from "./context/ThemeContext";
 const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
 });
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
+  display: "swap",
 });
 
 const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
+  display: "swap",
 });
 
 const baseUrl = "https://www.bworth.co.in";
