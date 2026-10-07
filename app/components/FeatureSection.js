@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 import {
   Truck,
   Coins,
-  PackageCheck,
   ArrowRight,
-  CheckCircle2,
   Sparkles,
+  CalendarCheck,
+  ShoppingBag,
 } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 import { translations as t } from "../utils/translations";
@@ -17,58 +17,71 @@ export default function FeatureSection() {
   const sectionRef = useRef(null);
   const videoRefs = useRef([]);
 
-  // 3 Step Videos matching the user's uploaded videos
+  // 4 Step Flow: Sell Clothes Easily & Buy New Clothes
   const features = [
     {
       stepNum: "01",
-      stepTag: "01 • Schedule Pickup",
-      icon: <Truck size={20} strokeWidth={2.5} />,
-      title: "Schedule Doorstep Pickup",
-      desc: "Choose a convenient pickup slot on the BWorth mobile app in under 2 minutes. Free collection right from your doorstep.",
-      video: "/step_video_01.mp4",
-      fallbackVideo: "/Man_and_woman_booking_pickup_20261005145936.mp4",
+      stepTag: "01 • Book & Gather",
+      icon: <CalendarCheck size={19} strokeWidth={2.5} />,
+      title: "Book Slot & Gather Old Clothes",
+      desc: "Choose a convenient pickup slot on the BWorth app in under 2 minutes and gather your unused clothes in any bag or box.",
+      video: "/1.mp4",
+      fallbackVideo: "/1.mp4",
       poster: "/step_3d_01_hd.png",
       accent: "#10B981",
       accentDark: "#047857",
       badgeLight: "bg-emerald-50 text-emerald-950 border-emerald-300 font-extrabold",
       badgeDark: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30 font-extrabold",
       stat: "2-Min App Booking",
-      perks: ["Free Doorstep Collection", "Any Brand & Any Condition", "Scheduled at Your Convenience"],
-      actionText: "Instant Pickup Dispatch",
+      actionText: "Book Doorstep Slot",
     },
     {
       stepNum: "02",
-      stepTag: "02 • Pack & Earn",
-      icon: <Coins size={20} strokeWidth={2.5} />,
-      title: "Pack Clothes & Earn Cash",
-      desc: "Pack your unused clothes in any bag or box. Earn instant BWC coins directly in your wallet (1 BWC = ₹1 cash value).",
-      video: "/step_video_02.mp4",
-      fallbackVideo: "/People_packing_clothes_together_20261005145948.mp4",
-      poster: "/step_3d_02_hd.png",
+      stepTag: "02 • Free Pickup",
+      icon: <Truck size={19} strokeWidth={2.5} />,
+      title: "Free Partner Pickup",
+      desc: "Our friendly verified partner arrives right at your doorstep to collect, weigh, and handle everything 100% hassle-free.",
+      video: "/2.mp4",
+      fallbackVideo: "/2.mp4",
+      poster: "/step_doorstep_pickup.jpg",
+      accent: "#0284C7",
+      accentDark: "#0369A1",
+      badgeLight: "bg-sky-50 text-sky-900 border-sky-300 font-extrabold",
+      badgeDark: "bg-sky-500/15 text-sky-300 border-sky-500/30 font-extrabold",
+      stat: "Free Doorstep Collection",
+      actionText: "Doorstep Collection",
+    },
+    {
+      stepNum: "03",
+      stepTag: "03 • Earn BWC",
+      icon: <Coins size={19} strokeWidth={2.5} />,
+      title: "Earn Instant BWC Coins",
+      desc: "Instant BWC coins are credited directly to your BWorth wallet (1 BWC = ₹1 cash value) with zero commission fees.",
+      video: "/3.mp4",
+      fallbackVideo: "/3.mp4",
+      poster: "/step_instant_coins.jpg",
       accent: "#F59E0B",
       accentDark: "#D97706",
       badgeLight: "bg-amber-50 text-amber-950 border-amber-300 font-extrabold",
       badgeDark: "bg-amber-500/15 text-amber-300 border-amber-500/30 font-extrabold",
       stat: "1 BWC = ₹1 Real Value",
-      perks: ["Guaranteed 1:1 Rupee Value", "Direct In-App Wallet Credit", "Zero Commission Fees"],
-      actionText: "Instant Wallet Payout",
+      actionText: "Instant Coin Payout",
     },
     {
-      stepNum: "03",
-      stepTag: "03 • Partner Pickup",
-      icon: <PackageCheck size={20} strokeWidth={2.5} />,
-      title: "Free Partner Pickup & Reuse",
-      desc: "Our friendly verified partner arrives at your door to collect, weigh, and responsibly recycle 100% zero-landfill.",
-      video: "/step_video_03.mp4",
-      fallbackVideo: "/Doorstep_clothing_pickup_interac…_20261005145955.mp4",
-      poster: "/step_3d_03_hd.png",
-      accent: "#14A3C7",
-      accentDark: "#0284C7",
-      badgeLight: "bg-sky-50 text-sky-900 border-sky-300 font-extrabold",
-      badgeDark: "bg-sky-500/15 text-sky-300 border-sky-500/30 font-extrabold",
-      stat: "100% Zero-Landfill",
-      perks: ["Verified Eco Partners", "100% Zero-Landfill Guarantee", "Traceable Environmental Impact"],
-      actionText: "Circular Fashion Impact",
+      stepNum: "04",
+      stepTag: "04 • Shop On App",
+      icon: <ShoppingBag size={19} strokeWidth={2.5} />,
+      title: "Order New Clothes on BWorth App",
+      desc: "Use your earned BWC coins directly on the BWorth app to order fresh, stylish fashion collections and complete the circular loop.",
+      video: "/4.mp4",
+      fallbackVideo: "/4.mp4",
+      poster: "/step_buy_sustainable.jpg",
+      accent: "#8B5CF6",
+      accentDark: "#6D28D9",
+      badgeLight: "bg-purple-50 text-purple-950 border-purple-300 font-extrabold",
+      badgeDark: "bg-purple-500/15 text-purple-300 border-purple-500/30 font-extrabold",
+      stat: "Shop on BWorth App",
+      actionText: "Order on BWorth App",
     },
   ];
 
@@ -120,50 +133,38 @@ export default function FeatureSection() {
       <div className="max-w-[1500px] mx-auto relative z-10">
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 mb-10 sm:mb-12">
-          <div className="max-w-2xl space-y-3">
-            <div
-              className={`inline-flex items-center gap-2 px-3 py-1 rounded-full border text-[11px] font-black uppercase tracking-wider ${
-                theme === "white"
-                  ? "bg-white border-slate-200 text-[#14A3C7]"
-                  : "bg-white/5 border-white/10 text-cyan-300"
-              }`}
-            >
-              <Sparkles size={13} className="text-[#14A3C7]" />
-              <span>Circular Lifecycle • 3 Simple Steps</span>
-            </div>
-
+          <div className="max-w-5xl space-y-3.5">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
-              className={`text-3xl sm:text-4xl lg:text-5xl font-sans font-black uppercase tracking-tight leading-tight ${
+              className={`text-2xl sm:text-4xl lg:text-5xl font-sans font-black uppercase tracking-tight leading-tight ${
                 theme === "white" ? "text-slate-900" : "text-white"
               }`}
             >
-              Sell Your Clothes{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#14A3C7] via-[#0ea5e9] to-[#0284c7] italic">
-                Easily.
+              <span>Sell Clothes Easily </span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#14A3C7] via-[#0ea5e9] to-[#0284c7]">
+                & Buy New Clothes.
               </span>
             </motion.h2>
             <p
-              className={`text-base sm:text-lg font-medium leading-relaxed ${
+              className={`text-base sm:text-lg font-medium leading-relaxed max-w-3xl ${
                 theme === "white" ? "text-slate-600" : "text-slate-300"
               }`}
             >
-              {t.features.desc ||
-                "Give fashion a second life. Schedule a doorstep pickup, earn BWorth Coins, and buy."}
+              Give fashion a second life. Book a slot, hand over old clothes, earn BWorth Coins (1 BWC = ₹1), and use them to buy fresh styles.
             </p>
           </div>
         </div>
 
 
-        {/* ── THE 3 VISUAL-FIRST STEP CARDS (With Clean 3D Studio Mockups & Connector Line) ─── */}
+        {/* ── THE 4 VISUAL-FIRST STEP CARDS (With Clean 3D Studio Mockups & Connector Line) ─── */}
         <div className="relative">
           {/* Subtle Horizontal Dashed Road Connector Line behind cards */}
-          <div className="hidden lg:block absolute top-[110px] inset-x-20 border-t-2 border-dashed border-sky-300/50 dark:border-white/15 pointer-events-none z-0" />
+          <div className="hidden xl:block absolute top-[110px] inset-x-16 border-t-2 border-dashed border-sky-300/50 dark:border-white/15 pointer-events-none z-0" />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 relative z-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 relative z-10">
             {features.map((f, i) => {
               const isCurrent = activeStep === i;
 
@@ -227,10 +228,10 @@ export default function FeatureSection() {
                   </div>
 
                   {/* ── CARD BODY (Concise, Clean Text) ── */}
-                  <div className="p-6 sm:p-7 flex flex-col flex-1 justify-between gap-5 relative z-10">
-                    <div className="space-y-3">
+                  <div className="p-5 sm:p-6 flex flex-col flex-1 justify-between gap-4 relative z-10">
+                    <div className="space-y-2.5">
                       <h3
-                        className={`text-xl sm:text-2xl font-sans font-bold tracking-tight transition-colors ${
+                        className={`text-lg sm:text-xl font-sans font-bold tracking-tight transition-colors leading-snug ${
                           theme === "white"
                             ? isCurrent
                               ? "text-slate-900"
@@ -244,38 +245,12 @@ export default function FeatureSection() {
                       </h3>
 
                       <p
-                        className={`text-xs sm:text-sm leading-relaxed font-medium ${
+                        className={`text-xs sm:text-[13px] leading-relaxed font-medium ${
                           theme === "white" ? "text-slate-600" : "text-slate-300"
                         }`}
                       >
                         {f.desc}
                       </p>
-                    </div>
-
-                    {/* Perks Checklist */}
-                    <div
-                      className={`space-y-2.5 pt-3.5 border-t ${
-                        theme === "white" ? "border-slate-100" : "border-white/10"
-                      }`}
-                    >
-                      {f.perks.map((perk, pIdx) => (
-                        <div
-                          key={pIdx}
-                          className={`flex items-center gap-2.5 text-xs sm:text-[13px] font-bold ${
-                            theme === "white" ? "text-slate-800" : "text-slate-200"
-                          }`}
-                        >
-                          <CheckCircle2
-                            size={15}
-                            strokeWidth={2.5}
-                            style={{
-                              color: theme === "white" && f.accentDark ? f.accentDark : f.accent,
-                            }}
-                            className="shrink-0"
-                          />
-                          <span className="font-semibold tracking-tight">{perk}</span>
-                        </div>
-                      ))}
                     </div>
 
                     {/* Bottom Action Ribbon */}

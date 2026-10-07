@@ -1,14 +1,14 @@
 export const metadata = {
-  title: "Contact Us - BWorth Sustainable Fashion Support",
-  description: "Get in touch with BWorth. Contact our team for partnership inquiries, support, or to learn more about our sustainable fashion solutions.",
-  keywords: ["Contact", "Support", "Partnership", "Fashion Technology", "BWorth"],
-  openGraph: {
-    title: "Contact BWorth - Sustainable Fashion Support",
-    description: "Reach out to BWorth for inquiries about sustainable fashion solutions.",
-    type: "website",
-  },
+  title: "Contact Us | Support, Partnerships & Inquiries",
+  description: "Get in touch with the BWorth team for B2C doorstep pickup support, B2B bulk textile recovery partnerships, brand onboarding, or general inquiries.",
   alternates: {
     canonical: "https://www.bworth.co.in/contact-us",
+  },
+  openGraph: {
+    title: "Contact BWorth | Support & Partnerships",
+    description: "Connect with our circular fashion support and operations team.",
+    url: "https://www.bworth.co.in/contact-us",
+    images: ["https://www.bworth.co.in/bworth_hero_official.jpg"],
   },
 };
 

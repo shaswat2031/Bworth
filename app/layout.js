@@ -25,53 +25,106 @@ const baseUrl = "https://www.bworth.co.in";
 
 const structuredData = {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "BWorth",
-  alternateName: "Beworth Technologies",
-  description: "The leading technology partner for circular luxury and sustainable fashion innovation",
-  url: baseUrl,
-  logo: `${baseUrl}/logo.png`,
-  sameAs: [
-    "https://www.instagram.com/bworth.fashion",
-    "https://www.facebook.com/people/BWorth/61565081468088/",
-    "https://www.linkedin.com/company/bworth-technologies",
-    "https://www.youtube.com/@Bworth_Fashion",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${baseUrl}/#organization`,
+      name: "BWorth",
+      alternateName: ["BWorth Circular Fashion", "Beworth Technologies", "BWorth Go"],
+      url: baseUrl,
+      logo: {
+        "@type": "ImageObject",
+        url: `${baseUrl}/bworth-logo.svg`,
+        width: 180,
+        height: 60,
+        caption: "BWorth Logo",
+      },
+      image: `${baseUrl}/bworth_hero_official.jpg`,
+      description: "BWorth is India's premier circular fashion and textile recovery platform. We empower households, enterprises, and fashion brands to give unused clothing a responsible next life through certified doorstep collection, re-wear, upcycling, and zero-landfill recycling.",
+      slogan: "Giving Clothes a Better Next Journey",
+      knowsAbout: [
+        "Circular Fashion Economy",
+        "Textile Recycling",
+        "Doorstep Clothing Pickup",
+        "Fashion Surplus Monetization",
+        "Upcycling and Responsible Reuse",
+        "Corporate ESG Textile Recovery",
+      ],
+      sameAs: [
+        "https://www.instagram.com/bworth.fashion",
+        "https://www.facebook.com/people/BWorth/61565081468088/",
+        "https://www.linkedin.com/company/bworth-technologies",
+        "https://www.youtube.com/@Bworth_Fashion",
+      ],
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          telephone: "+91-8826668050",
+          contactType: "Customer Support",
+          email: "tech@bworth.co.in",
+          areaServed: "IN",
+          availableLanguage: ["English", "Hindi"],
+        },
+      ],
+      address: {
+        "@type": "PostalAddress",
+        addressCountry: "IN",
+        addressLocality: "Gurugram",
+        addressRegion: "Haryana",
+        streetAddress: "Gurugram, Haryana, India",
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${baseUrl}/#website`,
+      url: baseUrl,
+      name: "BWorth Circular Fashion",
+      description: "Doorstep clothes pickup, circular recovery, and fashion brand buyback platform.",
+      publisher: {
+        "@id": `${baseUrl}/#organization`,
+      },
+      inLanguage: "en-US",
+    },
+    {
+      "@type": "Service",
+      "@id": `${baseUrl}/#service-pickup`,
+      name: "BWorth Doorstep Clothes Pickup & Circular Recovery",
+      serviceType: "Textile Recycling & Clothing Recirculation",
+      provider: {
+        "@id": `${baseUrl}/#organization`,
+      },
+      areaServed: {
+        "@type": "Country",
+        name: "India",
+      },
+      description: "Free doorstep collection kit for unused clothes. Earn instant BWC coins, declutter wardrobes, and divert textiles from landfills into verified re-wear, upcycling, and scientific recycling.",
+    },
   ],
-  contactPoint: {
-    "@type": "ContactPoint",
-    telephone: "+91-8826668050",
-    contactType: "Customer Service",
-    email: "info@bworth.co.in",
-  },
-  address: {
-    "@type": "PostalAddress",
-    addressCountry: "IN",
-    addressLocality: "Gurugram",
-    addressRegion: "Haryana",
-    streetAddress: "Gurugram, Haryana, India",
-  },
 };
 
 export const metadata = {
-  title: "BWorth - Technology Partner for Circular Luxury & Sustainable Fashion",
-  description: "BWorth: The leading technology partner for circular luxury and sustainable fashion innovation. Buy, sell, trade and recycle premium clothing with our innovative buyback program.",
+  metadataBase: new URL(baseUrl),
+  title: {
+    default: "BWorth | Circular Fashion, Doorstep Clothes Pickup & Textile Recovery",
+    template: "%s | BWorth",
+  },
+  description: "BWorth is India's leading circular fashion platform. Schedule free doorstep clothing pickups, earn instant BWC rewards, monetize brand deadstock, and prevent landfill waste.",
   keywords: [
-    "Sustainable Fashion",
-    "Circular Fashion",
-    "Luxury Fashion",
-    "Fashion Buyback",
-    "Eco-Friendly Clothing",
-    "Fashion Technology",
+    "Circular Fashion India",
+    "Doorstep Clothes Pickup",
+    "Clothing Recycling India",
+    "Sell Old Clothes Online",
+    "Wardrobe Declutter Pickup",
+    "B2B Bulk Textile Recovery",
+    "Sustainable Fashion Labels",
+    "Fashion Deadstock Monetization",
+    "Clothes Upcycling India",
     "BWorth",
-    "Beworth",
-    "Circular Economy",
-    "Sustainable Luxury",
-    "Fashion Resale",
-    "Clothing Recycling",
-    "B2B Fashion",
-    "Fashion Innovation",
+    "BWorth Go",
+    "Zero Landfill Textile",
+    "Corporate ESG Clothes Donation",
   ],
-  authors: [{ name: "BWorth Technologies" }],
+  authors: [{ name: "BWorth Technologies", url: baseUrl }],
   creator: "BWorth Technologies",
   publisher: "BWorth",
   formatDetection: {
@@ -80,37 +133,33 @@ export const metadata = {
   },
   icons: {
     icon: [
-      { url: "/logo.png", sizes: "any", type: "image/png" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/icon.png", sizes: "any", type: "image/png" },
+      { url: "/favicon.ico", sizes: "any" },
     ],
-    apple: { url: "/logo.png", sizes: "180x180" },
+    apple: { url: "/apple-icon.png", sizes: "180x180" },
   },
   openGraph: {
-    title: "BWorth - Sustainable Fashion Ecosystem",
-    description: "The leading technology partner for circular luxury and sustainable fashion innovation.",
+    title: "BWorth | Circular Fashion & Sustainable Clothing Recirculation",
+    description: "Giving clothes a better next journey. Book free doorstep clothing pickups, earn BWC wallet coins, and enable zero-landfill fashion.",
     url: baseUrl,
     siteName: "BWorth",
     images: [
       {
-        url: `${baseUrl}/og-image.jpg`,
+        url: `${baseUrl}/bworth_hero_official.jpg`,
         width: 1200,
         height: 630,
-        alt: "BWorth Sustainable Fashion",
-      },
-      {
-        url: `${baseUrl}/og-image-square.jpg`,
-        width: 1024,
-        height: 1024,
-        alt: "BWorth Logo",
+        alt: "BWorth Circular Fashion Platform",
       },
     ],
-    locale: "en_US",
+    locale: "en_IN",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "BWorth - Technology Partner for Circular Luxury",
-    description: "Join the revolution in sustainable fashion with innovative buyback programs.",
-    images: [`${baseUrl}/og-image.jpg`],
+    title: "BWorth | Circular Fashion & Doorstep Textile Recovery",
+    description: "Turn unused wardrobe clutter into valuable BWC rewards with certified circular recovery.",
+    images: [`${baseUrl}/bworth_hero_official.jpg`],
   },
   robots: {
     index: true,
@@ -123,10 +172,6 @@ export const metadata = {
       "max-video-preview": -1,
     },
   },
-  verification: {
-    google: "YOUR_GOOGLE_VERIFICATION_ID", // Add your Google Search Console ID
-    yandex: "YOUR_YANDEX_VERIFICATION_ID",
-  },
   alternates: {
     canonical: baseUrl,
   },
@@ -137,8 +182,10 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning>
       <head>
         {/* Favicon */}
-        <link rel="icon" type="image/png" href="/logo.png" />
-        <link rel="apple-touch-icon" href="/logo.png" />
+        <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+        <link rel="alternate icon" type="image/png" href="/icon.png" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/apple-icon.png" />
         
         {/* Theme Initialization Script to prevent flash */}
         <script

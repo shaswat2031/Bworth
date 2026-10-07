@@ -271,8 +271,8 @@ export default function Home() {
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
             {/* Left Column: Mission Narrative & Manifesto */}
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="lg:col-span-6 space-y-6">
-              <h2 className="mission-title text-3xl sm:text-4xl md:text-5xl font-sans font-black uppercase tracking-tight leading-[1.1]">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="lg:col-span-6 space-y-7 sm:space-y-8">
+              <h2 className="mission-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-sans font-black uppercase tracking-tight leading-[1.04]">
                 {t.hero.mission_title_our}{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#14A3C7] via-[#0ea5e9] to-[#0284c7]">
                   {t.hero.mission_title_mission}
@@ -281,7 +281,7 @@ export default function Home() {
 
               <div className="mission-desc space-y-4">
                 <p
-                  className={`text-lg sm:text-xl font-bold font-sans leading-snug ${
+                  className={`text-2xl sm:text-3xl lg:text-4xl font-sans font-black tracking-tight leading-tight ${
                     theme === "white" ? "text-slate-900" : "text-white"
                   }`}
                 >
@@ -290,7 +290,7 @@ export default function Home() {
                 </p>
 
                 <p
-                  className={`text-sm sm:text-base leading-relaxed ${
+                  className={`text-base sm:text-lg lg:text-xl leading-relaxed font-normal ${
                     theme === "white" ? "text-slate-600" : "text-slate-300"
                   }`}
                 >
@@ -300,13 +300,15 @@ export default function Home() {
               </div>
 
               {/* Trust Guarantee */}
-              <div className="mission-footer pt-1 flex items-center">
+              <div className="mission-footer pt-2 flex items-center">
                 <div
-                  className={`inline-flex items-center gap-2 text-xs font-semibold ${
-                    theme === "white" ? "text-slate-600" : "text-slate-300"
+                  className={`inline-flex items-center gap-2.5 px-4 py-2 rounded-full border text-sm sm:text-base font-bold transition-all ${
+                    theme === "white"
+                      ? "bg-emerald-50 border-emerald-200 text-emerald-800"
+                      : "bg-emerald-950/30 border-emerald-500/30 text-emerald-300"
                   }`}
                 >
-                  <CheckCircle2 size={16} className="text-emerald-500 shrink-0" />
+                  <CheckCircle2 size={18} className="text-emerald-500 shrink-0" />
                   <span>100% Zero-Landfill Guarantee</span>
                 </div>
               </div>

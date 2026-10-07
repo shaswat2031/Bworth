@@ -102,12 +102,11 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" className="group flex items-center gap-3 shrink-0">
             <Image
-              src="/logo.png"
+              src="/bworth-logo.svg"
               alt="Bworth Logo"
-              width={0}
-              height={0}
-              sizes="100vw"
-              className={`h-8 sm:h-10 w-auto object-contain transition-all duration-500 group-hover:scale-105 ${theme === "white" ? "" : "brightness-0 invert"
+              width={160}
+              height={45}
+              className={`h-9 sm:h-11 w-auto object-contain transition-all duration-500 group-hover:scale-105 ${theme === "white" ? "" : "brightness-0 invert"
                 }`}
             />
           </Link>
@@ -247,25 +246,6 @@ export default function Navbar() {
 
           {/* Right Action Controls */}
           <div className="flex items-center gap-3 shrink-0">
-            {/* Theme Toggle - Desktop Pill Button */}
-            <button
-              onClick={() => toggleTheme(theme === "blue" ? "white" : "blue")}
-              className={`hidden lg:flex items-center gap-2 px-3.5 py-2 rounded-full transition-all duration-300 hover:scale-105 active:scale-95 text-xs font-bold ${theme === "white"
-                  ? "bg-black/5 text-black hover:bg-black/10 border border-black/10"
-                  : "bg-white/10 text-white hover:bg-white/20 border border-white/15"
-                }`}
-              title={theme === "blue" ? "Switch to Light Mode" : "Switch to Dark Mode"}
-            >
-              <motion.div
-                key={theme}
-                initial={{ rotate: -90, opacity: 0 }}
-                animate={{ rotate: 0, opacity: 1 }}
-                transition={{ duration: 0.3 }}
-              >
-                {theme === "blue" ? <Sun size={16} className="text-amber-400" /> : <Moon size={16} />}
-              </motion.div>
-            </button>
-
             {/* Mobile Hamburger Button */}
             <button
               onClick={() => setIsOpen(true)}
@@ -320,21 +300,6 @@ export default function Navbar() {
 
               <div className="space-y-6 mt-12 pb-12">
                 <div
-                  onClick={() =>
-                    toggleTheme(theme === "blue" ? "white" : "blue")
-                  }
-                  className={`flex items-center gap-3 transition-colors cursor-pointer group ${theme === "white"
-                      ? "text-black/40 hover:text-[#14A3C7]"
-                      : "text-white hover:text-[#14A3C7]"
-                    }`}
-                >
-                  {theme === "blue" ? <Sun size={18} /> : <Moon size={18} />}
-                  <span className="text-xs font-bold uppercase tracking-widest">
-                    {theme === "blue" ? "Dark Mode" : "Light Mode"}
-                  </span>
-                </div>
-
-                <div
                   className={`text-[10px] uppercase tracking-[0.2em] font-bold ${theme === "white" ? "text-black/30" : "text-white/30"
                     }`}
                 >
@@ -362,19 +327,6 @@ export default function Navbar() {
                 </div>
 
                 <div className="flex items-center gap-4 ml-auto">
-                  {/* Mobile Toggles */}
-                  <div className="md:hidden pr-4">
-                    <button
-                      onClick={() =>
-                        toggleTheme(theme === "blue" ? "white" : "blue")
-                      }
-                      className={
-                        theme === "white" ? "text-black/60" : "text-white/60"
-                      }
-                    >
-                      {theme === "blue" ? <Sun size={20} /> : <Moon size={20} />}
-                    </button>
-                  </div>
 
                   <button
                     onClick={() => setIsOpen(false)}

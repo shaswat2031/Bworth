@@ -1,19 +1,54 @@
+# Modern Search Engine & AI Crawler Policy
+# Primary Canonical Domain: https://www.bworth.co.in
+
+User-agent: Googlebot
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin
+
+User-agent: Bingbot
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+
+User-agent: Applebot
+Allow: /
+Disallow: /api/
+
+# AI Search Engines & Answer Engines (GEO/AEO Readiness)
+User-agent: GPTBot
+Allow: /
+Disallow: /api/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /api/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /api/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /api/
+
+User-agent: anthropic-ai
+Allow: /
+Disallow: /api/
+
+User-agent: Bytespider
+Allow: /
+Disallow: /api/
+
+# Default policy for all web crawlers
 User-agent: *
 Allow: /
 Disallow: /api/
-Disallow: /*.json$
-Disallow: /admin
 Disallow: /_next/
+Disallow: /admin
+Disallow: /*.json$
 
-# Slow down aggressive crawlers
-User-agent: AhrefsBot
-Crawl-delay: 10
-
-User-agent: SemrushBot
-Crawl-delay: 10
-
-# Fast crawlers OK
-User-agent: Googlebot
-
-# Sitemap location
+# Sitemaps & Host
 Sitemap: https://www.bworth.co.in/sitemap.xml
+Host: https://www.bworth.co.in

@@ -20,11 +20,8 @@ export default function Footer() {
     { name: "B2C (Consumer)", href: '/b2c' },
     { name: t.footer.b2b, href: '/b2b' },
     { name: t.footer.about, href: '/about-us' },
-    { name: t.footer.mission, href: '/our-mission' },
-    { name: t.footer.vision, href: '/our-vision' },
     { name: "Carbon Calculator", href: '/carbon-calculator' },
     { name: t.footer.brands, href: '/brands' },
-    { name: "Blog", href: '/blog' },
     { name: t.footer.contact, href: '/contact-us' },
   ];
 
@@ -42,11 +39,11 @@ export default function Footer() {
           <div className="space-y-6">
             <Link href="/" className="inline-block">
               <Image
-                src="/logo.png"
+                src="/bworth-logo.svg"
                 alt="Bworth Logo"
-                width={140}
-                height={40}
-                className={`h-8 w-auto object-contain transition-all ${theme === 'white' ? '' : 'invert'}`}
+                width={180}
+                height={55}
+                className={`h-10 sm:h-11 w-auto object-contain transition-all ${theme === 'white' ? '' : 'brightness-0 invert'}`}
               />
             </Link>
             <p

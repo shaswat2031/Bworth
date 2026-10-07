@@ -25,15 +25,15 @@ export default function ScrollImpactBanner() {
   const rawX2 = useTransform(scrollYProgress, [0, 1], ["2%", "-8%"]);
   const x2 = useSpring(rawX2, springConfig);
 
-  // Primary banner items highlighting BWORTH and 25,000+ KG
+  // Primary banner items highlighting Sustainability Infrastructure and 25,000+ KG
   const primaryItems = [
-    { type: "brand", text: "BWORTH" },
+    { type: "brand", text: "SUSTAINABILITY INFRASTRUCTURE" },
     { type: "star" },
     { type: "pill", highlight: true, text: "25,000+ KG", sub: "CLOTHES RECYCLED" },
     { type: "star" },
     { type: "pill", highlight: false, text: "100% ZERO-LANDFILL", sub: "GUARANTEED" },
     { type: "star" },
-    { type: "brand", text: "BWORTH" },
+    { type: "brand", text: "CIRCULAR ECOSYSTEM" },
     { type: "star" },
     { type: "pill", highlight: true, text: "25,000+ KG", sub: "SAVED FROM DUMPS" },
     { type: "star" },
@@ -45,7 +45,7 @@ export default function ScrollImpactBanner() {
   const secondaryItems = [
     { text: "500+ TONS CO₂ SAVED", icon: Leaf },
     { text: "DOORSTEP PICKUP IN 2 MINS", icon: Sparkles },
-    { text: "BWORTH CIRCULAR IMPACT", icon: Recycle },
+    { text: "SUSTAINABILITY INFRASTRUCTURE", icon: Recycle },
     { text: "25,000+ KG SUSTAINABLY REPURPOSED", icon: CheckCircle2 },
     { text: "TURN CLUTTER INTO WALLET CASH", icon: Coins },
     { text: "100% ZERO WASTE REVOLUTION", icon: Leaf },
