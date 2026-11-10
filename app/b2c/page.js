@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
+import "./b2c-redesign.css";
 import {
   Smartphone,
   Coins,
@@ -83,7 +85,7 @@ export default function B2CPage() {
 
   return (
     <main
-      className={`min-h-screen transition-colors duration-500 font-sans ${
+      className={`bw-detail bw-b2c ${isWhite ? "bw-light" : "bw-dark"} min-h-screen transition-colors duration-500 font-sans ${
         isWhite ? "bg-[#f8fdff] text-slate-900" : "bg-[#061217] text-white"
       }`}
     >
@@ -94,12 +96,12 @@ export default function B2CPage() {
         {/* Ambient Glows */}
         <div className="absolute top-10 left-1/2 -translate-x-1/2 w-full max-w-5xl h-96 bg-[#14A3C7]/15 blur-[140px] rounded-full pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto relative z-10 space-y-8">
+        <div className="max-w-7xl mx-auto relative z-10 space-y-8 bw-b2c-hero-shell">
           <motion.div
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="max-w-4xl space-y-5"
+            className="max-w-4xl space-y-5 bw-b2c-hero-copy"
           >
             {/* Pill */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#14A3C7]/15 border border-[#14A3C7]/30 text-[#14A3C7]">
@@ -157,8 +159,13 @@ export default function B2CPage() {
             </div>
           </motion.div>
 
+          <figure className="bw-b2c-hero-photo">
+            <Image src="/bworth-hero-closet-v2.png" alt="Customer gathering pre-loved clothes for a BWORTH doorstep pickup" fill priority sizes="(max-width: 900px) 100vw, 46vw" />
+            <figcaption>YOUR WARDROBE, REWARDED.</figcaption>
+          </figure>
+
           {/* Quick 10-Second Visual Summary Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 pt-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 pt-6 bw-b2c-summary">
             {[
               {
                 icon: Truck,
@@ -246,6 +253,7 @@ export default function B2CPage() {
             {[
               {
                 step: "01",
+                image: "/bworth-hero-closet-v2.png",
                 icon: Calendar,
                 title: "Book Free Slot",
                 desc: "Open the BWorth app, choose a pickup slot in under 2 minutes, and gather your unused clothes in any bag.",
@@ -254,6 +262,7 @@ export default function B2CPage() {
               },
               {
                 step: "02",
+                image: "/bworth_closet_box.jpg",
                 icon: Scale,
                 title: "Clothes Collected",
                 desc: "Our verified friendly partner arrives at your doorstep, weighs your bag accurately, and collects it hassle-free.",
@@ -262,6 +271,7 @@ export default function B2CPage() {
               },
               {
                 step: "03",
+                image: "/bworth-earn-customer.png",
                 icon: Coins,
                 title: "Earn BWC Coins",
                 desc: "Instant 1 BWC = ₹1 cash value credited directly to your BWorth app wallet. Zero commission fees.",
@@ -270,6 +280,7 @@ export default function B2CPage() {
               },
               {
                 step: "04",
+                image: "/bworth-responsible-sorting.png",
                 icon: Recycle,
                 title: "Responsible Route",
                 desc: "Clothes are sorted for second-life reuse, upcycling into lifestyle goods, or eco-textile recycling.",
@@ -288,6 +299,7 @@ export default function B2CPage() {
                   }`}
                 >
                   <div className="space-y-4">
+                    <div className="bw-b2c-step-photo"><Image src={s.image} alt="" fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" /></div>
                     <div className="flex justify-between items-center">
                       <div className="w-12 h-12 rounded-2xl bg-white/10 border border-current/15 flex items-center justify-center">
                         <Icon size={22} className={s.accent} />

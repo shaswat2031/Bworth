@@ -41,6 +41,7 @@ import {
 import Footer from "../components/Footer";
 import ContactSection from "../components/ContactSection";
 import { useTheme } from "../context/ThemeContext";
+import "./brands-redesign.css";
 
 // Live Partner Brands Database
 const partnerBrands = [
@@ -320,7 +321,7 @@ export default function Brands() {
 
   return (
     <main
-      className={`min-h-screen transition-colors duration-300 font-sans ${
+      className={`bw-brands ${isWhite ? "bw-light" : "bw-dark"} min-h-screen transition-colors duration-300 font-sans ${
         isWhite ? "bg-[#F8FAFC] text-slate-900" : "bg-[#061217] text-white"
       }`}
     >
@@ -329,7 +330,7 @@ export default function Brands() {
         {/* Ambient Glow */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-full max-w-6xl h-96 bg-[#14A3C7]/15 blur-[140px] rounded-full pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto relative z-10">
+        <div className="max-w-7xl mx-auto relative z-10 bw-brands-hero-shell">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Left Column: Headline, Narrative & Highlights (7 Cols) */}
             <div className="lg:col-span-7 space-y-7 text-left">
@@ -396,6 +397,7 @@ export default function Brands() {
                     : "bg-[#081822] border-white/15 shadow-black/80"
                 }`}
               >
+                <figure className="bw-brands-hero-photo"><Image src="/bworth-brand-partners.png" alt="Fashion label partners reviewing garments together in a showroom" fill priority sizes="(max-width: 1024px) 100vw, 40vw" /></figure>
                 {/* Glow pill */}
                 <div className="flex items-center justify-between pb-4.5 border-b border-current/10">
                   <div className="flex items-center gap-2">
@@ -572,8 +574,7 @@ export default function Brands() {
         >
           {/* Collapsible Dropdown Header Trigger */}
           <div
-            onClick={() => setIsBrandNetworkOpen(!isBrandNetworkOpen)}
-            className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 cursor-pointer group"
+            className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 group"
           >
             <div className="space-y-1.5 text-left">
               <div className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-widest text-[#14A3C7]">
@@ -599,6 +600,9 @@ export default function Brands() {
             {/* Toggle Button / Badge */}
             <button
               type="button"
+              onClick={() => setIsBrandNetworkOpen(!isBrandNetworkOpen)}
+              aria-expanded={isBrandNetworkOpen}
+              aria-controls="brand-directory-content"
               className={`shrink-0 px-5 py-3 rounded-2xl border font-black text-xs uppercase tracking-wider flex items-center gap-2 transition-all ${
                 isBrandNetworkOpen
                   ? "bg-[#14A3C7] text-white border-[#14A3C7] shadow-md shadow-[#14A3C7]/20"
@@ -625,7 +629,7 @@ export default function Brands() {
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.35, ease: "easeInOut" }}
-                className="overflow-hidden pt-8 border-t border-current/10 mt-6 space-y-8"
+                id="brand-directory-content" className="overflow-hidden pt-8 border-t border-current/10 mt-6 space-y-8"
               >
                 {/* Search & Category Filter Bar */}
                 <div className="space-y-4">
@@ -989,7 +993,7 @@ export default function Brands() {
           >
             <div className="relative rounded-3xl overflow-hidden border shadow-2xl group bg-slate-900 aspect-[4/3] sm:aspect-[4/3.2]">
               <img
-                src="/b2b_circular_system.jpg"
+                src="/bworth-b2b-bulk-pickup.png"
                 alt="Circular Fashion Infrastructure"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
@@ -1027,7 +1031,7 @@ export default function Brands() {
           >
             <div className="relative rounded-3xl overflow-hidden border shadow-2xl group bg-slate-900 aspect-[4/3] sm:aspect-[4/3.2]">
               <img
-                src="/b2b_customer_rewards.jpg"
+                src="/bworth-shop-fashion.png"
                 alt="Give Customers More Reasons to Buy"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />

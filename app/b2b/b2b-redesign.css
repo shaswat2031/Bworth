@@ -1,0 +1,39 @@
+.bw-b2b{--detail-ink:#101b2c;--detail-blue:#14a3c7;font-family:var(--font-poppins),Arial,sans-serif}
+.bw-b2b h1,.bw-b2b h2,.bw-b2b h3,.bw-b2b h4,.bw-b2b button,.bw-b2b a,.bw-b2b label{font-family:var(--font-poppins),Arial,sans-serif}
+.bw-b2b h1,.bw-b2b h2,.bw-b2b h3{font-weight:700!important;text-transform:uppercase}
+.bw-b2b section{scroll-margin-top:100px}
+.bw-b2b.bw-light{background:#f5fbfe}
+.bw-b2b>section:first-of-type{background:linear-gradient(120deg,#d0ebf6 0%,#e4f4f9 65%,#f2fafc 100%);padding-bottom:85px}
+.bw-b2b>section:first-of-type>.absolute{display:none}
+.bw-b2b-hero-shell{max-width:1380px!important}
+.bw-b2b-hero-shell>.grid{grid-template-columns:repeat(12,minmax(0,1fr));gap:50px}
+.bw-b2b-hero-shell h1{font-size:clamp(47px,5vw,78px);line-height:1.03;letter-spacing:-.06em}
+.bw-b2b-hero-shell h1 span{background:none;color:#14a3c7}
+.bw-b2b-hero-shell .lg\:col-span-5>div{border-radius:3px!important;box-shadow:0 22px 45px #16475a20!important}
+.bw-b2b-hero-photo{position:relative;height:275px;overflow:hidden;border-radius:2px;background:#b7d8e3;margin-bottom:18px}
+.bw-b2b-hero-photo img{object-fit:cover;object-position:center 52%}
+.bw-b2b #streams{background:#e9f6fa;border-color:#c3dce5}
+.bw-b2b #streams>div,.bw-b2b #how-it-works,.bw-b2b #request-pickup>div{max-width:1380px}
+.bw-b2b #streams>div>div:first-child,.bw-b2b #how-it-works>div>div:first-child,.bw-b2b #request-pickup>div>div:first-child{text-align:left;max-width:850px;margin-left:0;margin-right:0}
+.bw-b2b section h2{letter-spacing:-.055em;line-height:1.03}
+.bw-b2b #streams .grid>div{border-radius:3px!important;box-shadow:none!important;min-height:280px;border-color:#b6d7e2!important;background:#fff!important}
+.bw-b2b #streams .grid>div:hover{box-shadow:0 12px 30px #16475a18!important;transform:translateY(-4px)}
+.bw-b2b #streams .grid h3{font-size:20px;line-height:1.12;letter-spacing:-.04em}
+.bw-b2b #streams .grid p{font-size:13px;line-height:1.55}
+.bw-b2b #how-it-works{padding-top:105px;padding-bottom:105px}
+.bw-b2b #how-it-works .grid>div{border-radius:3px!important;min-height:280px;border-color:#b6d7e2!important;background:#fff!important}
+.bw-b2b #how-it-works .grid>div>div:first-child>div:first-child{border-bottom:1px solid #d8e9ef;padding-bottom:18px}
+.bw-b2b #how-it-works .grid h3{font-size:17px;line-height:1.15}
+.bw-b2b #request-pickup{padding-top:105px;padding-bottom:110px;background:#e9f6fa;border-color:#c3dce5}
+.bw-b2b #request-pickup>div{max-width:1000px}
+.bw-b2b #request-pickup>div>div:nth-child(2){border-radius:3px!important;border-color:#b6d7e2!important;box-shadow:none!important}
+.bw-b2b #request-pickup input,.bw-b2b #request-pickup select,.bw-b2b #request-pickup textarea{border-radius:3px!important;min-height:54px}
+.bw-b2b #request-pickup textarea{min-height:110px}
+.bw-b2b a:focus-visible,.bw-b2b button:focus-visible,.bw-b2b input:focus-visible,.bw-b2b select:focus-visible,.bw-b2b textarea:focus-visible{outline:3px solid #0d7492;outline-offset:3px}
+.bw-b2b.bw-dark>section:first-of-type{background:linear-gradient(120deg,#0b2b39,#071b25)}
+.bw-b2b.bw-dark #streams,.bw-b2b.bw-dark #request-pickup{background:#0b2430;border-color:#285367}
+.bw-b2b.bw-dark #streams .grid>div,.bw-b2b.bw-dark #how-it-works .grid>div{background:#102b38!important;border-color:#285367!important}
+.bw-b2b.bw-dark #request-pickup>div>div:nth-child(2){border-color:#285367!important}
+@media(max-width:1100px){.bw-b2b-hero-shell>.grid{gap:28px}.bw-b2b-hero-shell h1{font-size:clamp(43px,5vw,66px)}}
+@media(max-width:1023px){.bw-b2b-hero-shell>.grid{display:grid;grid-template-columns:1fr}.bw-b2b-hero-shell>.grid>*{grid-column:auto}.bw-b2b-hero-photo{height:380px}}
+@media(max-width:600px){.bw-b2b>section:first-of-type{padding-left:16px;padding-right:16px}.bw-b2b-hero-shell h1{font-size:clamp(42px,10vw,58px)}.bw-b2b-hero-photo{height:250px}.bw-b2b section h2{font-size:clamp(35px,9vw,48px)}.bw-b2b #streams,.bw-b2b #how-it-works,.bw-b2b #request-pickup{padding-left:16px;padding-right:16px;padding-top:70px;padding-bottom:75px}.bw-b2b #streams .grid>div,.bw-b2b #how-it-works .grid>div{min-height:0}}

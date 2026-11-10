@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import "./b2b-redesign.css";
 import {
   Truck,
   Recycle,
@@ -194,7 +195,7 @@ export default function B2BPage() {
 
   return (
     <main
-      className={`min-h-screen w-full overflow-x-hidden transition-colors duration-500 font-sans ${isWhite ? "bg-[#f8fdff] text-slate-900" : "bg-[#061217] text-white"
+      className={`bw-detail bw-b2b ${isWhite ? "bw-light" : "bw-dark"} min-h-screen w-full overflow-x-hidden transition-colors duration-500 font-sans ${isWhite ? "bg-[#f8fdff] text-slate-900" : "bg-[#061217] text-white"
         }`}
     >
       {/* ══════════════════════════════════════════════════════════════
@@ -204,7 +205,7 @@ export default function B2BPage() {
         {/* Glow */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-full max-w-5xl h-80 bg-[#14A3C7]/15 blur-[120px] rounded-full pointer-events-none" />
 
-        <div className="max-w-6xl mx-auto relative z-10 w-full">
+        <div className="max-w-6xl mx-auto relative z-10 w-full bw-b2b-hero-shell">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Left Narrative */}
             <motion.div
@@ -294,6 +295,7 @@ export default function B2BPage() {
                   : "bg-[#091b26] border-white/15 shadow-black/80"
                   }`}
               >
+                <figure className="bw-b2b-hero-photo"><Image src="/bworth-b2b-bulk-pickup.png" alt="Bulk clothing collection team preparing neatly packed textiles for pickup" fill priority sizes="(max-width: 1024px) 100vw, 40vw" /></figure>
                 <div className="flex items-center justify-between pb-3 border-b border-current/10">
                   <span className="text-xs sm:text-sm font-mono font-bold uppercase tracking-wider text-[#14A3C7]">
                     THE BWORTH B2B ADVANTAGE

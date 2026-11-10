@@ -89,7 +89,7 @@ export default function Navbar() {
         initial={{ y: -80, opacity: 0, scale: 0.95 }}
         animate={{ y: 0, opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-4 sm:top-5 left-1/2 -translate-x-1/2 z-[80] w-[94%] max-w-6xl rounded-full transition-all duration-500 px-4 sm:px-6 py-2.5 sm:py-3 ${theme === "white"
+        className={`fixed top-4 sm:top-5 left-1/2 -translate-x-1/2 z-[80] w-[94%] max-w-6xl rounded-full transition-all duration-500 px-4 sm:px-6 py-2.5 sm:py-3 ${pathname === "/" ? "bw-nav-home" : ""} ${theme === "white"
             ? scrolled
               ? "bg-white/90 backdrop-blur-2xl border border-black/10 shadow-2xl shadow-black/10"
               : "bg-white/80 backdrop-blur-xl border border-black/10 shadow-lg shadow-black/5"
@@ -100,13 +100,13 @@ export default function Navbar() {
       >
         <div className="flex justify-between items-center relative">
           {/* Logo */}
-          <Link href="/" className="group flex items-center gap-3 shrink-0">
+          <Link href="/" className="bw-nav-brand group flex items-center gap-3 shrink-0" aria-label="BWORTH — Worth it with BWORTH">
             <Image
               src="/bworth-logo.svg"
-              alt="Bworth Logo"
-              width={160}
-              height={45}
-              className={`h-9 sm:h-11 w-auto object-contain transition-all duration-500 group-hover:scale-105 ${theme === "white" ? "" : "brightness-0 invert"
+              alt="BWORTH"
+              width={190}
+              height={60}
+              className={`bw-nav-logo h-12 sm:h-14 w-auto object-contain transition-all duration-500 group-hover:scale-105 ${theme === "white" ? "" : "brightness-0 invert"
                 }`}
             />
           </Link>
